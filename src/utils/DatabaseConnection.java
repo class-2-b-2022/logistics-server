@@ -21,5 +21,8 @@ public class DatabaseConnection {
             System.exit(-1);
         }
     }
+    public  Connection getConnection() {
+        return myConnection;
+    }
 
 }

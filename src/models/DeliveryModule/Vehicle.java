@@ -1,15 +1,36 @@
 package models.DeliveryModule;
 
 import java.sql.Date;
-import java.time.LocalDate;
 
 public class Vehicle {
     private String model;
+    private Integer vehicleId;
     private String plateNbr;
     private String brand;
     private String owner;
-    private String Description;
+    private String description;
     private Date createdAt;
+
+    public Vehicle() {
+    }
+
+    public Vehicle(String model, Integer vehicleId, String plateNbr, String brand, String owner, String description, Date createdAt) {
+        this.model = model;
+        this.vehicleId = vehicleId;
+        this.plateNbr = plateNbr;
+        this.brand = brand;
+        this.owner = owner;
+        this.description = description;
+        this.createdAt = createdAt;
+    }
+
+    public Integer getVehicleId() {
+        return vehicleId;
+    }
+
+    public void setVehicleId(Integer vehicleId) {
+        this.vehicleId = vehicleId;
+    }
 
     public String getModel() {
         return model;
@@ -44,11 +65,11 @@ public class Vehicle {
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String description) {
-        Description = description;
+        this.description = description;
     }
 
     public Date getCreatedAt() {

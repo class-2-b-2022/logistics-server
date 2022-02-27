@@ -41,10 +41,9 @@ public class VehicleService {
         return vehiclesObject;
     }
 
-    public void updateVehicle(Vehicle vehicle)  throws Exception {
-        DatabaseConnection databaseConnection = new DatabaseConnection();
-        Connection connection = databaseConnection.getConnection();
-        String updateQuery = "UPDATE vehicles set model=?,plateNbr=?,brand=?,owner=?,description=? WHERE id=?";
+    public List<Object> updateVehicle(Vehicle vehicle)  throws Exception {
+        List<Object> updatedVehicle = new ArrayList();
+        String updateQuery = "UPDATE vehicles set model=?,plateNbr=?,brand=?,owner=?,description=? WHERE vehicleId=?";
 
         PreparedStatement preparedStatement = connection.prepareStatement(updateQuery);
 
@@ -57,10 +56,9 @@ public class VehicleService {
 
         int rowsUpdated=preparedStatement.executeUpdate();
         if(rowsUpdated==1){
-//            return  new ResponseStatus(200,"UPDATED","User successfully updated");
-            System.out.println("User updated successfully");
+            updatedVehicle.add((Object) vehicle);
         }
-
+        return updatedVehicle;
     }
 
     public boolean findVehicleById(Integer vehicleId) throws  Exception{
@@ -73,6 +71,21 @@ public class VehicleService {
             vehicleExists=true;
         }
         return vehicleExists;
+    }
+
+    public List<Object> deleteVehicle(Vehicle vehicle) throws Exception{
+        List<Object> deletedVehicle = new ArrayList();
+        String deleteSQL = "DELETE FROM vehicles WHERE vehicleId=?";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(deleteSQL);
+        preparedStatement.setInt(1,vehicle.getVehicleId());
+
+        int delete = preparedStatement.executeUpdate();
+
+        if (delete == 1) {
+            deletedVehicle.add(vehicle);
+        }
+        return deletedVehicle;
     }
 
 }

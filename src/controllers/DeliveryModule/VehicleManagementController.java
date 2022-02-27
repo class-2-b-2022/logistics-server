@@ -1,26 +1,32 @@
 package controllers.DeliveryModule;
 
 import models.ClientRequest;
+import models.DeliveryModule.Vehicle;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class VehicleManagementController {
-    public void mainMethod(ClientRequest clientRequest){
+    public List<Object> mainMethod(ClientRequest clientRequest) throws Exception {
         String action = clientRequest.getAction();
+        VehicleManagementActions actions = new VehicleManagementActions();
+        List<Object> responseObject = new ArrayList();
 
         switch(action){
             case "register":
-                ///
+                responseObject = actions.registerVehicle( (Vehicle) clientRequest.getData());
                 break;
             case "view":
-                //method in vMactions
+                responseObject = actions.getVehicles();
                 break;
             case "update":
-                //method in vmActions
+                responseObject = actions.updatedVehicles((Vehicle) clientRequest.getData());
                 break;
             case "delete":
-                //method in vmActions
+                responseObject = actions.deleteVehicle((Vehicle) clientRequest.getData());
                 break;
         }
+        return responseObject;
     }
 }

@@ -1,5 +1,6 @@
 package Thread;
 
+import controllers.DeliveryModule.VehicleManagementController;
 import models.ClientRequest;
 
 import java.io.*;
@@ -8,6 +9,7 @@ import java.util.List;
 
 public class ClientManager implements Runnable{
     private Socket clientSocket;
+    private VehicleManagementController vehicleManagementController = new VehicleManagementController();
     public ClientManager(Socket socket){
         this.clientSocket = socket;
     }
@@ -37,8 +39,8 @@ public class ClientManager implements Runnable{
                     case "/inventory":
 //                        logic related to inventory
                         break;
-                    case "/billing":
-//                        logic related to billing
+                    case "/delivery/vehicles":
+                        vehicleManagementController.mainMethod(clientRequest);
                         break;
                     case "/shipping":
 
@@ -52,6 +54,8 @@ public class ClientManager implements Runnable{
                 responseStream.writeObject(responseData);
             }
         } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

@@ -11,17 +11,12 @@ public class UserController {
 	public static List<Object> mainMethod(ClientRequest req)throws IOException{
 		String action=req.getAction();
 		userActions UserActions=new userActions();
-		List <Object>res=new ArrayList();
-		try {
+		List <Object>res=new ArrayList<Object>();
 			switch(action) {
 			case "register":
 				res=UserActions.registerUser((User) req.getData());
 				break;
 			}
-			
-		}catch(Exception e ) {
-			e.printStackTrace();
-		}
-		return res;
+			return res;
 	}
 }

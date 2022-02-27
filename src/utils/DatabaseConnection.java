@@ -14,7 +14,7 @@ public class DatabaseConnection {
     public DatabaseConnection() {
         try{
             myConnection = DriverManager.getConnection(dbUrl,dbUser,dbPassword);
-            success.log("DATABASE LOG: Connected to the database successfully");
+
         }
         catch(Exception ex){
             error.log("DATABASE LOG: "+ex.getMessage());
@@ -23,6 +23,9 @@ public class DatabaseConnection {
     }
     public  Connection getConnection() {
         return myConnection;
+    }
+    public void init(){
+        if(myConnection !=null) success.log("========================================= CONNECTED TO DATABASE SUCCESSFULLY!!! ===================================================");
     }
 
 }

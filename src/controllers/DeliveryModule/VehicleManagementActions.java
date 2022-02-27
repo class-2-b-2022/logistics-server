@@ -22,6 +22,7 @@ public class VehicleManagementActions {
 
     public List<Object> getVehicles(Integer vehicleId) throws SQLException {
         List<Object> vehiclesObject = getListOfVehicles();
+        vehicleService.getListOfVehicles(vehicleId);
 
     }
 

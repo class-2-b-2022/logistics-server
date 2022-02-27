@@ -38,5 +38,6 @@ public class VehicleService {
             vehicle.setCreatedAt(result.getDate("createdAt"));
             vehiclesObject.add((Object) vehicle);
         }
+        return vehiclesObject;
     }
 }

@@ -3,8 +3,8 @@ package models;
 @author: Mudahemuka Manzi
  */
 public class ClientRequest {
-    private String route;
-    private String action;
+    private String route;///users
+    private String action;//regist
     private Object data;
     public ClientRequest(){}
     public ClientRequest(String route, String action, Object data){

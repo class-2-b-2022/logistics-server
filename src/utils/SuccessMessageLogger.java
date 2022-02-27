@@ -1,5 +1,5 @@
 package utils;
-/*
+/***
 @author: Nkubito pacis
  */
 public class SuccessMessageLogger {

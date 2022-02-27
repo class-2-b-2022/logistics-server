@@ -2,7 +2,7 @@ package utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-/*
+/***
 @author: Nkubito Pacis
 @author: Mudahemuka Manzi
  */

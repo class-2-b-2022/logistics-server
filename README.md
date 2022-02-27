@@ -1,4 +1,4 @@
-## logistics-server #delivery-module
+ #delivery-module
 
 **Authors**
 ```java

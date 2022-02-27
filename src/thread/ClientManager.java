@@ -6,6 +6,8 @@ import java.io.*;
 import java.net.Socket;
 import java.util.List;
 
+import controllers.user_management.UserController;
+
 public class ClientManager implements Runnable{
     private Socket clientSocket;
     public ClientManager(Socket socket){
@@ -34,6 +36,7 @@ public class ClientManager implements Runnable{
 //                        logic related to company registration
                         break;
                     case "/users":
+                    	  UserController.mainMethod(clientRequest);
 //                        logic related to user management
                         break;
                     case "/inventory":

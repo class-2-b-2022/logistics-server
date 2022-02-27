@@ -2,6 +2,7 @@ package utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 
 public class DatabaseConnection {
     private static final String dbUrl = "jdbc:mysql://remotemysql.com/XuJYb3DkoB";
@@ -27,5 +28,6 @@ public class DatabaseConnection {
     public void init(){
         if(myConnection !=null) success.log("========================================= CONNECTED TO DATABASE SUCCESSFULLY!!! ===================================================");
     }
+	
 
 }

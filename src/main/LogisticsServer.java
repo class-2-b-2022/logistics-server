@@ -1,5 +1,4 @@
 package main;
-import thread.ClientManager;
 import utils.DatabaseConnection;
 import utils.ErrorMessageLogger;
 import utils.SuccessMessageLogger;
@@ -7,6 +6,8 @@ import utils.SuccessMessageLogger;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+
+import thread.ClientManager;
 
 public class LogisticsServer {
     private static final int serverPort = 5450;

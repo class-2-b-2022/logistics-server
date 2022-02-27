@@ -1,6 +1,6 @@
 package thread;
 
-import models.ClientRequest;
+import models.*;
 import controllers.InventoryController;
 import java.io.*;
 import java.net.Socket;

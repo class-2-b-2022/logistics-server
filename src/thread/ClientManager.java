@@ -1,7 +1,7 @@
 package thread;
 
 import models.ClientRequest;
-
+import controllers.InventoryController;
 import java.io.*;
 import java.net.Socket;
 import java.util.List;
@@ -37,7 +37,8 @@ public class ClientManager implements Runnable{
 //                        logic related to user management
                         break;
                     case "/inventory":
-//                        logic related to inventory
+                         InventoryController inventory = new InventoryController();
+                         inventory.checkProductAvailability(1);
                         break;
                     case "/billing":
 //                        logic related to billing

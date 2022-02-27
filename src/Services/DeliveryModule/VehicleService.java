@@ -38,5 +38,41 @@ public class VehicleService {
             vehicle.setCreatedAt(result.getDate("createdAt"));
             vehiclesObject.add((Object) vehicle);
         }
+        return vehiclesObject;
     }
+
+    public void updateVehicle(Vehicle vehicle)  throws Exception {
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        Connection connection = databaseConnection.getConnection();
+        String updateQuery = "UPDATE vehicles set model=?,plateNbr=?,brand=?,owner=?,description=? WHERE id=?";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(updateQuery);
+
+        preparedStatement.setString(1, vehicle.getModel());
+        preparedStatement.setString(2, vehicle.getPlateNbr());
+        preparedStatement.setString(3, vehicle.getBrand());
+        preparedStatement.setString(4, vehicle.getOwner());
+        preparedStatement.setString(5, vehicle.getDescription());
+        preparedStatement.setDate(6, vehicle.getCreatedAt());
+
+        int rowsUpdated=preparedStatement.executeUpdate();
+        if(rowsUpdated==1){
+//            return  new ResponseStatus(200,"UPDATED","User successfully updated");
+            System.out.println("User updated successfully");
+        }
+
+    }
+
+    public boolean findVehicleById(Integer vehicleId) throws  Exception{
+        String sql="SELECT * FROM vehicles WHERE vehicleId=?";
+        PreparedStatement preparedStatement=connection.prepareStatement(sql);
+        preparedStatement.setInt(1,vehicleId);
+        ResultSet result=preparedStatement.executeQuery();
+        boolean vehicleExists=false;
+        if(result.next()){
+            vehicleExists=true;
+        }
+        return vehicleExists;
+    }
+
 }

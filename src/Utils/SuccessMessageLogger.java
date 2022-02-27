@@ -1,4 +1,4 @@
-package utils;
+package Utils;
 
 public class SuccessMessageLogger {
     private static final String GREEN = "\u001B[32m";

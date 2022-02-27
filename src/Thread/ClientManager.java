@@ -1,4 +1,4 @@
-package thread;
+package Thread;
 
 import models.ClientRequest;
 
@@ -41,7 +41,7 @@ public class ClientManager implements Runnable{
 //                        logic related to billing
                         break;
                     case "/shipping":
-//                        logic related to shipping
+
                         break;
                     case "/reporting":
 //                        logic related to reporting

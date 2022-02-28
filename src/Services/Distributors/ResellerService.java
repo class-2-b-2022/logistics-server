@@ -64,5 +64,20 @@ public class ResellerService {
         return updatedReseller;
     }
 
+    public List<Object> deleteResellers(Reseller reseller)  throws Exception {
+        List<Object> deletedReseller = new ArrayList();
+        String sql = "DELETE FROM resellers WHERE first_name=?, last_name=?, business_name=?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1,"");
+        statement.setString(2,"");
+        statement.setString(3,"");
+
+        int rowsDeleted = statement.executeUpdate();
+        if(rowsDeleted > 0){
+            System.out.println("User deleted successfully");
+        }
+
+        return deletedReseller;
+    }
 
 }

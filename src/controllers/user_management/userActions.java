@@ -2,7 +2,7 @@ package controllers.user_management;
 import java.util.ArrayList;
 import java.util.List;
 import models.user_model.User;
-import services.UserService;
+import services.user_services.UserService;
 
 
 public class userActions {

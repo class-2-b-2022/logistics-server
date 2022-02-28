@@ -1,6 +1,6 @@
 package Utils;
-/***
-@author: Nkubito pacis
+/**
+* @author: Nkubito pacis
  */
 
 public class SuccessMessageLogger {

@@ -1,9 +1,7 @@
 package controllers.DeliveryModule;
 
-import models.ClientRequest;
 import models.DeliveryModule.Vehicle;
-
-import java.sql.SQLException;
+import models.ClientRequest;
 import java.util.ArrayList;
 import java.util.List;
 

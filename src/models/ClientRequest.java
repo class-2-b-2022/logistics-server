@@ -1,5 +1,8 @@
 package models;
 
+/**
+ * @author : Mudahemuka Manzi
+ */
 public class ClientRequest {
     private String route;///users
     private String action;//regist

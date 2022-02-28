@@ -1,4 +1,4 @@
-package Thread;
+package thread;
 
 import controllers.DeliveryModule.VehicleManagementController;
 import models.ClientRequest;
@@ -6,7 +6,10 @@ import models.ClientRequest;
 import java.io.*;
 import java.net.Socket;
 import java.util.List;
-
+/**
+ * @author: Mudahemuka Manzi
+ * @author: Ntagungira Ali Rashid
+ */
 public class ClientManager implements Runnable{
     private Socket clientSocket;
     private VehicleManagementController vehicleManagementController = new VehicleManagementController();
@@ -17,15 +20,17 @@ public class ClientManager implements Runnable{
     public void run() {
         ObjectOutputStream responseStream = null;
         ObjectInputStream requestStream = null;
-        System.out.println("This is where all logic for handling client request will be managed");
+//        System.out.println("This is where all logic for handling client request will be managed");
         //get client request;
         try {
             //get client request stream
             requestStream = new ObjectInputStream(clientSocket.getInputStream());
+
             //get stream to respond to client
             responseStream = new ObjectOutputStream(clientSocket.getOutputStream());
             ClientRequest clientRequest;
             while((clientRequest =(ClientRequest) requestStream.readObject()) !=null){
+
                   //Get request route
                 String route = clientRequest.getRoute();
                 List<Object> responseData = null;
@@ -41,9 +46,6 @@ public class ClientManager implements Runnable{
                         break;
                     case "/delivery/vehicles":
                         responseData = vehicleManagementController.mainMethod(clientRequest);
-                        break;
-                    case "/shipping":
-
                         break;
                     case "/reporting":
 //                        logic related to reporting

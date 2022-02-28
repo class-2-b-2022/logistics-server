@@ -79,7 +79,7 @@ public class UserService {
             roleIdStmt.setInt(1, userRoleId);
             ResultSet rs3 = roleIdStmt.executeQuery();
             while (rs3.next()) {
-                userReturnValue.setRoleAsString(rs2.getString(1));
+                userReturnValue.setRoleAsString(rs3.getString(1));
             }
         }
         return userReturnValue;

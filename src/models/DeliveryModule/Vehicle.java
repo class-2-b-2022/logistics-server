@@ -1,8 +1,9 @@
 package models.DeliveryModule;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Vehicle {
+public class Vehicle implements  Serializable{
     private String model;
     private Integer vehicleId;
     private String plateNbr;

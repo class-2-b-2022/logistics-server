@@ -1,9 +1,12 @@
 package controllers;
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 public class BillingController {
 
 =======
+=======
+>>>>>>> Stashed changes
 import models.billing.BillingModel;
 import models.ClientRequest;
 import services.BillingService;
@@ -29,10 +32,17 @@ public class BillingController {
         }
     }
 
+<<<<<<< Updated upstream
 //    public Object BillingController(ClientRequest request) throws SQLException {
 //        this.request = request;
 //        return null;
 //    }
+=======
+    public Object BillingController(ClientRequest request) throws SQLException {
+        this.request = request;
+        return null;
+    }
+>>>>>>> Stashed changes
 
     public static  Object getDistWallet(BillingModel billing) throws SQLException {
        return billService.viewUserWallet(billing.getUserId());
@@ -42,6 +52,7 @@ public class BillingController {
         return billService.updateDistributorWallet(billModel);
     }
 
+<<<<<<< Updated upstream
     public List<Object> main(ClientRequest clientRequest) throws SQLException {
         List<Object> response = new ArrayList<Object>();
         switch(clientRequest.getAction()){
@@ -50,6 +61,17 @@ public class BillingController {
                 break;
             case "getdistributorwallet":
                 response.add(getDistWallet((BillingModel) clientRequest.getData()));
+=======
+
+    public List<Object> main(ClientRequest clientRequest) throws SQLException {
+        List<Object> response = null;
+        switch(this.request.getAction()){
+            case "updatedistributorwallet":
+                response.add(updateUserWallet((BillingModel) this.request.getData()));
+                break;
+            case "getdistributorwallet":
+                response.add(getDistWallet((BillingModel) this.request.getData()));
+>>>>>>> Stashed changes
                 break;
         }
         return response;

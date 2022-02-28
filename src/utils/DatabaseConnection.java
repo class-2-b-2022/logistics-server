@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 <<<<<<< Updated upstream:src/utils/DatabaseConnection.java
+<<<<<<< Updated upstream:src/utils/DatabaseConnection.java
 =======
+=======
+>>>>>>> Stashed changes:src/Utils/DatabaseConnection.java
 /**
  * @author : Nkubito Pacis
  * @author : Mudahemuka Manzi

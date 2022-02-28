@@ -1,13 +1,15 @@
 package thread;
 
 import models.ClientRequest;
-
 import java.io.*;
 import java.net.Socket;
 import java.util.List;
-
 import controllers.user_management.UserController;
 
+/***
+ @author: Mudahemuka Manzi
+ @author: Ntagungira Ali Rashid
+ */
 public class ClientManager implements Runnable{
     private Socket clientSocket;
     public ClientManager(Socket socket){
@@ -36,21 +38,14 @@ public class ClientManager implements Runnable{
 //                        logic related to company registration
                         break;
                     case "/users":
-					try {
-						responseData=UserController.mainMethod(clientRequest);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
+                    	  responseData=UserController.mainMethod(clientRequest);
 //                        logic related to user management
                         break;
                     case "/inventory":
 //                        logic related to inventory
                         break;
-                    case "/billing":
-//                        logic related to billing
-                        break;
-                    case "/delivery":
-//                        logic related to shipping
+                    case "/delivery/vehicles":
+                 
                         break;
                     case "/reporting":
 //                        logic related to reporting
@@ -61,6 +56,8 @@ public class ClientManager implements Runnable{
                 responseStream.writeObject(responseData);
             }
         } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

@@ -1,9 +1,12 @@
 package services;
 
-import utils.DatabaseConnection;
-import java.sql.*;
+import models.user_model.User;
+import Utils.DatabaseConnection;
 
-import models.user_model.User;  
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class UserService {
 	 private DatabaseConnection databaseConnection = new DatabaseConnection();
@@ -41,5 +44,15 @@ public class UserService {
 		   System.out.println("User Already Exists");
 		   System.exit(0);
 	   }
+   }
+   public void findUser(User user) throws  SQLException {
+	   String sql="SELECT * FROM ";
+	   PreparedStatement stmt=connection.prepareStatement(sql);
+	   stmt.setString(1, user.getNames());
+	   stmt.setString(2, user.getEmail());
+	   stmt.setInt(3, user.getPhone());
+	   stmt.setString(4,user.getPassword());
+	   stmt.setString(5, user.getRole());
+	   stmt.executeUpdate();
    }
 }

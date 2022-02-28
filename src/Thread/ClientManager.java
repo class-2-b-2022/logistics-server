@@ -1,13 +1,18 @@
 package thread;
 
+import controllers.DeliveryModule.VehicleManagementController;
 import models.ClientRequest;
 
 import java.io.*;
 import java.net.Socket;
 import java.util.List;
-
+/**
+ * @author: Mudahemuka Manzi
+ * @author: Ntagungira Ali Rashid
+ */
 public class ClientManager implements Runnable{
     private Socket clientSocket;
+    private VehicleManagementController vehicleManagementController = new VehicleManagementController();
     public ClientManager(Socket socket){
         this.clientSocket = socket;
     }
@@ -39,11 +44,8 @@ public class ClientManager implements Runnable{
                     case "/inventory":
 //                        logic related to inventory
                         break;
-                    case "/billing":
-//                        logic related to billing
-                        break;
-                    case "/delivery":
-//                        logic related to shipping
+                    case "/delivery/vehicles":
+                        responseData = vehicleManagementController.mainMethod(clientRequest);
                         break;
                     case "/reporting":
 //                        logic related to reporting
@@ -54,6 +56,8 @@ public class ClientManager implements Runnable{
                 responseStream.writeObject(responseData);
             }
         } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

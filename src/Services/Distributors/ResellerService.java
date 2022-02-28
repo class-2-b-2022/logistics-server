@@ -63,6 +63,18 @@ public class ResellerService {
 
         return updatedReseller;
     }
+    public boolean findResellerByBusinessName(String business_name) throws Exception{
+        String sql = "SELECT * FROM resellers WHERE business_name = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, business_name);
+        ResultSet result = statement.executeQuery();
+        boolean resellerExists = false;
+        if(result.next()){
+            resellerExists = true;
+        }
+        return resellerExists;
+    }
 
     public List<Object> deleteResellers(Reseller reseller)  throws Exception {
         List<Object> deletedReseller = new ArrayList();

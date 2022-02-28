@@ -1,14 +1,17 @@
 package thread;
 
 import controllers.DeliveryModule.VehicleManagementController;
+import controllers.TestingController;
 import models.ClientRequest;
+import models.billing.BillingModel;
 
 import java.io.*;
 import java.net.Socket;
 import java.util.List;
+
 /**
- * @author: Mudahemuka Manzi
- * @author: Ntagungira Ali Rashid
+ * @author : Mudahemuka Manzi
+ * @author : Ntagungira Ali Rashid
  */
 public class ClientManager implements Runnable{
     private Socket clientSocket;
@@ -50,7 +53,9 @@ public class ClientManager implements Runnable{
                     case "/reporting":
 //                        logic related to reporting
                         break;
-
+                    case "/testing":
+                        TestingController.test(clientRequest);
+                        break;
                 }
                 //return response to the client;
                 responseStream.writeObject(responseData);

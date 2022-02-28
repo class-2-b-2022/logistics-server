@@ -1,12 +1,17 @@
 package models.billing;
 
 /**
- * @author : Mudahemuka Manzi
+ * @author : Niyigena-Yves
  */
 public class BillingModel {
     private int userId;
     private float amount;
     public BillingModel(){}
+
+    public BillingModel(int userId, float amount) {
+        this.userId = userId;
+        this.amount = amount;
+    }
 
     public int getUserId() {
         return userId;

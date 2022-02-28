@@ -1,5 +1,6 @@
 package controllers;
 
+import main.billing.BillingModel;
 import models.ClientRequest;
 import services.BillingService;
 
@@ -21,22 +22,22 @@ public class BillingController {
         this.request = request;
     }
 
-    public static  Object getDistWallet(int userId) throws SQLException {
-       return billService.viewUserWallet(userId);
+    public static  Object getDistWallet(BillingModel billing) throws SQLException {
+       return billService.viewUserWallet(billing.getUserId());
     }
 
-    public static Object updateUserWallet(int userId, int amount) throws SQLException {
-        return billService.updateDistributorWallet(userId,amount);
+    public static Object updateUserWallet(BillingModel billModel) throws SQLException {
+        return billService.updateDistributorWallet(billModel);
     }
 
-    public Object main(String[] args) {
+    public Object main(String[] args) throws SQLException {
         Object response = null;
         switch(this.request.getAction()){
             case "updatedistributorwallet":
-                response = updateUserWallet(this.request.getData().userId, this.request.getData().amount);
+                response = updateUserWallet((BillingModel) this.request.getData());
                 break;
             case "getdistributorwallet":
-                response = getDistWallet(this.request.getData().userId);
+                response = getDistWallet((BillingModel) this.request.getData());
                 break;
         }
         return response;

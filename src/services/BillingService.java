@@ -1,6 +1,7 @@
 package services;
 
-import utils.DatabaseConnection;
+import Utils.DatabaseConnection;
+import main.billing.BillingModel;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -16,10 +17,10 @@ public class BillingService  {
     public BillingService() throws SQLException {
     }
 
-    public Object updateDistributorWallet(int newAmount, int userId ) throws SQLException {
+    public Object updateDistributorWallet(BillingModel billing) throws SQLException {
         Object rs = null;
         try {
-            rs = (Object) statement.executeQuery("update payments set `balance`=" + newAmount + "WHERE `id`=" + userId);
+            rs = (Object) statement.executeQuery("update payments set `balance`=" + billing.getAmount() + "WHERE `id`=" + billing.getUserId());
         }catch(SQLException e) {
             e.printStackTrace();
         }

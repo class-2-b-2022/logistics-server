@@ -1,14 +1,10 @@
 package thread;
 
-import controllers.DeliveryModule.VehicleManagementController;
-import controllers.user_management.UserController;
 import models.ClientRequest;
-
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 import java.util.List;
+import controllers.user_management.UserController;
 
 /***
  @author: Mudahemuka Manzi
@@ -16,7 +12,6 @@ import java.util.List;
  */
 public class ClientManager implements Runnable{
     private Socket clientSocket;
-    private VehicleManagementController vehicleManagementController = new VehicleManagementController();
     public ClientManager(Socket socket){
         this.clientSocket = socket;
     }
@@ -43,14 +38,14 @@ public class ClientManager implements Runnable{
 //                        logic related to company registration
                         break;
                     case "/users":
-                    	  UserController.mainMethod(clientRequest);
+                    	  responseData=UserController.mainMethod(clientRequest);
 //                        logic related to user management
                         break;
                     case "/inventory":
 //                        logic related to inventory
                         break;
                     case "/delivery/vehicles":
-                        responseData = vehicleManagementController.mainMethod(clientRequest);
+                 
                         break;
                     case "/reporting":
 //                        logic related to reporting

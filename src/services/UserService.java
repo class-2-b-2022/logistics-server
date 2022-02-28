@@ -14,7 +14,7 @@ import java.sql.SQLException;
 public class UserService {
 	static Utils.DatabaseConnection conn = new Utils.DatabaseConnection();
 
-	public static void insertUser(User user) throws SQLException {
+	public void insertUser(User user) throws SQLException {
 		String sql = "INSERT INTO user(names,email,phone,password,role)values(?,?,?,?,?)";
 		PreparedStatement stmt = conn.getConnection().prepareStatement(sql);
 		stmt.setString(1, user.getNames());
@@ -25,7 +25,7 @@ public class UserService {
 		stmt.executeUpdate();
 	}
 
-	public static String findUser(User user) throws SQLException {
+	public String findUser(User user) throws SQLException {
 		int userCheck = (checkIfUserExists(user.getEmail(), user.getPassword()));
 		if (userCheck != -1)
 			return "User not found";
@@ -57,6 +57,7 @@ public class UserService {
 	}
 
 	public static void main(String[] args) throws IOException, SQLException {
-		findUser(new User());
+		UserService userService = new UserService();
+		userService.findUser(new User());
 	}
 }

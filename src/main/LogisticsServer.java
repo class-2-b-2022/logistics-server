@@ -1,6 +1,6 @@
 package main;
-import thread.ClientManager;
-import Utils.DatabaseConnection;
+import Thread.ClientManager;
+import utils.*;
 import Utils.ErrorMessageLogger;
 import Utils.SuccessMessageLogger;
 

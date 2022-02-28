@@ -27,6 +27,10 @@ public class UserService {
         return userExists;
     }
 
+    /**
+     *
+     * @author: Isite Yves
+     */
     public static int getRoleIdByEmail(String email) throws SQLException {
         String sql = "SELECT role FROM users WHERE email=?";
         PreparedStatement selectStmt = conn.getConnection().prepareStatement(sql);
@@ -58,6 +62,10 @@ public class UserService {
         }
     }
 
+    /**
+     *
+     * @author: Isite Yves
+     */
     public User findUser(User user) throws SQLException {
         User userReturnValue = new User();
         boolean userCheck = checkIfUserExists(user.getEmail());
@@ -85,6 +93,10 @@ public class UserService {
         return userReturnValue;
     }
 
+    /**
+     *
+     * @author: Isite Yves
+     */
     public static void main(String[] args) throws IOException, SQLException {
         // Test Login
         UserService s1 = new UserService();

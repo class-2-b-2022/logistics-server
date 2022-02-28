@@ -4,11 +4,12 @@ import models.ClientRequest;
 import models.user_model.User;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserController {
-    public static List<Object> mainMethod(ClientRequest req) throws IOException {
+    public static List<Object> mainMethod(ClientRequest req) throws IOException, SQLException {
         String action = req.getAction();
         userActions UserActions = new userActions();
         List<Object> res = new ArrayList<Object>();

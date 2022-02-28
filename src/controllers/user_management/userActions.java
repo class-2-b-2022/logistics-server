@@ -3,9 +3,13 @@ package controllers.user_management;
 import models.user_model.User;
 import services.UserService;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
+/***
+ @author: Isite Yves
+ @author: Ntagungira Ali Rashid
+ */
 public class userActions {
     UserService userService = new UserService();
 
@@ -15,8 +19,9 @@ public class userActions {
         return newUser;
     }
 
-    public List<Object> loginUser(User user) {
+    public List<Object> loginUser(User user) throws SQLException {
         List<Object> userToLogin = new ArrayList<>();
+        userService.findUser(user);
         userToLogin.add((Object) user);
         return userToLogin;
     }

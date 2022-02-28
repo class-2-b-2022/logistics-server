@@ -2,7 +2,6 @@ package Utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 
 /***
 @author: Nkubito Pacis
@@ -13,8 +12,8 @@ public class DatabaseConnection {
     private static final String dbUser = "XuJYb3DkoB";
     private static final String dbPassword = "l43QuoJSlB";
     public static Connection myConnection;
-    private ErrorMessageLogger error = new ErrorMessageLogger();
-    private SuccessMessageLogger success = new SuccessMessageLogger();
+    private Utils.ErrorMessageLogger error = new Utils.ErrorMessageLogger();
+    private Utils.SuccessMessageLogger success = new Utils.SuccessMessageLogger();
 
     public DatabaseConnection() {
         try{

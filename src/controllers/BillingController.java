@@ -1,11 +1,15 @@
 package controllers;
 
-import main.billing.BillingModel;
+import models.billing.BillingModel;
 import models.ClientRequest;
 import services.BillingService;
 
 import java.sql.SQLException;
 
+/**
+ * @author : Mudahemuka Manzi
+ * @author : Gasaro leila
+ */
 public class BillingController {
     ClientRequest request;
     static BillingService billService;
@@ -18,8 +22,9 @@ public class BillingController {
         }
     }
 
-    public BillingController(ClientRequest request) throws SQLException {
+    public Object BillingController(ClientRequest request) throws SQLException {
         this.request = request;
+        return null;
     }
 
     public static  Object getDistWallet(BillingModel billing) throws SQLException {

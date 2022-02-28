@@ -1,14 +1,15 @@
 package services;
 
 import Utils.DatabaseConnection;
-import main.billing.BillingModel;
+import models.billing.BillingModel;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
+/**
+ * @author : Gasaro leila
+ */
 public class BillingService  {
     DatabaseConnection dbConn = new DatabaseConnection();
     Connection conn = dbConn.getConnection();

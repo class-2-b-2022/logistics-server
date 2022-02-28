@@ -1,5 +1,8 @@
-package main.billing;
+package models.billing;
 
+/**
+ * @author : Mudahemuka Manzi
+ */
 public class BillingModel {
     private int userId;
     private float amount;

@@ -9,7 +9,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class LogisticsServer {
-    private static final int serverPort = 5450;
+    private static final int serverPort = 8987;
     public static void main(String[] args) throws IOException {
         ServerSocket server = null;
         ErrorMessageLogger logError = new ErrorMessageLogger();

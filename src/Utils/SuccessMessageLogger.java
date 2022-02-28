@@ -1,11 +1,7 @@
-<<<<<<< Updated upstream:src/utils/SuccessMessageLogger.java
-package utils;
-=======
 package Utils;
 /**
-* @author: Nkubito pacis
+ * @author: Nkubito pacis
  */
->>>>>>> Stashed changes:src/Utils/SuccessMessageLogger.java
 
 public class SuccessMessageLogger {
     private static final String GREEN = "\u001B[32m";

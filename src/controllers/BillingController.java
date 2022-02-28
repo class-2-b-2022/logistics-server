@@ -2,7 +2,6 @@ package controllers;
 import models.billing.BillingModel;
 import models.ClientRequest;
 import services.BillingService;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,17 +11,19 @@ import java.util.List;
  * @author : Mudahemuka Manzi
  * @author : Gasaro leila
  */
+import models.billing.BillingModel;
+import models.ClientRequest;
+import services.BillingService;
+
+import java.sql.SQLException;
+
+/**
+ * @author : Mudahemuka Manzi
+ * @author : Gasaro leila
+ */
 public class BillingController {
     ClientRequest request;
     static BillingService billService;
-
-    static {
-        try {
-            billService = new BillingService();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
 
     public static  Object getDistWallet(BillingModel billing) throws SQLException {
@@ -33,15 +34,11 @@ public class BillingController {
         return billService.updateDistributorWallet(billModel);
     }
 
-    public List<Object> main(ClientRequest clientRequest) throws SQLException {
-        List<Object> response = new ArrayList<Object>();
-        switch(clientRequest.getAction()){
-            case "updatedistributorwallet":
-                response.add(updateUserWallet((BillingModel) clientRequest.getData()));
-                break;
-            case "getdistributorwallet":
-                response.add(getDistWallet((BillingModel) clientRequest.getData()));
-                break;
+    public List<Object> mainMethod(ClientRequest clientRequest) throws SQLException {
+        List<Object> response = null;
+        switch (clientRequest.getAction()) {
+            case "updatedistributorwallet" -> response.add(updateUserWallet((BillingModel) this.request.getData()));
+            case "getdistributorwallet" -> response.add(getDistWallet((BillingModel) this.request.getData()));
         }
         return response;
     }

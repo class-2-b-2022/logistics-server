@@ -1,5 +1,9 @@
 package main;
+<<<<<<< HEAD
 import Thread.ClientManager;
+=======
+import thread.ClientManager;
+>>>>>>> f74ccf859309cdbe7a416af7bc430e40d8a4204e
 import Utils.DatabaseConnection;
 import Utils.ErrorMessageLogger;
 import Utils.SuccessMessageLogger;

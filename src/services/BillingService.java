@@ -1,7 +1,8 @@
 package services;
 
-import Utils.DatabaseConnection;
+import utils.DatabaseConnection;
 import models.billing.BillingModel;
+import utils.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.SQLException;

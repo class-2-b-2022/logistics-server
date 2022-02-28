@@ -1,6 +1,7 @@
 package Thread;
 
 import controllers.BillingController;
+
 import controllers.DeliveryModule.VehicleManagementController;
 import models.ClientRequest;
 
@@ -33,10 +34,10 @@ public class ClientManager implements Runnable{
             responseStream = new ObjectOutputStream(clientSocket.getOutputStream());
             ClientRequest clientRequest;
             while((clientRequest =(ClientRequest) requestStream.readObject()) !=null){
+
                   //Get request route
                 String route = clientRequest.getRoute();
                 List<Object> responseData = null;
-                Object response = null;
                 switch (route){
                     case "/companyregistration":
 //                        logic related to company registration
@@ -54,12 +55,11 @@ public class ClientManager implements Runnable{
 //                        logic related to reporting
                         break;
                     case "/billing":
-                        responseData = billingController.main(clientRequest);
+                        responseData = billingController.mainMethod(clientRequest);
 
                 }
                 //return response to the client;
                 responseStream.writeObject(responseData);
-
             }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();

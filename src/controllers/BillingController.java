@@ -29,16 +29,16 @@ public class BillingController {
         return billService.updateDistributorWallet(userId,amount);
     }
 
-    public Object main(String[] args) {
-        Object response = null;
-        switch(this.request.getAction()){
-            case "updatedistributorwallet":
-                response = updateUserWallet(this.request.getData().userId, this.request.getData().amount);
-                break;
-            case "getdistributorwallet":
-                response = getDistWallet(this.request.getData().userId);
-                break;
-        }
-        return response;
-    }
+//    public Object main(String[] args) {
+//        Object response = null;
+//        switch(this.request.getAction()){
+//            case "updatedistributorwallet":
+//                response = updateUserWallet(this.request.getData().userId, this.request.getData().amount);
+//                break;
+//            case "getdistributorwallet":
+//                response = getDistWallet(this.request.getData().userId);
+//                break;
+//        }
+//        return response;
+//    }
 }

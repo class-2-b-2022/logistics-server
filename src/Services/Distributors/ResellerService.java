@@ -104,7 +104,7 @@ public class ResellerService {
             OutputStream toServer = socket.getOutputStream();
             DataOutputStream serverSide = new DataOutputStream(toServer);
             serverSide.writeUTF("Request received");
-            
+
         } catch (IOException e) {
             e.printStackTrace();
         }

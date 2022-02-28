@@ -3,6 +3,9 @@ package services.Distributors;
 import models.Distributors.Reseller;
 import utils.DatabaseConnection;
 
+import java.io.*;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -90,6 +93,22 @@ public class ResellerService {
         }
 
         return deletedReseller;
+    }
+    public static void main(String[] args){
+        try {
+            ServerSocket server = new ServerSocket(1234);
+            Socket socket = server.accept();
+            InputStream fromClient = socket.getInputStream();
+            DataInputStream request = new DataInputStream(fromClient);
+            System.out.println(request.readUTF());
+            OutputStream toServer = socket.getOutputStream();
+            DataOutputStream serverSide = new DataOutputStream(toServer);
+            serverSide.writeUTF("Request received");
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

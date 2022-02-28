@@ -45,4 +45,24 @@ public class ResellerService {
         return resellersObject;
     }
 
+    public List<Object> updateResellers(Reseller reseller)  throws Exception {
+        List<Object> updatedReseller = new ArrayList();
+        String sql = " UPDATE resellers SET first_name=?, last_name=?, telephone=?, email=?, business_name=? WHERE first_name=?,last_name=? && business_name=? ";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, reseller.getFirst_name());
+        statement.setString(2, reseller.getLast_name());        statement.setString(1, reseller.getFirst_name());
+        statement.setInt(3, reseller.getTelephone());
+        statement.setString(4, reseller.getEmail());
+        statement.setString(5, reseller.getBusiness_name());
+        //        attention! will statements for where conditions
+
+        int rowsUpdated = statement.executeUpdate();
+        if (rowsUpdated > 0) {
+            System.out.println("The user has been updated successful");
+        }
+
+        return updatedReseller;
+    }
+
+
 }

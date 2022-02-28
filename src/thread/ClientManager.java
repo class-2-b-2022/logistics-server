@@ -4,7 +4,6 @@ import models.ClientRequest;
 
 import java.io.*;
 import java.net.Socket;
-import java.sql.SQLException;
 import java.util.List;
 
 import controllers.user_management.UserController;
@@ -37,7 +36,11 @@ public class ClientManager implements Runnable{
 //                        logic related to company registration
                         break;
                     case "/users":
-                    	  responseData=UserController.mainMethod(clientRequest);
+					try {
+						responseData=UserController.mainMethod(clientRequest);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 //                        logic related to user management
                         break;
                     case "/inventory":
@@ -57,7 +60,7 @@ public class ClientManager implements Runnable{
                 //return response to the client;
                 responseStream.writeObject(responseData);
             }
-        } catch (IOException | ClassNotFoundException | SQLException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
 

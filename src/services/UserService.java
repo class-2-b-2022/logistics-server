@@ -65,14 +65,21 @@ public class UserService {
             System.out.println("User not found");
         else {
             int userRoleId = getRoleIdByEmail(user.getEmail());
-            String sql2 = "SELECT names, email, phone FROM roles WHERE role_id=?";
-            PreparedStatement roleIdStmt = conn.getConnection().prepareStatement(sql2);
-            roleIdStmt.setInt(1, userRoleId);
-            ResultSet rs2 = roleIdStmt.executeQuery();
+            String sql2 = "SELECT names, email, phone FROM users WHERE email=?";
+            PreparedStatement userDetailsStmt = conn.getConnection().prepareStatement(sql2);
+            userDetailsStmt.setString(1, user.getEmail());
+            ResultSet rs2 = userDetailsStmt.executeQuery();
+            String sql3 = "SELECT role FROM roles WHERE role_id=?";
             while (rs2.next()) {
                 userReturnValue.setNames(rs2.getString(1));
                 userReturnValue.setEmail(rs2.getString(2));
                 userReturnValue.setPhone(rs2.getInt(3));
+            }
+            PreparedStatement roleIdStmt = conn.getConnection().prepareStatement(sql3);
+            roleIdStmt.setInt(1, userRoleId);
+            ResultSet rs3 = roleIdStmt.executeQuery();
+            while (rs3.next()) {
+                userReturnValue.setRoleAsString(rs2.getString(1));
             }
         }
         return userReturnValue;
@@ -85,6 +92,6 @@ public class UserService {
         u1.setEmail("yvesisite@gmail.com");
         u1.setNames("Isite");
         u1.setPassword("pass123");
-        System.out.println(s1.findUser(u1));
+        System.out.println(s1.findUser(u1).getEmail());
     }
 }

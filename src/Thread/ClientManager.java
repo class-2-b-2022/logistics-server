@@ -6,9 +6,9 @@ import models.ClientRequest;
 import java.io.*;
 import java.net.Socket;
 import java.util.List;
-/***
- @author: Mudahemuka Manzi
- @author: Ntagungira Ali Rashid
+/**
+ * @author: Mudahemuka Manzi
+ * @author: Ntagungira Ali Rashid
  */
 public class ClientManager implements Runnable{
     private Socket clientSocket;

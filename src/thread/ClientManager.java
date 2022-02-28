@@ -23,6 +23,7 @@ public class ClientManager implements Runnable{
 
             //get stream to respond to client
             responseStream = new ObjectOutputStream(clientSocket.getOutputStream());
+
             ClientRequest clientRequest;
             while((clientRequest =(ClientRequest) requestStream.readObject()) !=null){
 

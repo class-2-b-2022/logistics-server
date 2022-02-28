@@ -1,6 +1,8 @@
 package models;
 
-public class ClientRequest {
+import java.io.Serializable;
+
+public class ClientRequest implements Serializable {
     private String route;
     private String action;
     private Object data;

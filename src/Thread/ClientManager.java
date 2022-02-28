@@ -40,6 +40,7 @@ public class ClientManager implements Runnable{
 //                        logic related to inventory
                         break;
                     case "/delivery/vehicles":
+                        System.out.println("Vehicles");
                         vehicleManagementController.mainMethod(clientRequest);
                         break;
                     case "/shipping":

@@ -25,8 +25,8 @@ public class ClientManager implements Runnable{
             responseStream = new ObjectOutputStream(clientSocket.getOutputStream());
 
             ClientRequest clientRequest;
-            while((clientRequest =(ClientRequest) requestStream.readObject()) !=null){
 
+            while((clientRequest =(ClientRequest) requestStream.readObject()) !=null){
                   //Get request route
                 String route = clientRequest.getRoute();
                 List<Object> responseData = null;
@@ -37,9 +37,17 @@ public class ClientManager implements Runnable{
                     case "/users":
 //                        logic related to user management
                         break;
-                    case "/inventory":
+                    case "/inventory/getProducts":
                          InventoryController inventory = new InventoryController();
-                         inventory.checkProductAvailability(1);
+                         responseData = inventory.getProducts();
+                        break;
+                    case "/inventory":
+                        InventoryController inv = new InventoryController();
+                        Object inventoryObject;
+                        inventoryObject = clientRequest.getData();
+                        InventoryModel inventoryModel = (InventoryModel) inventoryObject;
+                        boolean res = inv.addInventory(inventoryModel);
+                        responseStream.writeBoolean(res);
                         break;
                     case "/billing":
 //                        logic related to billing

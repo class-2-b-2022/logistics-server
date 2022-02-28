@@ -58,21 +58,24 @@ public class UserService {
         }
     }
 
-    public String findUser(User user) throws SQLException {
+    public User findUser(User user) throws SQLException {
+        User userReturnValue = new User();
         boolean userCheck = checkIfUserExists(user.getEmail());
         if (!userCheck)
-            return "User not found";
+            System.out.println("User not found");
         else {
             int userRoleId = getRoleIdByEmail(user.getEmail());
-            String sql2 = "SELECT role FROM roles WHERE role_id=?";
+            String sql2 = "SELECT names, email, phone FROM roles WHERE role_id=?";
             PreparedStatement roleIdStmt = conn.getConnection().prepareStatement(sql2);
             roleIdStmt.setInt(1, userRoleId);
             ResultSet rs2 = roleIdStmt.executeQuery();
-            String returnValue = "not found";
-            while (rs2.next())
-                returnValue = rs2.getString(1);
-            return returnValue;
+            while (rs2.next()) {
+                userReturnValue.setNames(rs2.getString(1));
+                userReturnValue.setEmail(rs2.getString(2));
+                userReturnValue.setPhone(rs2.getInt(3));
+            }
         }
+        return userReturnValue;
     }
 
     public static void main(String[] args) throws IOException, SQLException {

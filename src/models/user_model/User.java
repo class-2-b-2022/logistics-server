@@ -6,6 +6,7 @@ public class User {
     private int phone;
     private String password;
     private String role;
+    private String roleAsString;
 
     public int getPhone() {
         return phone;
@@ -47,4 +48,11 @@ public class User {
         this.role = role;
     }
 
+    public String getRoleAsString() {
+        return roleAsString;
+    }
+
+    public void setRoleAsString(String roleAsString) {
+        this.roleAsString = roleAsString;
+    }
 }

@@ -8,8 +8,8 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-/***
-@author: Mudahemuka Manzi
+/**
+ * @author : Mudahemuka Manzi
  */
 public class LogisticsServer {
     private static final int serverPort = 5450;

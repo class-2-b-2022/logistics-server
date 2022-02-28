@@ -41,6 +41,8 @@ public class ClientManager implements Runnable{
                          InventoryController inventory = new InventoryController();
                          responseData = inventory.getProducts();
                         break;
+                    case "products":
+                        System.out.println("reached to product");
                     case "/inventory":
                         InventoryController inv = new InventoryController();
                         Object inventoryObject;

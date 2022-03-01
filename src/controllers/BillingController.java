@@ -1,6 +1,7 @@
 package controllers;
 import models.billing.BillingModel;
 import models.ClientRequest;
+import models.billing.Wallet;
 import services.BillingService;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -25,20 +26,24 @@ public class BillingController {
     ClientRequest request;
     static BillingService billService;
 
-
-    public static  Object getDistWallet(BillingModel billing) throws SQLException {
-       return billService.viewUserWallet(billing.getUserId());
+    public static void createWallet(Wallet wallet) throws SQLException {
+        billService.createWallet(wallet);
     }
 
-    public static Object updateUserWallet(BillingModel billModel) throws SQLException {
-        return billService.updateDistributorWallet(billModel);
+    public static Wallet getDistWallet(Wallet wallet) throws SQLException {
+       return billService.viewUserWallet(wallet.getUserId());
+    }
+
+    public static Wallet updateUserWallet(Wallet wallet) throws SQLException {
+        return billService.updateDistributorWallet(wallet);
     }
 
     public List<Object> mainMethod(ClientRequest clientRequest) throws SQLException {
         List<Object> response = null;
         switch (clientRequest.getAction()) {
-            case "updatedistributorwallet" -> response.add(updateUserWallet((BillingModel) this.request.getData()));
-            case "getdistributorwallet" -> response.add(getDistWallet((BillingModel) this.request.getData()));
+            case "createwallet" -> createWallet((Wallet) this.request.getData());
+            case "updatedistributorwallet" -> response.add(updateUserWallet((Wallet) this.request.getData()));
+            case "getdistributorwallet" -> response.add(getDistWallet((Wallet) this.request.getData()));
         }
         return response;
     }

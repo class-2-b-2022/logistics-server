@@ -1,6 +1,6 @@
 package main;
 
-import utils.DatabaseConnection;
+import Utils.DatabaseConnection;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

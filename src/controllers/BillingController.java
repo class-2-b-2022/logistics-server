@@ -1,18 +1,9 @@
 package controllers;
-import models.billing.BillingModel;
 import models.ClientRequest;
 import models.billing.Wallet;
 import services.BillingService;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-
-
-import models.billing.BillingModel;
-import models.ClientRequest;
-import services.BillingService;
-
-import java.sql.SQLException;
 
 /**
  * @author : Mudahemuka Manzi

@@ -1,9 +1,10 @@
-package thread;
+package Thread;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import controllers.DeliveryModule.VehicleManagementController;
 import models.BillingModel;
 import models.ClientRequest;
-
 import java.io.*;
 import java.net.Socket;
 import java.util.List;
@@ -22,14 +23,36 @@ public class ClientManager implements Runnable{
     public void run() {
         ObjectOutputStream responseStream = null;
         ObjectInputStream requestStream = null;
-//        System.out.println("This is where all logic for handling client request will be managed");
-        //get client request;
         try {
-            //get client request stream
             requestStream = new ObjectInputStream(clientSocket.getInputStream());
 
-            //get stream to respond to client
             responseStream = new ObjectOutputStream(clientSocket.getOutputStream());
+            List<String> clientRequest;
+            System.out.println(requestStream.readObject());
+            while((clientRequest =(List) requestStream.readObject()) !=null){
+                System.out.println("MY request "+clientRequest.get(0));
+//                String route = clientRequest.getRoute();
+//                List<Object> responseData = null;
+//                switch (route){
+//                    case "/companyregistration":
+////                        logic related to company registration
+//                        break;
+//                    case "/users":
+////                        logic related to user management
+//                        break;
+//                    case "/inventory":
+////                        logic related to inventory
+//                        break;
+//                    case "/delivery/vehicles":
+//                        responseData = vehicleManagementController.mainMethod(clientRequest);
+//                        break;
+//                    case "/reporting":
+////                        logic related to reporting
+//                        break;
+//                }
+//                //return response to the client;
+//                responseStream.writeObject(responseData);
+            }
             ClientRequest clientRequest;
             System.out.println(requestStream.readObject());
             while((clientRequest =(ClientRequest) requestStream.readObject()) !=null){
@@ -71,3 +94,10 @@ public class ClientManager implements Runnable{
     }
 
 }
+
+
+
+
+
+
+

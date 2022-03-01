@@ -23,8 +23,9 @@ public class ClientManager implements Runnable{
             //get stream to respond to client
             responseStream = new ObjectOutputStream(clientSocket.getOutputStream());
             ClientRequest clientRequest;
+            System.out.println(requestStream.readObject());
             while((clientRequest =(ClientRequest) requestStream.readObject()) !=null){
-                  //Get request route
+                //Get request route
                 String route = clientRequest.getRoute();
                 List<Object> responseData = null;
                 switch (route){
@@ -49,7 +50,7 @@ public class ClientManager implements Runnable{
 
                 }
                 //return response to the client;
-                responseStream.writeObject(responseData);
+//                responseStream.writeObject(responseData);
             }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();

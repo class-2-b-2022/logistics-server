@@ -1,5 +1,6 @@
 package main;
 import thread.ClientManager;
+import utils.DatabaseConnection;
 import utils.ErrorMessageLogger;
 import utils.SuccessMessageLogger;
 
@@ -8,16 +9,18 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class LogisticsServer {
-    private static final int serverPort = 8000;
+    private static final int serverPort = 5450;
     public static void main(String[] args) throws IOException {
         ServerSocket server = null;
         ErrorMessageLogger logError = new ErrorMessageLogger();
         SuccessMessageLogger successLog = new SuccessMessageLogger();
+        DatabaseConnection dbConn = new DatabaseConnection();
         try {
-//            initializing server on port 8000
+//            initializing server on port 5450
             server = new ServerSocket(serverPort);
             server.setReuseAddress(true);
-            successLog.log("---------------------------------------   server is listening on port "+serverPort+"  --------------------------------");
+            successLog.log("                   -----------------------   server is listening on port "+serverPort+"  --------------------------------");
+            dbConn.init();
             while(true){
                 //accepting new client request
                 Socket client = server.accept();
@@ -44,5 +47,3 @@ public class LogisticsServer {
 
     }
 }
-
-

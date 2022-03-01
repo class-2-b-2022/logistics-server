@@ -3,14 +3,16 @@ package Thread;
 import controllers.BillingController;
 
 import controllers.DeliveryModule.VehicleManagementController;
+import models.BillingModel;
 import models.ClientRequest;
 
 import java.io.*;
 import java.net.Socket;
 import java.util.List;
+
 /**
- * @author: Mudahemuka Manzi
- * @author: Ntagungira Ali Rashid
+ * @author : Mudahemuka Manzi
+ * @author : Ntagungira Ali Rashid
  */
 public class ClientManager implements Runnable{
     private Socket clientSocket;
@@ -33,9 +35,12 @@ public class ClientManager implements Runnable{
             //get stream to respond to client
             responseStream = new ObjectOutputStream(clientSocket.getOutputStream());
             ClientRequest clientRequest;
+            System.out.println(requestStream.readObject());
             while((clientRequest =(ClientRequest) requestStream.readObject()) !=null){
-
                   //Get request route
+                System.out.println(clientRequest.getRoute());
+                BillingModel bill = (BillingModel) clientRequest.getData();
+                System.out.println(bill.getAmount());
                 String route = clientRequest.getRoute();
                 List<Object> responseData = null;
                 switch (route){
@@ -49,7 +54,7 @@ public class ClientManager implements Runnable{
 //                        logic related to inventory
                         break;
                     case "/delivery/vehicles":
-                        responseData = vehicleManagementController.mainMethod(clientRequest);
+//                        responseData = vehicleManagementController.mainMethod(clientRequest);
                         break;
                     case "/reporting":
 //                        logic related to reporting
@@ -57,9 +62,12 @@ public class ClientManager implements Runnable{
                     case "/billing":
                         responseData = billingController.mainMethod(clientRequest);
 
+                    case "/testing":
+//                        TestingController.test(clientRequest);
+                        break;
                 }
                 //return response to the client;
-                responseStream.writeObject(responseData);
+//                responseStream.writeObject(responseData);
             }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();

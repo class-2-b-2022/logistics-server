@@ -8,10 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-/**
- * @author : Mudahemuka Manzi
- * @author : Gasaro leila
- */
 import models.billing.BillingModel;
 import models.ClientRequest;
 import services.BillingService;

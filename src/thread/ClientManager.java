@@ -1,5 +1,6 @@
 package thread;
 
+import controllers.ProductController;
 import models.*;
 import controllers.InventoryController;
 import java.io.*;
@@ -26,10 +27,9 @@ public class ClientManager implements Runnable{
 
             ClientRequest clientRequest;
 
-            while((clientRequest =(ClientRequest) requestStream.readObject()) !=null){
+            while ((clientRequest =(ClientRequest) requestStream.readObject()) !=null){
                   //Get request route
                 String route = clientRequest.getRoute();
-                List<Object> responseData = null;
                 switch (route){
                     case "/companyregistration":
 //                        logic related to company registration
@@ -38,18 +38,24 @@ public class ClientManager implements Runnable{
 //                        logic related to user management
                         break;
                     case "/inventory/getProducts":
-                         InventoryController inventory = new InventoryController();
-                         responseData = inventory.getProducts();
+                        List<Object> responseData = null;
+                         ProductController product = new ProductController();
+                         responseData = product.getProducts();
+                        //return response to the client;
+                        responseStream.writeObject(responseData);
                         break;
                     case "products":
                         System.out.println("reached to product");
                     case "/inventory":
-                        InventoryController inv = new InventoryController();
-                        Object inventoryObject;
-                        inventoryObject = clientRequest.getData();
-                        InventoryModel inventoryModel = (InventoryModel) inventoryObject;
-                        boolean res = inv.addInventory(inventoryModel);
-                        responseStream.writeBoolean(res);
+                        if (clientRequest.getRoute() == "POST"){
+                            InventoryController inv = new InventoryController();
+                            Object inventoryObject;
+                            inventoryObject = clientRequest.getData();
+                            InventoryModel inventoryModel = (InventoryModel) inventoryObject;
+                            DataOutputStream saveResult = new DataOutputStream(clientSocket.getOutputStream());
+                            int res = inv.addInventory(inventoryModel);
+                            saveResult.writeInt(res);
+                        }
                         break;
                     case "/billing":
 //                        logic related to billing
@@ -62,13 +68,10 @@ public class ClientManager implements Runnable{
                         break;
 
                 }
-                //return response to the client;
-                responseStream.writeObject(responseData);
             }
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            e.getMessage();
         }
 
     }
-
 }

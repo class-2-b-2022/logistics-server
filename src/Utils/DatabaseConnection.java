@@ -1,8 +1,12 @@
-package utils;
+package Utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+/**
+ * @author : Nkubito Pacis
+ * @author : Mudahemuka Manzi
+ */
 public class DatabaseConnection {
     private static final String dbUrl = "jdbc:mysql://remotemysql.com/XuJYb3DkoB";
     private static final String dbUser = "XuJYb3DkoB";

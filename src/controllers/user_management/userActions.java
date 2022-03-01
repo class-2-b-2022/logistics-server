@@ -30,7 +30,7 @@ public class userActions {
     public List<Object> loginUser(User user) throws SQLException {
         List<Object> userToLogin = new ArrayList<>();
         User foundUser = userService.findUser(user);
-        userToLogin.add((Object) user);
+        userToLogin.add((Object) foundUser);
         return userToLogin;
     }
 }

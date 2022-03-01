@@ -1,9 +1,8 @@
 package thread;
 
 import controllers.DeliveryModule.VehicleManagementController;
-import controllers.TestingController;
+import models.BillingModel;
 import models.ClientRequest;
-import models.billing.BillingModel;
 
 import java.io.*;
 import java.net.Socket;
@@ -32,9 +31,12 @@ public class ClientManager implements Runnable{
             //get stream to respond to client
             responseStream = new ObjectOutputStream(clientSocket.getOutputStream());
             ClientRequest clientRequest;
+            System.out.println(requestStream.readObject());
             while((clientRequest =(ClientRequest) requestStream.readObject()) !=null){
-
                   //Get request route
+                System.out.println(clientRequest.getRoute());
+                BillingModel bill = (BillingModel) clientRequest.getData();
+                System.out.println(bill.getAmount());
                 String route = clientRequest.getRoute();
                 List<Object> responseData = null;
                 switch (route){
@@ -48,17 +50,17 @@ public class ClientManager implements Runnable{
 //                        logic related to inventory
                         break;
                     case "/delivery/vehicles":
-                        responseData = vehicleManagementController.mainMethod(clientRequest);
+//                        responseData = vehicleManagementController.mainMethod(clientRequest);
                         break;
                     case "/reporting":
 //                        logic related to reporting
                         break;
                     case "/testing":
-                        TestingController.test(clientRequest);
+//                        TestingController.test(clientRequest);
                         break;
                 }
                 //return response to the client;
-                responseStream.writeObject(responseData);
+//                responseStream.writeObject(responseData);
             }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();

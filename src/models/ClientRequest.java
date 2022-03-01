@@ -7,7 +7,7 @@ import java.io.Serializable;
  */
 public class ClientRequest implements Serializable {
     private String route;///users
-    private String action;//regist
+    private String action;//register
     private Object data;
     public ClientRequest(){}
     public ClientRequest(String route, String action, Object data){

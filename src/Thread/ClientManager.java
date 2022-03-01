@@ -1,4 +1,4 @@
-package thread;
+package Thread;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,13 +21,13 @@ public class ClientManager implements Runnable{
     public void run() {
         ObjectOutputStream responseStream = null;
         ObjectInputStream requestStream = null;
-//        System.out.println("This is where all logic for handling client request will be managed");
-        //get client request;
         try {
-            //get client request stream
             requestStream = new ObjectInputStream(clientSocket.getInputStream());
+<<<<<<< HEAD
             System.out.println(requestStream);
             //get stream to respond to client
+=======
+>>>>>>> 3464cdf3d7e9e27aea417ceb632cdf99fbb21547
             responseStream = new ObjectOutputStream(clientSocket.getOutputStream());
             List<String> clientRequest;
             System.out.println(requestStream.readObject());
@@ -54,7 +54,11 @@ public class ClientManager implements Runnable{
 //                }
 //                //return response to the client;
 //                responseStream.writeObject(responseData);
+<<<<<<< HEAD
            }
+=======
+            }
+>>>>>>> 3464cdf3d7e9e27aea417ceb632cdf99fbb21547
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -64,3 +68,10 @@ public class ClientManager implements Runnable{
     }
 
 }
+
+
+
+
+
+
+

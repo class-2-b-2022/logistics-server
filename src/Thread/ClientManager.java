@@ -1,8 +1,9 @@
 package thread;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import controllers.DeliveryModule.VehicleManagementController;
 import models.ClientRequest;
-
 import java.io.*;
 import java.net.Socket;
 import java.util.List;
@@ -25,36 +26,35 @@ public class ClientManager implements Runnable{
         try {
             //get client request stream
             requestStream = new ObjectInputStream(clientSocket.getInputStream());
-
+            System.out.println(requestStream);
             //get stream to respond to client
             responseStream = new ObjectOutputStream(clientSocket.getOutputStream());
-            ClientRequest clientRequest;
-            while((clientRequest =(ClientRequest) requestStream.readObject()) !=null){
-
-                  //Get request route
-                String route = clientRequest.getRoute();
-                List<Object> responseData = null;
-                switch (route){
-                    case "/companyregistration":
-//                        logic related to company registration
-                        break;
-                    case "/users":
-//                        logic related to user management
-                        break;
-                    case "/inventory":
-//                        logic related to inventory
-                        break;
-                    case "/delivery/vehicles":
-                        responseData = vehicleManagementController.mainMethod(clientRequest);
-                        break;
-                    case "/reporting":
-//                        logic related to reporting
-                        break;
-
-                }
-                //return response to the client;
-                responseStream.writeObject(responseData);
-            }
+            List<String> clientRequest;
+            System.out.println(requestStream.readObject());
+            while((clientRequest =(List) requestStream.readObject()) !=null){
+                System.out.println("MY request "+clientRequest.get(0));
+//                String route = clientRequest.getRoute();
+//                List<Object> responseData = null;
+//                switch (route){
+//                    case "/companyregistration":
+////                        logic related to company registration
+//                        break;
+//                    case "/users":
+////                        logic related to user management
+//                        break;
+//                    case "/inventory":
+////                        logic related to inventory
+//                        break;
+//                    case "/delivery/vehicles":
+//                        responseData = vehicleManagementController.mainMethod(clientRequest);
+//                        break;
+//                    case "/reporting":
+////                        logic related to reporting
+//                        break;
+//                }
+//                //return response to the client;
+//                responseStream.writeObject(responseData);
+           }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         } catch (Exception e) {

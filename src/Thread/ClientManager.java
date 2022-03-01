@@ -3,13 +3,15 @@ package Thread;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import controllers.DeliveryModule.VehicleManagementController;
+import models.BillingModel;
 import models.ClientRequest;
 import java.io.*;
 import java.net.Socket;
 import java.util.List;
+
 /**
- * @author: Mudahemuka Manzi
- * @author: Ntagungira Ali Rashid
+ * @author : Mudahemuka Manzi
+ * @author : Ntagungira Ali Rashid
  */
 public class ClientManager implements Runnable{
     private Socket clientSocket;
@@ -23,11 +25,7 @@ public class ClientManager implements Runnable{
         ObjectInputStream requestStream = null;
         try {
             requestStream = new ObjectInputStream(clientSocket.getInputStream());
-<<<<<<< HEAD
-            System.out.println(requestStream);
-            //get stream to respond to client
-=======
->>>>>>> 3464cdf3d7e9e27aea417ceb632cdf99fbb21547
+
             responseStream = new ObjectOutputStream(clientSocket.getOutputStream());
             List<String> clientRequest;
             System.out.println(requestStream.readObject());
@@ -54,11 +52,39 @@ public class ClientManager implements Runnable{
 //                }
 //                //return response to the client;
 //                responseStream.writeObject(responseData);
-<<<<<<< HEAD
-           }
-=======
             }
->>>>>>> 3464cdf3d7e9e27aea417ceb632cdf99fbb21547
+            ClientRequest clientRequest;
+            System.out.println(requestStream.readObject());
+            while((clientRequest =(ClientRequest) requestStream.readObject()) !=null){
+                  //Get request route
+                System.out.println(clientRequest.getRoute());
+                BillingModel bill = (BillingModel) clientRequest.getData();
+                System.out.println(bill.getAmount());
+                String route = clientRequest.getRoute();
+                List<Object> responseData = null;
+                switch (route){
+                    case "/companyregistration":
+//                        logic related to company registration
+                        break;
+                    case "/users":
+//                        logic related to user management
+                        break;
+                    case "/inventory":
+//                        logic related to inventory
+                        break;
+                    case "/delivery/vehicles":
+//                        responseData = vehicleManagementController.mainMethod(clientRequest);
+                        break;
+                    case "/reporting":
+//                        logic related to reporting
+                        break;
+                    case "/testing":
+//                        TestingController.test(clientRequest);
+                        break;
+                }
+                //return response to the client;
+//                responseStream.writeObject(responseData);
+            }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         } catch (Exception e) {

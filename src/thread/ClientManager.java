@@ -1,12 +1,9 @@
 package thread;
 
-import controllers.user_management.UserController;
+import controllers.DeliveryModule.VehicleManagementController;
 import models.BillingModel;
 import models.ClientRequest;
-
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 import java.util.List;
 
@@ -45,7 +42,7 @@ public class ClientManager implements Runnable{
 //                        logic related to company registration
                         break;
                     case "/users":
-                    	  responseData= UserController.mainMethod(clientRequest);
+                    	  responseData=UserController.mainMethod(clientRequest);
 //                        logic related to user management
                         break;
                     case "/inventory":

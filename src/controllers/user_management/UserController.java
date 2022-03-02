@@ -1,9 +1,6 @@
 package controllers.user_management;
 import models.ClientRequest;
 import models.user_model.User;
-
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -17,18 +17,18 @@ public class UserService {
 	public void insertUser(User user) throws SQLException {
 		boolean userCheck = checkIfUserExists(user.getEmail());
 		if(!userCheck){
-			String sql = "INSERT INTO user(names,email,phone,password,role)values(?,?,?,?,?)";
+			String sql = "INSERT INTO users(names,email,phone,password,role)values(?,?,?,?,?)";
 			PreparedStatement stmt = conn.getConnection().prepareStatement(sql);
 			stmt.setString(1, user.getNames());
 			stmt.setString(2, user.getEmail());
 			stmt.setInt(3, user.getPhone());
 			stmt.setString(4, user.getPassword());
-			stmt.setString(5, user.getRole());
+			stmt.setInt(5, user.getRole());
 			int Created=stmt.executeUpdate();
 			if(Created==1){
 				System.out.println("User Created Successfully");
 			}else{
-System.out.println("Error creating the user.");
+            System.out.println("Error creating the user.");
 			}
 		}else{
 			System.out.println("User already Exists");
@@ -63,14 +63,20 @@ System.out.println("Error creating the user.");
 		}
 		return userExists;
 	}
+	
+//	public String hashPassword(String password){
+
+//    }
 
 	public static void main(String[] args) throws IOException, SQLException {
 		// Test Login
 		UserService s1=new UserService();
 		User u1=new User();
-		u1.setEmail("yvesisite@gmail.com");
-		u1.setNames("Isite");
-		u1.setPassword("pass123");
-		System.out.println(s1.findUser(u1));
+		u1.setNames("Ntagungira ali");	
+		u1.setEmail("ali@gmail.com");
+	    u1.setPhone(781351171);
+		u1.setPassword("passw123");
+		u1.setRole(1);
+		s1.insertUser(u1);
 	}
 }

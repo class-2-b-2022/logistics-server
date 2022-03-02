@@ -2,7 +2,6 @@ package services.user_services;
 
 import models.user_model.User;
 import Utils.DatabaseConnection;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,7 +32,7 @@ public class UserService {
 		   stmt.setString(2, user.getEmail());
 		   stmt.setInt(3, user.getPhone());
 		   stmt.setString(4,user.getPassword());
-		   stmt.setString(5, user.getRole());
+		   stmt.setInt(5, user.getRole());
 		   int inserted=stmt.executeUpdate();
 		   if(inserted==1) {
 			  System.out.println("Registered Successfully");
@@ -52,7 +51,7 @@ public class UserService {
 	   stmt.setString(2, user.getEmail());
 	   stmt.setInt(3, user.getPhone());
 	   stmt.setString(4,user.getPassword());
-	   stmt.setString(5, user.getRole());
+	   stmt.setInt(5, user.getRole());
 	   stmt.executeUpdate();
    }
 }

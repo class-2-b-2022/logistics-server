@@ -12,9 +12,9 @@ public class DatabaseConnection {
     // "jdbc:mysql://remotemysql.com/XuJYb3DkoB";
     // private static final String dbUser = "XuJYb3DkoB";
     // private static final String dbPassword = "l43QuoJSlB";
-    private static final String dbUrl = "jdbc:mysql://localhost:3306/logisticApp?characterEncoding=latin1";
-    private static final String dbUser = "root";
-    private static final String dbPassword = "///*81esyvprog17*/";
+    private static final String dbUrl = "jdbc:mysql://localhost:3306/logistics?characterEncoding=latin1";
+    private static final String dbUser = "ntagungira";
+    private static final String dbPassword = "real0987";
     public static Connection myConnection;
     private Utils.ErrorMessageLogger error = new Utils.ErrorMessageLogger();
     private Utils.SuccessMessageLogger success = new Utils.SuccessMessageLogger();

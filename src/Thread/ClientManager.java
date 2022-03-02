@@ -26,11 +26,11 @@ public class ClientManager implements Runnable{
     }
     @Override
     public void run() {
-        ObjectOutputStream responseStream = null;
+        DataOutputStream responseStream = null;
         ObjectInputStream requestStream = null;
         try {
             requestStream = new ObjectInputStream(clientSocket.getInputStream());
-            responseStream = new ObjectOutputStream(clientSocket.getOutputStream());
+            responseStream = new DataOutputStream(clientSocket.getOutputStream());
             String jsonString = (String) requestStream.readObject();
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode jsonNodeRoot = objectMapper.readTree(jsonString);
@@ -58,6 +58,7 @@ public class ClientManager implements Runnable{
                         break;
                 }
                 //return response to the client;
+                 System.out.println(responseData);
                 responseStream.writeUTF(responseData);
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();

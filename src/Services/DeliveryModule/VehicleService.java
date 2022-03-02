@@ -30,6 +30,7 @@ public class VehicleService {
         ResultSet result = statement.executeQuery(sql);
         while (result.next()){
             Vehicle vehicle = new Vehicle();
+            vehicle.setVehicleId(result.getInt("vehicleId"));
             vehicle.setModel(result.getString("model"));
             vehicle.setPlateNbr(result.getString("plateNbr"));
             vehicle.setBrand(result.getString("brand"));

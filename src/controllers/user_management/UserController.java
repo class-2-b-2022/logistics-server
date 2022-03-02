@@ -14,7 +14,7 @@ public class UserController {
                 res = UserActions.registerUser((User) req.getData());
                 break;
             case "login":
-                res = UserActions.loginUser((User) req.getData());
+               // res = UserActions.loginUser((User) req.getData());
         }
         return res;
     }

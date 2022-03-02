@@ -23,10 +23,14 @@ public class userActions {
         return newUser;
     }
 
-    public List<Object> loginUser(User user) throws SQLException {
-        List<Object> userToLogin = new ArrayList<>();
-        userService.findUser(user);
-        userToLogin.add((Object) user);
-        return userToLogin;
-    }
+    /**
+     *
+     * @author: Isite Yves
+     */
+    // public List<Object> loginUser(User user) throws SQLException {
+    //     List<Object> userToLogin = new ArrayList<>();
+    //     User foundUser = userService.findUser(user);
+    //     userToLogin.add((Object) foundUser);
+    //     return userToLogin;
+    // }
 }

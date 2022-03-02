@@ -1,60 +1,63 @@
-package thread;
-
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import controllers.DeliveryModule.VehicleManagementController;
 import models.ClientRequest;
 import java.io.*;
 import java.net.Socket;
+import java.util.Iterator;
 import java.util.List;
-import controllers.user_management.UserController;
+import java.util.Map;
 
-/***
- @author: Mudahemuka Manzi
- @author: Ntagungira Ali Rashid
+/**
+ * @author: Mudahemuka Manzi
+ * @author: Ntagungira Ali Rashid
  */
 public class ClientManager implements Runnable{
     private Socket clientSocket;
+    private String json_data;
+    private ClientRequest clientRequest = new ClientRequest();
+    private VehicleManagementController vehicleManagementController = new VehicleManagementController();
     public ClientManager(Socket socket){
         this.clientSocket = socket;
     }
     @Override
     public void run() {
-        ObjectOutputStream responseStream = null;
+        DataOutputStream responseStream = null;
         ObjectInputStream requestStream = null;
-//        System.out.println("This is where all logic for handling client request will be managed");
-        //get client request;
         try {
-            //get client request stream
             requestStream = new ObjectInputStream(clientSocket.getInputStream());
-
-            //get stream to respond to client
-            responseStream = new ObjectOutputStream(clientSocket.getOutputStream());
-            ClientRequest clientRequest;
-            while((clientRequest =(ClientRequest) requestStream.readObject()) !=null){
-
-                  //Get request route
-                String route = clientRequest.getRoute();
-                List<Object> responseData = null;
-                switch (route){
+            responseStream = new DataOutputStream(clientSocket.getOutputStream());
+            String jsonString = (String) requestStream.readObject();
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode jsonNodeRoot = objectMapper.readTree(jsonString);
+            JsonNode requestData = jsonNodeRoot.get("data");
+            Iterator<Map.Entry<String, JsonNode>> iterator = requestData.fields();
+            clientRequest.setRoute(jsonNodeRoot.get("route").asText());
+            clientRequest.setData(iterator);
+            clientRequest.setAction((jsonNodeRoot.get("action").asText()));
+                String responseData = null;
+                switch (jsonNodeRoot.get("route").asText()){
                     case "/companyregistration":
 //                        logic related to company registration
                         break;
                     case "/users":
-                    	  responseData=UserController.mainMethod(clientRequest);
 //                        logic related to user management
                         break;
                     case "/inventory":
 //                        logic related to inventory
                         break;
                     case "/delivery/vehicles":
-                 
+                        responseData = vehicleManagementController.mainMethod(clientRequest);
                         break;
                     case "/reporting":
 //                        logic related to reporting
                         break;
-
                 }
                 //return response to the client;
-                responseStream.writeObject(responseData);
-            }
+                 System.out.println(responseData);
+                responseStream.writeUTF(responseData);
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         } catch (Exception e) {

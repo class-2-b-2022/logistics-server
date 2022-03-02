@@ -1,77 +1,53 @@
-package Thread;
+package main;
+import Thread.ClientManager;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import controllers.DeliveryModule.VehicleManagementController;
-import models.ClientRequest;
-import java.io.*;
+import Utils.DatabaseConnection;
+import Utils.ErrorMessageLogger;
+import Utils.SuccessMessageLogger;
+
+import java.io.IOException;
+import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
 /**
- * @author: Mudahemuka Manzi
- * @author: Ntagungira Ali Rashid
+ * @author : Mudahemuka Manzi
  */
-public class ClientManager implements Runnable{
-    private Socket clientSocket;
-    private String json_data;
-    private ClientRequest clientRequest = new ClientRequest();
-    private VehicleManagementController vehicleManagementController = new VehicleManagementController();
-    public ClientManager(Socket socket){
-        this.clientSocket = socket;
-    }
-    @Override
-    public void run() {
-        ObjectOutputStream responseStream = null;
-        ObjectInputStream requestStream = null;
+public class LogisticsServer {
+    private static final int serverPort = 5450;
+    public static void main(String[] args) throws IOException {
+        ServerSocket server = null;
+        ErrorMessageLogger logError = new ErrorMessageLogger();
+        SuccessMessageLogger successLog = new SuccessMessageLogger();
+        DatabaseConnection dbConn = new DatabaseConnection();
         try {
-            requestStream = new ObjectInputStream(clientSocket.getInputStream());
-            responseStream = new ObjectOutputStream(clientSocket.getOutputStream());
-            String jsonString = (String) requestStream.readObject();
-            ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode jsonNodeRoot = objectMapper.readTree(jsonString);
-            JsonNode requestData = jsonNodeRoot.get("data");
-            Iterator<Map.Entry<String, JsonNode>> iterator = requestData.fields();
-            clientRequest.setRoute(jsonNodeRoot.get("route").asText());
-            clientRequest.setData(iterator);
-            clientRequest.setAction((jsonNodeRoot.get("action").asText()));
-                String responseData = null;
-                switch (jsonNodeRoot.get("route").asText()){
-                    case "/companyregistration":
-//                        logic related to company registration
-                        break;
-                    case "/users":
-//                        logic related to user management
-                        break;
-                    case "/inventory":
-//                        logic related to inventory
-                        break;
-                    case "/delivery/vehicles":
-                        responseData = vehicleManagementController.mainMethod(clientRequest);
-                        break;
-                    case "/reporting":
-//                        logic related to reporting
-                        break;
+//            initializing server on port 5450
+            server = new ServerSocket(serverPort);
+            server.setReuseAddress(true);
+            successLog.log("                   -----------------------   server is listening on port "+serverPort+"  --------------------------------");
+            dbConn.init();
+            while(true){
+                //accepting new client request
+                Socket client = server.accept();
+                System.out.println("Client with address: "+
+                        client.getInetAddress().getHostAddress()+" is connected");
+                //assigning client request to a new thread
+                ClientManager clientManager = new ClientManager(client);
+                new Thread(clientManager).start();
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally{
+            if(server !=null){
+                //close server
+                try {
+                    server.close();
+                }catch (Exception e){
+                    e.printStackTrace();
+                    logError.log(e.getMessage());
                 }
-                //return response to the client;
-                responseStream.writeUTF(responseData);
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
+            }
         }
 
     }
-
 }
-
-
-
-
-
-
-

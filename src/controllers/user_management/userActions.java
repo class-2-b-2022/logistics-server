@@ -1,7 +1,7 @@
 package controllers.user_management;
 
 import models.user_model.User;
-import services.UserService;
+import services.user_services.*;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

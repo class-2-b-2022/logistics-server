@@ -1,6 +1,4 @@
 package main;
-import thread.ClientManager;
-
 import Utils.DatabaseConnection;
 import Utils.ErrorMessageLogger;
 import Utils.SuccessMessageLogger;
@@ -8,6 +6,8 @@ import Utils.SuccessMessageLogger;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+
+import Thread.ClientManager;
 
 /**
  * @author : Mudahemuka Manzi

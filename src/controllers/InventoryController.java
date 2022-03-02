@@ -40,6 +40,32 @@ public class InventoryController {
         finally {
             return rowsInserted;
         }
-    }
 
+
+    }
+    public List getInventory(int userId){
+        List result = new ArrayList();
+        try {
+            Statement statement = con.createStatement();
+            Scanner scanner = new Scanner(System.in);
+            String getProductsQuery = ("select * from inventory where userId = " + userId);
+            this.p = con.prepareStatement(getProductsQuery);
+            this.rs = p.executeQuery();
+
+            while (rs.next()){
+                InventoryModel inventoryModel = new InventoryModel();
+                inventoryModel.setProductId(rs.getInt("productId"));
+                inventoryModel.setQuantity(rs.getInt("quantity"));
+                inventoryModel.setUserId(rs.getInt("userId"));
+                inventoryModel.setStatus(rs.getString("Status"));
+
+                result.add(inventoryModel);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        finally {
+            return  result;
+        }
+    }
 }

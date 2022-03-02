@@ -37,17 +37,17 @@ public class ClientManager implements Runnable{
                     case "/users":
 //                        logic related to user management
                         break;
-                    case "/inventory/getProducts":
-                        List<Object> responseData = null;
-                         ProductController product = new ProductController();
-                         responseData = product.getProducts();
-                        //return response to the client;
-                        responseStream.writeObject(responseData);
-                        break;
-                    case "products":
-                        System.out.println("reached to product");
+                    case "/products":
+                        if (clientRequest.getAction().equals("GET")){
+                            List<Object> responseData = null;
+                            ProductController product = new ProductController();
+                            responseData = product.getProducts((int) clientRequest.getData());
+                            //return response to the client;
+                            responseStream.writeObject(responseData);
+                            break;
+                        }
                     case "/inventory":
-                        if (clientRequest.getRoute() == "POST"){
+                        if (clientRequest.getAction().equals("POST")){
                             InventoryController inv = new InventoryController();
                             Object inventoryObject;
                             inventoryObject = clientRequest.getData();
@@ -55,6 +55,14 @@ public class ClientManager implements Runnable{
                             DataOutputStream saveResult = new DataOutputStream(clientSocket.getOutputStream());
                             int res = inv.addInventory(inventoryModel);
                             saveResult.writeInt(res);
+                        }
+                        if (clientRequest.getAction().equals("GET")){
+                                List<Object> responseData = null;
+                                ProductController product = new ProductController();
+                                responseData = product.getProducts((int) clientRequest.getData());
+                                //return response to the client;
+                                responseStream.writeObject(responseData);
+                                break;
                         }
                         break;
                     case "/billing":

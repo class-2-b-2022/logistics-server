@@ -35,7 +35,6 @@ public class ClientManager implements Runnable{
             while((clientRequest =(List) requestStream.readObject()) !=null){
                 ClientRequest client = objectMapper.readValue(clientRequest.get(0), ClientRequest.class);
                 String route = client.getRoute();
-//                String json = objectMapper.writeValueAsString(client.getData());
                 List<Object> responseData = null;
                 switch (route){
                     case "/companyregistration":

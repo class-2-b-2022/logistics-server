@@ -1,12 +1,19 @@
-package models.billing;
+package models;
+
+import java.io.Serializable;
 
 /**
- * @author : Mudahemuka Manzi
+ * @author : Niyigena-Yves
  */
-public class BillingModel {
+public class BillingModel implements Serializable {
     private int userId;
     private float amount;
     public BillingModel(){}
+
+    public BillingModel(int userId, float amount) {
+        this.userId = userId;
+        this.amount = amount;
+    }
 
     public int getUserId() {
         return userId;

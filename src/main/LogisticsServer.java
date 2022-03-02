@@ -1,5 +1,6 @@
 package main;
-import thread.ClientManager;
+import Thread.ClientManager;
+
 import Utils.DatabaseConnection;
 import Utils.ErrorMessageLogger;
 import Utils.SuccessMessageLogger;
@@ -50,5 +51,3 @@ public class LogisticsServer {
 
     }
 }
-
-

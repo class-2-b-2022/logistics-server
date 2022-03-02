@@ -1,20 +1,26 @@
 package controllers.DeliveryModule;
 
 import Services.DeliveryModule.VehicleService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import models.DeliveryModule.Vehicle;
+import models.ResponseObject;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class VehicleManagementActions<ResponseStatus> {
+public class VehicleManagementActions {
     private VehicleService vehicleService = new VehicleService();
-
-    public List<Object> registerVehicle(Vehicle vehicle) throws SQLException {
+    private ResponseObject responseObject = new ResponseObject();
+    public Object registerVehicle(Vehicle vehicle) throws SQLException, JsonProcessingException {
         List<Object> vehicleObject = new ArrayList<>();
         vehicleService.insertIntoVehicles(vehicle);
         vehicleObject.add((Object) vehicle);
-        return vehicleObject;
+        responseObject.setStatus("200");
+        responseObject.setMessage("Vehicle registered");
+        responseObject.setData(vehicleObject);
+        return responseObject;
     }
 
     public List<Object> getVehicles(Integer vehicleId) throws SQLException {

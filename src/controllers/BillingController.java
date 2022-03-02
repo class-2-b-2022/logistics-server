@@ -1,6 +1,6 @@
 package controllers;
 
-import models.billing.BillingModel;
+import models.BillingModel;
 import models.ClientRequest;
 import services.BillingService;
 

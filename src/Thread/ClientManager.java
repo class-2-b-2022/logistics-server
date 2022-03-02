@@ -1,4 +1,4 @@
-package Thread;
+package thread;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,7 +15,7 @@ public class ClientManager implements Runnable{
     private Socket clientSocket;
     private VehicleManagementController vehicleManagementController = new VehicleManagementController();
     public ClientManager(Socket socket){
-        this.clientSocket = socket;
+    this.clientSocket = socket;
     }
     @Override
     public void run() {
@@ -23,16 +23,12 @@ public class ClientManager implements Runnable{
         ObjectInputStream requestStream = null;
         try {
             requestStream = new ObjectInputStream(clientSocket.getInputStream());
-<<<<<<< HEAD
-            System.out.println(requestStream);
-            //get stream to respond to client
-=======
->>>>>>> 3464cdf3d7e9e27aea417ceb632cdf99fbb21547
+
             responseStream = new ObjectOutputStream(clientSocket.getOutputStream());
             List<String> clientRequest;
             System.out.println(requestStream.readObject());
-            while((clientRequest =(List) requestStream.readObject()) !=null){
-                System.out.println("MY request "+clientRequest.get(0));
+            while((clientRequest =(List) requestStream.readObject()) !=null) {
+                System.out.println("MY request " + clientRequest.get(0));
 //                String route = clientRequest.getRoute();
 //                List<Object> responseData = null;
 //                switch (route){
@@ -54,11 +50,7 @@ public class ClientManager implements Runnable{
 //                }
 //                //return response to the client;
 //                responseStream.writeObject(responseData);
-<<<<<<< HEAD
-           }
-=======
             }
->>>>>>> 3464cdf3d7e9e27aea417ceb632cdf99fbb21547
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         } catch (Exception e) {

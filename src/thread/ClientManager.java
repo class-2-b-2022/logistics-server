@@ -48,7 +48,7 @@ public class ClientManager implements Runnable{
                         }
                     case "/inventory":
                         if (clientRequest.getAction().equals("POST")){
-                            InventoryController inv = new InventoryController();
+                             InventoryController inv = new InventoryController();
                             Object inventoryObject;
                             inventoryObject = clientRequest.getData();
                             InventoryModel inventoryModel = (InventoryModel) inventoryObject;

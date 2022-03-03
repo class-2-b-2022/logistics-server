@@ -32,6 +32,7 @@ public class ClientManager implements Runnable{
             requestStream = new ObjectInputStream(clientSocket.getInputStream());
             responseStream = new DataOutputStream(clientSocket.getOutputStream());
             String jsonString = (String) requestStream.readObject();
+            System.out.println(jsonString);
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode jsonNodeRoot = objectMapper.readTree(jsonString);
             JsonNode requestData = jsonNodeRoot.get("data");
@@ -39,8 +40,10 @@ public class ClientManager implements Runnable{
             clientRequest.setRoute(jsonNodeRoot.get("route").asText());
             clientRequest.setData(iterator);
             clientRequest.setAction((jsonNodeRoot.get("action").asText()));
-                String responseData = null;
-                switch (jsonNodeRoot.get("route").asText()){
+            System.out.println(iterator);
+            String responseData = null;
+
+            switch (jsonNodeRoot.get("route").asText()){
                     case "/companyregistration":
 //                        logic related to company registration
                         break;

@@ -53,8 +53,7 @@ public class VehicleService {
         preparedStatement.setString(3, vehicle.getBrand());
         preparedStatement.setString(4, vehicle.getOwner());
         preparedStatement.setString(5, vehicle.getDescription());
-        preparedStatement.setDate(6, vehicle.getCreatedAt());
-        preparedStatement.setInt(7, vehicle.getVehicleId());
+        preparedStatement.setInt(6, vehicle.getVehicleId());
 
 
         int rowsUpdated=preparedStatement.executeUpdate();

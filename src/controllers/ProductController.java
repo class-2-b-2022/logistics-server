@@ -1,37 +1,44 @@
 package controllers;
-import java.sql.*;
+ import java.sql.Connection;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import models.*;
 import utils.DatabaseConnection;
 
-
-
-import models.RegisterProduct;
-
-public class ProductRegister {
-
-	public static void main(String[] args) throws SQLException {
-		RegisterProduct product=new RegisterProduct();
-DatabaseConnection connection=new DatabaseConnection();
-Connection con=connection.getConnection();
-product.setProductName("Jewelery");
-product.setProductType("Wear");
-product.setPricePBulk(20000);
-String pname=product.getProductName();
-String ptype=product.getProductType();
-Integer price =product.getPricePBulk();
-String sql="insert into products(productName,productType,userId,pricePBulk)values(?,?,?,?)";
-PreparedStatement statement=con.prepareStatement(sql);
-statement.setString(1,pname);
-statement.setString(2,ptype);
-statement.setInt(3,1);
-statement.setInt(4,price);
-int inserted=statement.executeUpdate();
-if(inserted==1) {
-	System.out.println("Inserted");
+public class ProductController{
+	   DatabaseConnection connection = new DatabaseConnection();
+	    Connection con = connection.getConnection();
+	    PreparedStatement p;
+	    ResultSet rs;
+@SuppressWarnings("finally")
+public
+boolean registerProduct(ProductModel product) {
+     try{
+    	 
+    	 String sql="insert into products(productName,productType,userId,pricePBulk) values(?,?,?,?)";
+         PreparedStatement preparedStatement=con.prepareStatement(sql);
+         preparedStatement.setString(1,product.getProductName());
+         preparedStatement.setString(2,product.getProductType());
+         preparedStatement.setInt(3,product.getUserId());
+         preparedStatement.setString(4,product.getPricePerBulk());
+         int inserted = preparedStatement.executeUpdate();
+         if(inserted==1) {
+        	 System.out.println("Product Added successfully");
+         }else {
+        	 System.out.println("and error occured");
+         }
+         
+     }catch(Exception e){
+         e.printStackTrace();
+     }
+     finally {
+         return true;
+     }
 }
-else {
-	System.out.println("Erroe");
 }
-	}
 
-}
+
+

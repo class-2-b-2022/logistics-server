@@ -2,6 +2,8 @@ package thread;
 
 import models.*;
 import controllers.InventoryController;
+import controllers.ProductController;
+
 import java.io.*;
 import java.net.Socket;
 import java.util.List;
@@ -37,12 +39,7 @@ public class ClientManager implements Runnable{
                     case "/users":
 //                        logic related to user management
                         break;
-                    case "/inventory/getProducts":
-                         InventoryController inventory = new InventoryController();
-                         responseData = inventory.getProducts();
-                        break;
-                    case "products":
-                        System.out.println("reached to product");
+                  
                     case "/inventory":
                         InventoryController inv = new InventoryController();
                         Object inventoryObject;
@@ -51,6 +48,20 @@ public class ClientManager implements Runnable{
                         boolean res = inv.addInventory(inventoryModel);
                         responseStream.writeBoolean(res);
                         break;
+                    case "inventory/products":
+//                    	System.out.println(clientRequest.getRoute());
+                    	System.out.println("Reached.....");
+                    	if (clientRequest.getAction().equals("POST")){
+//                    		
+                   
+                         Object productObject;
+                    		productObject=clientRequest.getData();
+                    		ProductModel productModel=(ProductModel) productObject;
+                    		ProductController prod=new ProductController();
+                    		prod.registerProduct(productModel);
+                    	    break;
+                    	}
+                break;
                     case "/billing":
 //                        logic related to billing
                         break;
@@ -63,7 +74,7 @@ public class ClientManager implements Runnable{
 
                 }
                 //return response to the client;
-                responseStream.writeObject(responseData);
+//                responseStream.writeObject(responseData);
             }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();

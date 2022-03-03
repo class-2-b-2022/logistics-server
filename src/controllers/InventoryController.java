@@ -1,6 +1,5 @@
 package controllers;
 
-import models.ClientRequest;
 import models.InventoryModel;
 import models.ProductModel;
 import utils.*;
@@ -10,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -20,11 +18,13 @@ public class InventoryController {
     PreparedStatement p;
     ResultSet rs;
 
-    public  List getProducts(){
+    @SuppressWarnings({ "rawtypes", "resource" })
+	public  List getProducts(){
         List result = new ArrayList();
         try {
             Statement statement = con.createStatement();
-            Scanner scanner = new Scanner(System.in);
+            @SuppressWarnings("unused")
+			Scanner scanner = new Scanner(System.in);
             String getProductsQuery = ("select * from products");
             this.p = con.prepareStatement(getProductsQuery);
             this.rs = p.executeQuery();

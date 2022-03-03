@@ -1,8 +1,6 @@
 package controllers.user_management;
 import models.ClientRequest;
 import models.user_model.User;
-
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class UserController {
@@ -16,8 +14,15 @@ public class UserController {
         User user=new User();
         switch (action) {
             case "register":
-                
+                user.setNames(req.getData().next().toString().split("=")[1]);
+                user.setEmail(req.getData().next().toString().split("=")[1]);
+                user.setPhone(Integer.parseInt(req.getData().next().toString().split("=")[1]));
+                user.setPassword(req.getData().next().toString().split("=")[1]);
+                user.setRole(Integer.parseInt(req.getData().next().toString().split("=")[1]));
+                res =UserActions.registerUser(user);
                 break;
+            case "view":
+            	break;
             case "login":
                // res = UserActions.loginUser((User) req.getData());
         }

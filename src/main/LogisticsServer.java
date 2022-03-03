@@ -39,7 +39,7 @@ public class LogisticsServer {
             e.printStackTrace();
         }finally{
             if(server !=null){
-                //close server
+                //close server    
                 try {
                     server.close();
                 }catch (Exception e){

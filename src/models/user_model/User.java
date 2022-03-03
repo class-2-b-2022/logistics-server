@@ -3,11 +3,16 @@ package models.user_model;
 public class User {
     private String names;
     private String email;
-    private int phone;
     private String password;
-    private int role;
     private String roleAsString;
-
+    private int phone;
+    private int role;
+    public User() {}
+    
+//    public User(String) {
+//    	
+//    }
+    
     public int getPhone() {
         return phone;
     }

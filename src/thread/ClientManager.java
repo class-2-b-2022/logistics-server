@@ -3,6 +3,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import controllers.DeliveryModule.VehicleManagementController;
+import controllers.user_management.UserController;
 import models.ClientRequest;
 import java.io.*;
 import java.net.Socket;
@@ -44,7 +45,7 @@ public class ClientManager implements Runnable{
 //                        logic related to company registration
                         break;
                     case "/users":
-//                        logic related to user management
+                         responseData=UserController.mainMethod(clientRequest);
                         break;
                     case "/inventory":
 //                        logic related to inventory

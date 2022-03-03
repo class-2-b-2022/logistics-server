@@ -37,6 +37,7 @@ public class ClientManager implements Runnable{
             clientRequest.setRoute(jsonNodeRoot.get("route").asText());
             clientRequest.setData(iterator);
             clientRequest.setAction((jsonNodeRoot.get("action").asText()));
+            System.out.println(jsonNodeRoot.get("data").asText());
                 String responseData = null;
                 switch (jsonNodeRoot.get("route").asText()){
                     case "/companyregistration":
@@ -56,8 +57,8 @@ public class ClientManager implements Runnable{
                         break;
                 }
                 //return response to the client;
-                 System.out.println(responseData);
-                responseStream.writeUTF(responseData);
+                 //System.out.println(responseData);
+                //responseStream.writeUTF(responseData);
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         } catch (Exception e) {

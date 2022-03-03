@@ -1,19 +1,34 @@
 package controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import models.BillingModel;
 import models.ClientRequest;
+import models.ResponseBody;
 import utils.*;
 
 public class TestingController {
-    public static  void test(ClientRequest clientRequest){
+    public static  String test(ClientRequest clientRequest) throws JsonProcessingException {
        ParserObj parserObj = new ParserObj();
         BillingModel billingModel = parserObj.parseData(clientRequest.getData(), BillingModel.class);
         System.out.println(billingModel.getAmount());
         System.out.println(billingModel.getUserId());
+        ObjectMapper mapper = new ObjectMapper();
+        ResponseBody res = new ResponseBody();
+        String json = mapper.writeValueAsString(billingModel);
+        String response;
         switch (clientRequest.getAction()){
             case "testing":
-                System.out.println("request body");
+               res.setStatus("200");
+               res.setMessage("Received data successfully");
+               res.setData(json);
+               response = mapper.writeValueAsString(res);
+                System.out.println(response);
+                System.out.println("assigned response");
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + clientRequest.getAction());
         }
+        return response;
     }
 }

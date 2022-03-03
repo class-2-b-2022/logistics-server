@@ -22,20 +22,20 @@ public class ClientManager implements Runnable{
     }
     @Override
     public void run() {
-        ObjectOutputStream responseStream = null;
+        DataOutputStream responseStream = null;
         ObjectInputStream requestStream = null;
         ClientRequest req= null;
         try {
             requestStream = new ObjectInputStream(clientSocket.getInputStream());
-            responseStream = new ObjectOutputStream(clientSocket.getOutputStream());
-//            ClientRequest clientRequest;
-            List<String> clientRequest;
+            responseStream = new DataOutputStream(clientSocket.getOutputStream());
             System.out.println("New client with adresss: "+ clientSocket.getInetAddress().getHostAddress());
             ObjectMapper objectMapper = new ObjectMapper();
-            while((clientRequest =(List) requestStream.readObject()) !=null){
-                ClientRequest client = objectMapper.readValue(clientRequest.get(0), ClientRequest.class);
+            List<String> clientRequest;
+              List<String> json = (List) requestStream.readObject();
+                ClientRequest client = objectMapper.readValue(json.get(0), ClientRequest.class);
                 String route = client.getRoute();
-                List<Object> responseData = null;
+
+             String response = null;
                 switch (route){
                     case "/companyregistration":
 //                        logic related to company registration
@@ -53,16 +53,19 @@ public class ClientManager implements Runnable{
 //                        logic related to reporting
                         break;
                     case "/testing":
-                        TestingController.test(client);
+                      response = TestingController.test(client);
                         break;
                 }
+
                 //return response to the client;
-//                }
-//                //return response to the client;
-//                responseStream.writeObject(responseData);
-            }
+                responseStream.writeUTF(response);
+
+
+        } catch (EOFException e){
+            System.out.println("received data");
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
+            System.out.println(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
         }

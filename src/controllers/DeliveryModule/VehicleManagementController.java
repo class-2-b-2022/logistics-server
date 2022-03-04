@@ -1,4 +1,5 @@
 package controllers.DeliveryModule;
+
 import models.DeliveryModule.Vehicle;
 import models.ClientRequest;
 
@@ -10,13 +11,8 @@ public class VehicleManagementController {
     public String mainMethod(ClientRequest clientRequest) throws Exception {
         String action = clientRequest.getAction();
         VehicleManagementActions actions = new VehicleManagementActions();
-<<<<<<< HEAD
-        List<Object> responseObject = new ArrayList<Object>();
-
-=======
         Object responseObject = new Object();
         Vehicle vehicle = new Vehicle();
->>>>>>> 850eaad061768ed7f2694e3bfbbf57807a9d7108
         switch(action){
             case "register":
                 vehicle.setPlateNbr(clientRequest.getData().next().toString().split("=")[1]);

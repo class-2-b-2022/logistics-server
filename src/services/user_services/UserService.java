@@ -35,6 +35,7 @@ public class UserService {
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {
             returnObject.setNames(rs.getString(1));
+            returnObject.setEmail(user.getEmail());
             returnObject.setPhone(rs.getInt(2));
             returnObject.setRoleAsString(getRoleAsString(user.getEmail()));
             break;

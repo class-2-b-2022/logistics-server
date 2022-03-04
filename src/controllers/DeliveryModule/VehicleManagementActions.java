@@ -1,45 +1,63 @@
 package controllers.DeliveryModule;
 import services.DeliveryModule.*;
 import models.DeliveryModule.Vehicle;
+import models.ResponseObject;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VehicleManagementActions<ResponseStatus> {
+public class VehicleManagementActions {
     private VehicleService vehicleService = new VehicleService();
-
-    public List<Object> registerVehicle(Vehicle vehicle) throws SQLException {
+    private ResponseObject responseObject = new ResponseObject();
+    public Object registerVehicle(Vehicle vehicle) throws SQLException{
         List<Object> vehicleObject = new ArrayList<>();
         vehicleService.insertIntoVehicles(vehicle);
         vehicleObject.add((Object) vehicle);
-        return vehicleObject;
+        responseObject.setStatus("200");
+        responseObject.setMessage("Vehicle registered");
+        responseObject.setData(vehicleObject);
+        return responseObject;
     }
 
-    public List<Object> getVehicles(Integer vehicleId) throws SQLException {
-        return vehicleService.getListOfVehicles();
+    public Object getVehicles() throws SQLException {
+        List<Object> vehicles =  vehicleService.getListOfVehicles();
+        responseObject.setStatus("201");
+        responseObject.setMessage("Vehicles");
+        responseObject.setData(vehicles);
+        return responseObject;
     }
 
-    public List<Object> updatedVehicles(Vehicle vehicle) throws Exception {
-        List<Object> responseObject = new ArrayList();
+    public Object updatedVehicles(Vehicle vehicle) throws Exception {
+        List<Object> vehicles = new ArrayList();
         if(vehicleService.findVehicleById(vehicle.getVehicleId())){
-            responseObject = vehicleService.updateVehicle(vehicle);
+            vehicles = vehicleService.updateVehicle(vehicle);
+            responseObject.setStatus("200");
+            responseObject.setMessage("Vehicle updated successfully");
+            responseObject.setData(vehicles);
         }
-        return  responseObject;
+        else{
+            responseObject.setStatus("404");
+            responseObject.setMessage("Vehicle not found");
+            responseObject.setData(vehicles);
+        }
+        return responseObject;
     }
 
-
-
-    public List<Object> deleteVehicle(Vehicle vehicle) throws Exception {
-        List<Object> responseObject = new ArrayList();
+    public Object deleteVehicle(Vehicle vehicle) throws Exception {
+        List<Object> vehicles = new ArrayList();
         if(vehicleService.findVehicleById(vehicle.getVehicleId())){
-            responseObject = vehicleService.deleteVehicle(vehicle);
+            vehicles = vehicleService.deleteVehicle(vehicle);
+            responseObject.setStatus("200");
+            responseObject.setMessage("Vehicle deleted successfully");
+            responseObject.setData(vehicles);
         }
-        return  responseObject;
-    }
-
-    public List<Object> getVehicles() throws SQLException {
-       return vehicleService.getListOfVehicles();
+        else{
+            responseObject.setStatus("404");
+            responseObject.setMessage("Vehicle not found");
+            responseObject.setData(vehicles);
+        }
+        return responseObject;
     }
 
 }

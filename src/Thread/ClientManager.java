@@ -1,4 +1,6 @@
-package thread;
+package Thread;
+
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -30,6 +32,7 @@ public class ClientManager implements Runnable{
             requestStream = new ObjectInputStream(clientSocket.getInputStream());
             responseStream = new DataOutputStream(clientSocket.getOutputStream());
             String jsonString = (String) requestStream.readObject();
+            System.out.println(jsonString);
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode jsonNodeRoot = objectMapper.readTree(jsonString);
             JsonNode requestData = jsonNodeRoot.get("data");
@@ -37,28 +40,29 @@ public class ClientManager implements Runnable{
             clientRequest.setRoute(jsonNodeRoot.get("route").asText());
             clientRequest.setData(iterator);
             clientRequest.setAction((jsonNodeRoot.get("action").asText()));
-            System.out.println(jsonNodeRoot.get("data").asText());
-                String responseData = null;
-                switch (jsonNodeRoot.get("route").asText()){
-                    case "/companyregistration":
+            System.out.println(iterator);
+            String responseData = null;
+
+            switch (jsonNodeRoot.get("route").asText()){
+                case "/companyregistration":
 //                        logic related to company registration
-                        break;
-                    case "/users":
+                    break;
+                case "/users":
 //                        logic related to user management
-                        break;
-                    case "/inventory":
+                    break;
+                case "/inventory":
 //                        logic related to inventory
-                        break;
-                    case "/delivery/vehicles":
-                         responseData = vehicleManagementController.mainMethod(clientRequest);
-                        break;
-                    case "/reporting":
+                    break;
+                case "/delivery/vehicles":
+                    responseData = vehicleManagementController.mainMethod(clientRequest);
+                    break;
+                case "/reporting":
 //                        logic related to reporting
-                        break;
-                }
-                //return response to the client;
-                 System.out.println(responseData);
-                responseStream.writeUTF(responseData);
+                    break;
+            }
+            //return response to the client;
+            System.out.println(responseData);
+            responseStream.writeUTF(responseData);
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         } catch (Exception e) {

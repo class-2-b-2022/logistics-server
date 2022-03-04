@@ -1,5 +1,5 @@
 package main;
-import thread.ClientManager;
+import Thread.ClientManager;
 
 import utils.DatabaseConnection;
 import utils.ErrorMessageLogger;

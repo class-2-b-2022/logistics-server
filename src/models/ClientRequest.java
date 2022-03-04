@@ -1,16 +1,20 @@
 package models;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
 import java.io.Serializable;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * @author : Mudahemuka Manzi
  */
 public class ClientRequest implements Serializable {
     private String route;///users
-    private String action;//register
-    private Object data;
+    private String action;//regist
+    private Iterator<Map.Entry<String, JsonNode>> data;
     public ClientRequest(){}
-    public ClientRequest(String route, String action, Object data){
+    public ClientRequest(String route, String action, Iterator<Map.Entry<String, JsonNode>> data){
         this.route = route;
         this.action = action;
         this.data = data;
@@ -32,11 +36,11 @@ public class ClientRequest implements Serializable {
         this.action = action;
     }
 
-    public Object getData() {
+    public Iterator<Map.Entry<String, JsonNode>> getData() {
         return data;
     }
 
-    public void setData(Object data) {
+    public void setData(Iterator<Map.Entry<String, JsonNode>> data) {
         this.data = data;
     }
 }

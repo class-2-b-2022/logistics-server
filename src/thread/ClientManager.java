@@ -50,15 +50,15 @@ public class ClientManager implements Runnable{
 //                        logic related to inventory
                         break;
                     case "/delivery/vehicles":
-//                         responseData = vehicleManagementController.mainMethod(clientRequest);
+                         responseData = vehicleManagementController.mainMethod(clientRequest);
                         break;
                     case "/reporting":
 //                        logic related to reporting
                         break;
                 }
                 //return response to the client;
-                 //System.out.println(responseData);
-                //responseStream.writeUTF(responseData);
+                 System.out.println(responseData);
+                responseStream.writeUTF(responseData);
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         } catch (Exception e) {

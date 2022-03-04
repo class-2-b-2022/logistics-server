@@ -6,6 +6,7 @@ public class User {
     private int phone;
     private String password;
     private int role;
+    private int user_id;
     private String roleAsString;
 
     public int getPhone() {
@@ -48,6 +49,13 @@ public class User {
         this.role = role;
     }
 
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
 
     public String getRoleAsString() {
         return roleAsString;

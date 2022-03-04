@@ -42,12 +42,23 @@ public class ClientManager implements Runnable{
                         break;
                   
                     case "/inventory":
-                        InventoryController inv = new InventoryController();
-                        Object inventoryObject;
-                        inventoryObject = clientRequest.getData();
-                        InventoryModel inventoryModel = (InventoryModel) inventoryObject;
-                        int res = inv.addInventory(inventoryModel);
-                        responseStream.writeByte(res);
+                        if (clientRequest.getAction().equals("POST")){
+                             InventoryController inv = new InventoryController();
+                            Object inventoryObject;
+                            inventoryObject = clientRequest.getData();
+                            InventoryModel inventoryModel = (InventoryModel) inventoryObject;
+                            DataOutputStream saveResult = new DataOutputStream(clientSocket.getOutputStream());
+                            int res = inv.addInventory(inventoryModel);
+                            saveResult.writeInt(res);
+                        }
+                        if (clientRequest.getAction().equals("GET")){
+                                List<Object> responseData = null;
+                                ProductController product = new ProductController();
+                                responseData = product.getProducts((int) clientRequest.getData());
+                                //return response to the client;
+                                responseStream.writeObject(responseData);
+                                break;
+                        }
                         break;
                     case "inventory/products":
 //                    	System.out.println(clientRequest.getRoute());

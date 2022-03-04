@@ -1,6 +1,6 @@
 package controllers;
 
-import models.*;
+import models.InventoryModel;
 import utils.*;
 
 import java.sql.*;

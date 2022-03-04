@@ -10,5 +10,7 @@
 	<classpathentry kind="lib" path="lib/jackson-annotations-2.12.1.jar"/>
 	<classpathentry kind="lib" path="lib/jackson-core-2.12.1.jar"/>
 	<classpathentry kind="lib" path="lib/jackson-databind-2.12.1.jar"/>
+	<classpathentry kind="lib" path="lib/bcrypt-2.3.0.jar"/>
+	<classpathentry kind="lib" path="lib/spring-security-crypto-4.1.0.RELEASE.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -6,12 +6,14 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.Map;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
 /**
  * @author : Mudahemuka Manzi
  */
 public class ClientRequest implements Serializable {
     private String route;///users
-    private String action;//regist
+    private String action;//register
     private Iterator<Map.Entry<String, JsonNode>> data;
     public ClientRequest(){}
     public ClientRequest(String route, String action, Iterator<Map.Entry<String, JsonNode>> data){

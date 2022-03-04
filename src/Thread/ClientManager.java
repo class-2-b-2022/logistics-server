@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import controllers.DeliveryModule.VehicleManagementController;
+import controllers.user_management.UserController;
 import models.ClientRequest;
 import java.io.*;
 import java.net.Socket;
@@ -46,11 +47,11 @@ public class ClientManager implements Runnable{
             switch (jsonNodeRoot.get("route").asText()){
                 case "/companyregistration":
 //                        logic related to company registration
-                    break;
-                case "/users":
-//                        logic related to user management
-                    break;
-                case "/inventory":
+                        break;
+                    case "/users":
+                         responseData=UserController.mainMethod(clientRequest);
+                        break;
+                    case "/inventory":
 //                        logic related to inventory
                     break;
                 case "/delivery/vehicles":

@@ -1,5 +1,6 @@
 package controllers.user_management;
 
+import models.ResponseObject;
 import models.user_model.User;
 import services.user_services.*;
 
@@ -13,18 +14,22 @@ import java.util.List;
  */
 
 public class userActions {
-
+    /**
+     * @author Ntagungira Ali Rashid
+     */
+    private ResponseObject resObj = new ResponseObject();
     UserService userService = new UserService();
-
     public List<Object> registerUser(User user) throws Exception {
         List<Object> newUser = new ArrayList<>();
         userService.insertUser(user);
         newUser.add((Object) user);
+        resObj.setStatus("200");
+        resObj.setMessage("User registered successfully");
+        resObj.setData(newUser);
         return newUser;
     }
 
     /**
-     *
      * @author: Isite Yves
      */
      public List<Object> loginUser(User user) throws Exception {

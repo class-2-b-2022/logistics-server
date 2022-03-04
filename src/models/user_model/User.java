@@ -3,12 +3,16 @@ package models.user_model;
 public class User {
     private String names;
     private String email;
-    private int phone;
     private String password;
-    private int role;
-    private int user_id;
     private String roleAsString;
-
+    private int phone;
+    private int role;
+    public User() {}
+    
+//    public User(String) {
+//    	
+//    }
+    
     public int getPhone() {
         return phone;
     }
@@ -47,14 +51,6 @@ public class User {
 
     public void setRole(int role) {
         this.role = role;
-    }
-
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
     }
 
     public String getRoleAsString() {

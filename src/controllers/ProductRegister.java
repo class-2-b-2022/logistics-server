@@ -9,8 +9,7 @@ import models.RegisterProduct;
 
 public class ProductRegister {
 
-	public static void main(String[] args) throws SQLException {
-		RegisterProduct product=new RegisterProduct();
+	public static void main(String[] args) throws SQLException {RegisterProduct product=new RegisterProduct();
 DatabaseConnection connection=new DatabaseConnection();
 Connection con=connection.getConnection();
 product.setProductName("Jewelery");

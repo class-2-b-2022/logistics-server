@@ -1,8 +1,6 @@
 package services;
-
-import utils.DatabaseConnection;
-import models.billing.BillingModel;
-import models.billing.Wallet;
+import models.Wallet;
+import utils.*;
 
 import java.sql.*;
 
@@ -17,24 +15,41 @@ public class BillingService  {
     public BillingService() throws SQLException {
     }
 
-    public void createWallet(Wallet wallet) throws SQLException {
+    public boolean createWallet(Wallet wallet) throws SQLException {
         try {
             String sql = "INSERT INTO wallet(userId) values(?)";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1, wallet.getUserId());
-            preparedStatement.executeUpdate();
         }catch (SQLException e) {
             e.printStackTrace();
         }
+
+        return true;
+
     }
 
-    public Wallet updateDistributorWallet(Wallet wallet) throws SQLException {
+
+    public Wallet updateUserWallet(Wallet wallet, String action) throws SQLException {
         try {
             String updateQuery = "UPDATE wallet set balance=? WHERE id=?";
+            Wallet currentUserWallet = viewUserWallet(wallet.getUserId());
+            double oldBalance = currentUserWallet.getAmount();
+            double newBalance = 0.0;
+
+
+            switch (action) {
+                case "Withdraw" -> {
+                    if (oldBalance >= wallet.getAmount()) {
+                        newBalance = oldBalance - wallet.getAmount();
+                    }
+                    ;
+                }
+                case "Deposit" -> newBalance = oldBalance + wallet.getAmount();
+            }
 
             PreparedStatement preparedStatement = conn.prepareStatement(updateQuery);
 
-            preparedStatement.setDouble(1, wallet.getAmount());
+            preparedStatement.setDouble(1, newBalance);
             preparedStatement.setInt(2, wallet.getId());
 
             int rowsUpdated=preparedStatement.executeUpdate();

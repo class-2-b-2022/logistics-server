@@ -1,4 +1,4 @@
-package models.billing;
+package models;
 
 public class Wallet {
     private int id;

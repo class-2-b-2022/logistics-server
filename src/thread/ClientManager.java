@@ -1,13 +1,14 @@
 package thread;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
 import controllers.BillingController;
-
 import controllers.DeliveryModule.VehicleManagementController;
+import controllers.TestingController;
 import models.BillingModel;
 import models.ClientRequest;
-
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -24,25 +25,20 @@ public class ClientManager implements Runnable{
     }
     @Override
     public void run() {
-        ObjectOutputStream responseStream = null;
+        DataOutputStream responseStream = null;
         ObjectInputStream requestStream = null;
-//        System.out.println("This is where all logic for handling client request will be managed");
-        //get client request;
+        ClientRequest req= null;
         try {
-            //get client request stream
             requestStream = new ObjectInputStream(clientSocket.getInputStream());
+            responseStream = new DataOutputStream(clientSocket.getOutputStream());
+            System.out.println("New client with adresss: "+ clientSocket.getInetAddress().getHostAddress());
+            ObjectMapper objectMapper = new ObjectMapper();
+            List<String> clientRequest;
+              List<String> json = (List) requestStream.readObject();
+                ClientRequest client = objectMapper.readValue(json.get(0), ClientRequest.class);
+                String route = client.getRoute();
 
-            //get stream to respond to client
-            responseStream = new ObjectOutputStream(clientSocket.getOutputStream());
-            ClientRequest clientRequest;
-            System.out.println(requestStream.readObject());
-            while((clientRequest =(ClientRequest) requestStream.readObject()) !=null){
-                  //Get request route
-                System.out.println(clientRequest.getRoute());
-                BillingModel bill = (BillingModel) clientRequest.getData();
-                System.out.println(bill.getAmount());
-                String route = clientRequest.getRoute();
-                List<Object> responseData = null;
+             String response = null;
                 switch (route){
                     case "/companyregistration":
 //                        logic related to company registration
@@ -59,18 +55,23 @@ public class ClientManager implements Runnable{
                     case "/reporting":
 //                        logic related to reporting
                         break;
-                    case "/billing":
-                        responseData = billingController.mainMethod(clientRequest);
-
                     case "/testing":
-//                        TestingController.test(clientRequest);
+                      response = TestingController.test(client);
                         break;
+                     case "/billing":
+                       response = billingController.processPayment(client);
                 }
+
                 //return response to the client;
-//                responseStream.writeObject(responseData);
-            }
+            assert response != null;
+            responseStream.writeUTF(response);
+
+
+        } catch (EOFException e){
+            System.out.println("received data");
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
+            System.out.println(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
         }

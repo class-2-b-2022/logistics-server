@@ -1,37 +1,71 @@
 package controllers;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import models.ClientRequest;
-import models.billing.Wallet;
+import models.ResponseBody;
+import models.Wallet;
 import services.BillingService;
+import utils.ParserObj;
 import java.sql.SQLException;
-import java.util.List;
 
 /**
  * @author : Mudahemuka Manzi
  * @author : Gasaro leila
  */
 public class BillingController {
-    ClientRequest request;
     static BillingService billService;
 
-    public static void createWallet(Wallet wallet) throws SQLException {
-        billService.createWallet(wallet);
+    public static boolean createWallet(Wallet wallet) throws SQLException {
+        return billService.createWallet(wallet);
     }
 
     public static Wallet getDistWallet(Wallet wallet) throws SQLException {
        return billService.viewUserWallet(wallet.getUserId());
     }
 
-    public static Wallet updateUserWallet(Wallet wallet) throws SQLException {
-        return billService.updateDistributorWallet(wallet);
+    public static Wallet updateUserWallet(Wallet wallet, String action) throws SQLException {
+        return billService.updateUserWallet(wallet, action);
     }
 
-    public List<Object> mainMethod(ClientRequest clientRequest) throws SQLException {
-        List<Object> response = null;
+    public String processPayment(ClientRequest clientRequest) throws JsonProcessingException, SQLException {
+        ParserObj parse = new ParserObj();
+        Wallet wallet = parse.parseData(clientRequest.getData(), Wallet.class);
+        ObjectMapper mapper = new ObjectMapper();
+        ResponseBody res = new ResponseBody();
+        String result;
         switch (clientRequest.getAction()) {
-            case "createwallet" -> createWallet((Wallet) this.request.getData());
-            case "updatedistributorwallet" -> response.add(updateUserWallet((Wallet) this.request.getData()));
-            case "getdistributorwallet" -> response.add(getDistWallet((Wallet) this.request.getData()));
+            case "CreateWallet":
+                if(createWallet(wallet)) {
+                    res.setStatus("201");
+                    res.setMessage("Wallet Created Successfully!");
+                }
+                break;
+            case "Deposit":
+                wallet = parse.parseData(updateUserWallet(wallet, clientRequest.getAction()), Wallet.class);
+                result = mapper.writeValueAsString(wallet);
+                res.setStatus("204");
+                res.setMessage("Wallet updated successfully!");
+                res.setData(result);
+                break;
+
+            case "Withdraw":
+                wallet = parse.parseData(updateUserWallet(wallet, clientRequest.getAction()), Wallet.class);
+                result = mapper.writeValueAsString(wallet);
+                res.setStatus("204");
+                res.setMessage("Wallet updated successfully!");
+                res.setData(result);
+                break;
+
+
+            case "GetWallet":
+                wallet = parse.parseData(getDistWallet(wallet), Wallet.class);
+                result = mapper.writeValueAsString(wallet);
+                res.setStatus("200");
+                res.setData(result);
+                break;
         }
-        return response;
+
+
+        return mapper.writeValueAsString(res);
     }
 }

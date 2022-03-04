@@ -12,7 +12,7 @@ import java.util.Map;
 public class ResponseBody implements Serializable {
     private String message;//created
     private String status;//201
-    private String data;
+    private Object data;
     public ResponseBody(){}
     public ResponseBody(String message, String status, String data){
         this.status = status;
@@ -27,7 +27,7 @@ public class ResponseBody implements Serializable {
         return status;
     }
 
-    public String getData() {
+    public Object getData() {
         return data;
     }
 
@@ -41,7 +41,7 @@ public class ResponseBody implements Serializable {
         this.status = status;
     }
 
-    public void setData(String data) {
+    public void setData(Object data) {
         this.data = data;
     }
 

@@ -31,7 +31,8 @@ public class ClientManager implements Runnable{
             while((clientRequest =(ClientRequest) requestStream.readObject()) !=null){
                   //Get request route
                 String route = clientRequest.getRoute();
-                List<Object> responseData = null;
+                @SuppressWarnings("unused")
+				List<Object> responseData = null;
                 switch (route){
                     case "/companyregistration":
 //                        logic related to company registration
@@ -45,8 +46,8 @@ public class ClientManager implements Runnable{
                         Object inventoryObject;
                         inventoryObject = clientRequest.getData();
                         InventoryModel inventoryModel = (InventoryModel) inventoryObject;
-                        boolean res = inv.addInventory(inventoryModel);
-                        responseStream.writeBoolean(res);
+                        int res = inv.addInventory(inventoryModel);
+                        responseStream.writeByte(res);
                         break;
                     case "inventory/products":
 //                    	System.out.println(clientRequest.getRoute());
@@ -54,7 +55,7 @@ public class ClientManager implements Runnable{
                     	if (clientRequest.getAction().equals("POST")){
 //                    		
                    
-                         Object productObject;
+                            Object productObject;
                     		productObject=clientRequest.getData();
                     		ProductModel productModel=(ProductModel) productObject;
                     		ProductController prod=new ProductController();

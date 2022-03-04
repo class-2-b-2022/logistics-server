@@ -4,6 +4,7 @@ package controllers;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.*;
 
 import models.*;
 import utils.DatabaseConnection;
@@ -15,6 +16,9 @@ public class ProductController{
 	    ResultSet rs;
 @SuppressWarnings("finally")
 public
+
+/*Author Michaella INEZA*/
+
 boolean registerProduct(ProductModel product) {
      try{
     	 
@@ -38,7 +42,37 @@ boolean registerProduct(ProductModel product) {
          return true;
      }
 }
+
+
+
+@SuppressWarnings({ "finally", "rawtypes", "unchecked" })
+/*author Michaella INEZA*/
+
+public List getProducts(int userId) {
+        List result = new ArrayList();
+        try {
+            @SuppressWarnings("unused")
+			Statement statement = con.createStatement();
+			@SuppressWarnings({ "unused", "resource" })
+			Scanner scanner = new Scanner(System.in);
+            String getProductsQuery = ("select * from products where userId = " + userId);
+            this.p = con.prepareStatement(getProductsQuery);
+            this.rs = p.executeQuery();
+
+            while (rs.next()){
+                ProductModel product = new ProductModel();
+                product.setProductId(rs.getInt("productId"));
+                product.setProductName(rs.getString("productName"));
+                product.setProductType(rs.getString("productType"));
+                product.setPricePerBulk(rs.getString("pricePBulk"));
+
+                result.add(product);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        finally {
+            return  result;
+        }
+    }
 }
-
-
-

@@ -1,6 +1,6 @@
 package Services.DeliveryModule;
 
-import Utils.DatabaseConnection;
+import utils.DatabaseConnection;
 import models.DeliveryModule.Vehicle;
 
 import java.sql.*;

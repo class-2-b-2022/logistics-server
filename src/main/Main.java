@@ -1,10 +1,8 @@
 package main;
 
-import Utils.DatabaseConnection;
+import utils.DatabaseConnection;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class Main {
 

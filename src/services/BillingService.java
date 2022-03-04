@@ -1,7 +1,6 @@
 package services;
 
-import Utils.DatabaseConnection;
-import models.DeliveryModule.Vehicle;
+import utils.DatabaseConnection;
 import models.billing.BillingModel;
 import models.billing.Wallet;
 

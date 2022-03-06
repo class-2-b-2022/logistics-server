@@ -33,6 +33,7 @@ public class userActions {
      * @author: Isite Yves
      */
      public List<Object> loginUser(User user) throws Exception {
+         System.out.println("User info..."+user.getEmail());
          List<Object> userObject = new ArrayList<>();
          User foundUser = userService.findUser(user);
          userObject.add((Object) foundUser);

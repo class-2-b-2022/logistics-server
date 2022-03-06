@@ -37,11 +37,11 @@ public class ClientManager implements Runnable{
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode jsonNodeRoot = objectMapper.readTree(jsonString);
             JsonNode requestData = jsonNodeRoot.get("data");
-            System.out.println(requestData);
             Iterator<Map.Entry<String, JsonNode>> iterator = requestData.fields();
             clientRequest.setRoute(jsonNodeRoot.get("route").asText());
             clientRequest.setData(iterator);
             clientRequest.setAction((jsonNodeRoot.get("action").asText()));
+            System.out.println(iterator);
             String responseData = null;
 
             switch (jsonNodeRoot.get("route").asText()){

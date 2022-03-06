@@ -51,7 +51,7 @@ public class Reseller {
 
     public void setBusiness_name(String business_name) { this.business_name = business_name; }
 
-    public Date getCreatedAt() { return createdAt;    }
+    public Date getCreatedAt() { return createdAt; }
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;

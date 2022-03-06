@@ -1,7 +1,6 @@
 package services.Distributors;
 
 import models.Distributors.Reseller;
-import utils.DatabaseConnection;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -10,12 +9,12 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResellerService {
-    private DatabaseConnection databaseConnection = new DatabaseConnection();
+public class ResellerService implements Serializable {
+    private Database databaseConnection = new Database();
     Connection connection = databaseConnection.getConnection();
 
     public void insertIntoResellers(Reseller reseller) throws SQLException {
-        String sql = "INSERT INTO resellers(first_name,last_name,telephone,email,business,createdAt) values(?,?,?,?,?,?)";
+        String sql = "INSERT INTO resellers(first_name,last_name,telephone,email,business_name,createdAt) values(?,?,?,?,?,?)";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, reseller.getFirst_name());
         preparedStatement.setString(2, reseller.getLast_name());
@@ -96,6 +95,10 @@ public class ResellerService {
     }
     public static void main(String[] args){
         try {
+
+
+//            server interaction with client
+
             ServerSocket server = new ServerSocket(1234);
             Socket socket = server.accept();
             InputStream fromClient = socket.getInputStream();
@@ -104,8 +107,16 @@ public class ResellerService {
             OutputStream toServer = socket.getOutputStream();
             DataOutputStream serverSide = new DataOutputStream(toServer);
             serverSide.writeUTF("Request received");
+            Reseller reseller = new Reseller();
+            reseller.setFirst_name(request.readUTF());
+            reseller.setLast_name(request.readUTF());
+            reseller.setTelephone(077);
+            reseller.setEmail(request.readUTF());
+            reseller.setBusiness_name(request.readUTF());
+            ResellerService resellerService = new ResellerService();
+            resellerService.insertIntoResellers(reseller);
 
-        } catch (IOException e) {
+        } catch (IOException | SQLException e) {
             e.printStackTrace();
         }
 

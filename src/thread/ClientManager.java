@@ -1,38 +1,41 @@
 package thread;
-
-import models.*;
-import controllers.InventoryController;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import controllers.DeliveryModule.VehicleManagementController;
 import controllers.ProductController;
-
+import controllers.TestingController;
+import models.BillingModel;
+import models.ClientRequest;
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
+/**
+ * @author : Mudahemuka Manzi
+ * @author : Ntagungira Ali Rashid
+ */
 public class ClientManager implements Runnable{
     private Socket clientSocket;
+    private VehicleManagementController vehicleManagementController = new VehicleManagementController();
     public ClientManager(Socket socket){
         this.clientSocket = socket;
     }
     @Override
     public void run() {
-        ObjectOutputStream responseStream = null;
+        DataOutputStream responseStream = null;
         ObjectInputStream requestStream = null;
-//        System.out.println("This is where all logic for handling client request will be managed");
-        //get client request;
+        ClientRequest req= null;
         try {
-            //get client request stream
             requestStream = new ObjectInputStream(clientSocket.getInputStream());
-
-            //get stream to respond to client
-            responseStream = new ObjectOutputStream(clientSocket.getOutputStream());
-
-            ClientRequest clientRequest;
-
-            while((clientRequest =(ClientRequest) requestStream.readObject()) !=null){
-                  //Get request route
-                String route = clientRequest.getRoute();
-                @SuppressWarnings("unused")
-				List<Object> responseData = null;
+            responseStream = new DataOutputStream(clientSocket.getOutputStream());
+            System.out.println("New client with adresss: "+ clientSocket.getInetAddress().getHostAddress());
+           ObjectMapper objectMapper = new ObjectMapper();
+            List<String> clientRequest;
+              List<String> json = (List) requestStream.readObject();
+                ClientRequest client = objectMapper.readValue(json.get(0), ClientRequest.class);
+                String route = client.getRoute();
+             String response = null;
                 switch (route){
                     case "/companyregistration":
 //                        logic related to company registration
@@ -40,58 +43,46 @@ public class ClientManager implements Runnable{
                     case "/users":
 //                        logic related to user management
                         break;
-                  
+                    case "/products" :
+                        int userId = (int) client.getData();
+                        ProductController productController = new ProductController();
+                        productController.getProducts(userId);
+                        break;
                     case "/inventory":
-                        if (clientRequest.getAction().equals("POST")){
-                             InventoryController inv = new InventoryController();
-                            Object inventoryObject;
-                            inventoryObject = clientRequest.getData();
-                            InventoryModel inventoryModel = (InventoryModel) inventoryObject;
-                            DataOutputStream saveResult = new DataOutputStream(clientSocket.getOutputStream());
-                            int res = inv.addInventory(inventoryModel);
-                            saveResult.writeInt(res);
-                        }
-                        if (clientRequest.getAction().equals("GET")){
-                                List<Object> responseData = null;
-                                ProductController product = new ProductController();
-                                responseData = product.getProducts((int) clientRequest.getData());
-                                //return response to the client;
-                                responseStream.writeObject(responseData);
-                                break;
-                        }
+//                        logic related to inventory
                         break;
-                    case "inventory/products":
-//                    	System.out.println(clientRequest.getRoute());
-                    	System.out.println("Reached.....");
-                    	if (clientRequest.getAction().equals("POST")){
-//                    		
-                   
-                            Object productObject;
-                    		productObject=clientRequest.getData();
-                    		ProductModel productModel=(ProductModel) productObject;
-                    		ProductController prod=new ProductController();
-                    		prod.registerProduct(productModel);
-                    	    break;
-                    	}
-                break;
-                    case "/billing":
-//                        logic related to billing
-                        break;
-                    case "/delivery":
-//                        logic related to shipping
+                    case "/delivery/vehicles":
+//                        responseData = vehicleManagementController.mainMethod(clientRequest);
                         break;
                     case "/reporting":
 //                        logic related to reporting
                         break;
-
+                    case "/testing":
+                      response = TestingController.test(client);
+                        System.out.println("response: " + response);
+                        break;
                 }
+
                 //return response to the client;
-//                responseStream.writeObject(responseData);
-            }
+                responseStream.writeUTF(response);
+
+
+        } catch (EOFException e){
+            System.out.println("received data");
         } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
 }
+
+
+
+
+
+
+

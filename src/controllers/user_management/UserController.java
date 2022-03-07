@@ -24,7 +24,9 @@ public class UserController {
             case "view":
             	break;
             case "login":
-                res = UserActions.loginUser((User) req.getData());
+                user.setEmail(req.getData().next().toString().split("=")[1]);
+                user.setPassword(req.getData().next().toString().split("=")[1]);
+                res = UserActions.loginUser(user);
         }
         return new ObjectMapper().writeValueAsString(res);
    }

@@ -1,4 +1,4 @@
-package Thread;
+package thread;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -33,7 +33,6 @@ public class ClientManager implements Runnable{
             requestStream = new ObjectInputStream(clientSocket.getInputStream());
             responseStream = new DataOutputStream(clientSocket.getOutputStream());
             String jsonString = (String) requestStream.readObject();
-            System.out.println(jsonString);
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode jsonNodeRoot = objectMapper.readTree(jsonString);
             JsonNode requestData = jsonNodeRoot.get("data");
@@ -41,17 +40,17 @@ public class ClientManager implements Runnable{
             clientRequest.setRoute(jsonNodeRoot.get("route").asText());
             clientRequest.setData(iterator);
             clientRequest.setAction((jsonNodeRoot.get("action").asText()));
-            System.out.println(iterator);
+            System.out.println(requestData);
             String responseData = null;
 
             switch (jsonNodeRoot.get("route").asText()){
                 case "/companyregistration":
 //                        logic related to company registration
-                        break;
-                    case "/users":
-                         responseData=UserController.mainMethod(clientRequest);
-                        break;
-                    case "/inventory":
+                    break;
+                case "/users":
+                    responseData= UserController.mainMethod(clientRequest);
+                    break;
+                case "/inventory":
 //                        logic related to inventory
                     break;
                 case "/delivery/vehicles":
@@ -73,3 +72,7 @@ public class ClientManager implements Runnable{
     }
 
 }
+
+
+
+

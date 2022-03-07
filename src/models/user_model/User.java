@@ -1,6 +1,8 @@
 package models.user_model;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private String names;
     private String email;
     private String password;
@@ -8,10 +10,14 @@ public class User {
     private int phone;
     private int role;
     public User() {}
-    
-//    public User(String) {
-//    	
-//    }
+    public User(String names,String email,String password,String roleAsString,int phone,int role) {
+        this.names=names;
+        this.email=email;
+        this.password=password;
+        this.roleAsString=roleAsString;
+        this.phone=phone;
+        this.role=role;
+    }
     
     public int getPhone() {
         return phone;

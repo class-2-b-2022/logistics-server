@@ -19,6 +19,7 @@ public class userActions {
      */
     private ResponseObject resObj = new ResponseObject();
     UserService userService = new UserService();
+
     public List<Object> registerUser(User user) throws Exception {
         List<Object> newUser = new ArrayList<>();
         userService.insertUser(user);
@@ -32,11 +33,12 @@ public class userActions {
     /**
      * @author: Isite Yves
      */
-     public List<Object> loginUser(User user) throws Exception {
-         System.out.println("User info..."+user.getEmail());
-         List<Object> userObject = new ArrayList<>();
-         User foundUser = userService.findUser(user);
-         userObject.add((Object) foundUser);
-         return userObject;
-     }
+    public Object loginUser(User user) throws Exception {
+        List<Object> users = new ArrayList();
+        users = userService.findUser(user);
+        resObj.setStatus("200");
+        resObj.setMessage("User info processed successfully.");
+        resObj.setData(users);
+        return resObj;
+    }
 }

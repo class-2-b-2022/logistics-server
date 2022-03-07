@@ -2,11 +2,13 @@ package services.user_services;
 import models.user_model.User;
 import utils.DatabaseConnection;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 public class UserService {
@@ -25,8 +27,10 @@ public class UserService {
         return checkUser;
     }
 
-    public User findUser(User user) throws Exception {
+    public List<Object> findUser(User user) throws Exception {
         User returnObject = new User();
+        System.out.println("here...."+user.getEmail());
+        List<Object> userObject = new ArrayList();
         if (!checkIfUserExists(user.getEmail()))
             System.out.println("User not found.");
         String sql = "SELECT names,phone FROM users WHERE email=? LIMIT 1";
@@ -40,7 +44,8 @@ public class UserService {
             returnObject.setRoleAsString(getRoleAsString(user.getEmail()));
             break;
         }
-        return returnObject;
+        userObject.add((Object) returnObject);
+        return userObject;
     }
 
     public String getRoleAsString(String email) throws SQLException {
@@ -59,7 +64,6 @@ public class UserService {
         u1.setEmail("yvesisite@gmail.com");
         u1.setPassword("pass123");
         UserService us = new UserService();
-        System.out.println(us.findUser(u1).getPhone());
     }
   
   private String hashPassword(String password){

@@ -1,6 +1,7 @@
 package controllers;
 
 import models.InventoryModel;
+import models.ProductModel;
 import utils.*;
 
 import java.sql.*;
@@ -15,10 +16,8 @@ public class InventoryController {
     PreparedStatement p;
     ResultSet rs;
 
-    @SuppressWarnings("finally")
-	public int addInventory(InventoryModel inv){
-        @SuppressWarnings({ "unchecked", "rawtypes", "unused" })
-		List<Number> list = new ArrayList();
+    public int addInventory(InventoryModel inv){
+        List<Number> list = new ArrayList();
         int rowsInserted = 0;
         try{
             long millis = System.currentTimeMillis();
@@ -44,14 +43,11 @@ public class InventoryController {
 
 
     }
-    @SuppressWarnings({ "finally", "unchecked", "rawtypes" })
-	public List getInventory(int userId){
+    public List getInventory(int userId){
         List result = new ArrayList();
         try {
-            @SuppressWarnings("unused")
-			Statement statement = con.createStatement();
-            @SuppressWarnings({ "unused", "resource" })
-			Scanner scanner = new Scanner(System.in);
+            Statement statement = con.createStatement();
+            Scanner scanner = new Scanner(System.in);
             String getProductsQuery = ("select * from inventory where userId = " + userId);
             this.p = con.prepareStatement(getProductsQuery);
             this.rs = p.executeQuery();

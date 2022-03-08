@@ -2,7 +2,6 @@ package models;
 
 import java.io.Serializable;
 
-@SuppressWarnings("serial")
 public class ProductModel implements Serializable {
     int productId;
     String productName;

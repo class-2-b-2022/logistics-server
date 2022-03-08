@@ -18,6 +18,8 @@ public class ProductController {
     public List getProducts(int userId) {
         List result = new ArrayList();
         try {
+            Statement statement = con.createStatement();
+            Scanner scanner = new Scanner(System.in);
             String getProductsQuery = ("select * from products where userId = " + userId);
             this.p = con.prepareStatement(getProductsQuery);
             this.rs = p.executeQuery();

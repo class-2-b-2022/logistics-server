@@ -1,7 +1,6 @@
 package thread;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import controllers.DeliveryModule.VehicleManagementController;
-import controllers.ProductController;
 import controllers.TestingController;
 import models.BillingModel;
 import models.ClientRequest;
@@ -30,7 +29,7 @@ public class ClientManager implements Runnable{
             requestStream = new ObjectInputStream(clientSocket.getInputStream());
             responseStream = new DataOutputStream(clientSocket.getOutputStream());
             System.out.println("New client with adresss: "+ clientSocket.getInetAddress().getHostAddress());
-           ObjectMapper objectMapper = new ObjectMapper();
+            ObjectMapper objectMapper = new ObjectMapper();
             List<String> clientRequest;
               List<String> json = (List) requestStream.readObject();
                 ClientRequest client = objectMapper.readValue(json.get(0), ClientRequest.class);
@@ -43,11 +42,6 @@ public class ClientManager implements Runnable{
                     case "/users":
 //                        logic related to user management
                         break;
-                    case "/products" :
-                        int userId = (int) client.getData();
-                        ProductController productController = new ProductController();
-                        productController.getProducts(userId);
-                        break;
                     case "/inventory":
 //                        logic related to inventory
                         break;
@@ -59,7 +53,6 @@ public class ClientManager implements Runnable{
                         break;
                     case "/testing":
                       response = TestingController.test(client);
-                        System.out.println("response: " + response);
                         break;
                 }
 

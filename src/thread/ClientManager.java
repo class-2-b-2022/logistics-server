@@ -1,9 +1,13 @@
 package thread;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import controllers.DeliveryModule.VehicleManagementController;
+import controllers.InventoryController;
+import controllers.ProductController;
 import controllers.TestingController;
 import models.BillingModel;
 import models.ClientRequest;
+import models.InventoryModel;
+
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -34,6 +38,7 @@ public class ClientManager implements Runnable{
               List<String> json = (List) requestStream.readObject();
                 ClientRequest client = objectMapper.readValue(json.get(0), ClientRequest.class);
                 String route = client.getRoute();
+                String action = client.getAction();
              String response = null;
                 switch (route){
                     case "/companyregistration":
@@ -42,8 +47,19 @@ public class ClientManager implements Runnable{
                     case "/users":
 //                        logic related to user management
                         break;
+                    case "/products":
+                        int data = (int) client.getData();
+                        response = new ProductController().getProducts(data);
+                        System.out.println(response);
+                        break;
                     case "/inventory":
-//                        logic related to inventory
+                        InventoryController inventoryController = new InventoryController();
+                        if (action.equals("POST")){
+                            System.out.println(client.getData());
+                            InventoryModel inventoryModel = (InventoryModel) client.getData();
+
+                            inventoryController.addInventory(inventoryModel);
+                        }
                         break;
                     case "/delivery/vehicles":
 //                        responseData = vehicleManagementController.mainMethod(clientRequest);

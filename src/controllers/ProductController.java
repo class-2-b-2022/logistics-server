@@ -1,6 +1,9 @@
 package controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import models.ProductModel;
+import models.ResponseBody;
+import services.ProductService;
 import utils.DatabaseConnection;
 
 import java.sql.*;
@@ -9,35 +12,21 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ProductController {
-
-    DatabaseConnection connection = new DatabaseConnection();
-    Connection con = connection.getConnection();
-    PreparedStatement p;
-    ResultSet rs;
-
-    public List getProducts(int userId) {
-        List result = new ArrayList();
-        try {
-            Statement statement = con.createStatement();
-            Scanner scanner = new Scanner(System.in);
-            String getProductsQuery = ("select * from products where userId = " + userId);
-            this.p = con.prepareStatement(getProductsQuery);
-            this.rs = p.executeQuery();
-
-            while (rs.next()){
-                ProductModel product = new ProductModel();
-                product.setProductId(rs.getInt("productId"));
-                product.setProductName(rs.getString("productName"));
-                product.setProductType(rs.getString("productType"));
-                product.setPricePerBulk(rs.getString("pricePBulk"));
-
-                result.add(product);
-            }
-        }catch (Exception e){
+    public String getProducts(int userId) {
+        String resultFromReponseObject = "";
+        try{
+            List result = new ProductService().getProducts(userId);
+            ResponseBody responseBody = new ResponseBody();
+            responseBody.setData(result);
+            responseBody.setMessage("successfully fetched products");
+            responseBody.setStatus("200");
+            ObjectMapper objectMapper = new ObjectMapper();
+            resultFromReponseObject = objectMapper.writeValueAsString(responseBody);
+        }catch(Exception e){
             e.printStackTrace();
+        }finally {
+            return  resultFromReponseObject;
         }
-        finally {
-            return  result;
-        }
+
     }
 }

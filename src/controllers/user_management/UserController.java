@@ -26,6 +26,8 @@ public class UserController {
             case "login":
                 user.setEmail(req.getData().next().toString().split("=")[1]);
                 user.setPassword(req.getData().next().toString().split("=")[1]);
+                user.setEmail(user.getEmail().substring(1,user.getEmail().length()-1));
+                user.setPassword(user.getPassword().substring(1,user.getPassword().length()-1));
                 res = UserActions.loginUser(user);
         }
         return new ObjectMapper().writeValueAsString(res);

@@ -35,10 +35,19 @@ public class userActions {
      */
     public Object loginUser(User user) throws Exception {
         List<Object> users = new ArrayList();
-        users = userService.findUser(user);
+        users.add((Object) userService.findUser(user));
         resObj.setStatus("200");
         resObj.setMessage("User info processed successfully.");
         resObj.setData(users);
+        return resObj;
+    }
+
+    public Object deleteUser(User user) throws Exception {
+        List<Object> deletedUser = new ArrayList();
+        deletedUser.add((Object) userService.deleteUser(user));
+        resObj.setStatus("200");
+        resObj.setMessage("User info processed successfully.");
+        resObj.setData(deletedUser);
         return resObj;
     }
 }

@@ -1,6 +1,10 @@
 package thread;
+<<<<<<< HEAD
+=======
 import com.fasterxml.jackson.databind.JsonNode;
+>>>>>>> d4773f6db3a04acc42721b94c66a13caf0321919
 import com.fasterxml.jackson.databind.ObjectMapper;
+import controllers.BillingController;
 import controllers.DeliveryModule.VehicleManagementController;
 import controllers.InventoryController;
 import controllers.ProductController;
@@ -11,6 +15,7 @@ import models.InventoryModel;
 
 import java.io.*;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -22,7 +27,13 @@ import java.util.List;
 public class ClientManager implements Runnable{
     private Socket clientSocket;
     private VehicleManagementController vehicleManagementController = new VehicleManagementController();
+<<<<<<< HEAD
+    private BillingController billingController = new BillingController();
+
+    public ClientManager(Socket socket) throws SQLException {
+=======
     public ClientManager(Socket socket){
+>>>>>>> d4773f6db3a04acc42721b94c66a13caf0321919
         this.clientSocket = socket;
     }
     @Override
@@ -69,10 +80,13 @@ public class ClientManager implements Runnable{
                     case "/testing":
                       response = TestingController.test(client);
                         break;
+                     case "/billing":
+                       response = billingController.processPayment(client);
                 }
 
                 //return response to the client;
-                responseStream.writeUTF(response);
+            assert response != null;
+            responseStream.writeUTF(response);
 
 
         } catch (EOFException e){

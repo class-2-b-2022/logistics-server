@@ -1,4 +1,5 @@
 package thread;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import controllers.DeliveryModule.VehicleManagementController;
 import controllers.InventoryController;
@@ -55,10 +56,8 @@ public class ClientManager implements Runnable{
                     case "/inventory":
                         InventoryController inventoryController = new InventoryController();
                         if (action.equals("POST")){
-                            System.out.println(client.getData());
-                            InventoryModel inventoryModel = (InventoryModel) client.getData();
-
-                            inventoryController.addInventory(inventoryModel);
+                            InventoryModel inventoryModel = objectMapper.convertValue(client.getData(), InventoryModel.class);
+                            response = inventoryController.addInventory(inventoryModel);
                         }
                         break;
                     case "/delivery/vehicles":

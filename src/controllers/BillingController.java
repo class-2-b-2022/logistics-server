@@ -15,6 +15,17 @@ import java.sql.SQLException;
 public class BillingController {
     static BillingService billService;
 
+    static {
+        try {
+            billService = new BillingService();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public BillingController() throws SQLException {
+    }
+
     public static boolean createWallet(Wallet wallet) throws SQLException {
         return billService.createWallet(wallet);
     }

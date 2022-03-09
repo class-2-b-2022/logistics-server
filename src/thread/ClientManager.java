@@ -7,6 +7,7 @@ import models.BillingModel;
 import models.ClientRequest;
 import java.io.*;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -20,7 +21,7 @@ public class ClientManager implements Runnable{
     private VehicleManagementController vehicleManagementController = new VehicleManagementController();
     private BillingController billingController = new BillingController();
 
-    public ClientManager(Socket socket){
+    public ClientManager(Socket socket) throws SQLException {
         this.clientSocket = socket;
     }
     @Override

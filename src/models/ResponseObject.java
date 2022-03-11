@@ -12,7 +12,7 @@ public class ResponseObject {
     }
 
     public void setStatus(String status) {
-        Status = status;
+        this.Status = status;
     }
 
     public String getMessage() {
@@ -20,7 +20,7 @@ public class ResponseObject {
     }
 
     public void setMessage(String message) {
-        Message = message;
+        this.Message = message;
     }
 
     public List<Object> getData() {

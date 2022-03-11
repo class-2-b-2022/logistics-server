@@ -35,9 +35,15 @@ public class userActions {
      */
     public Object loginUser(User user) throws Exception {
         List<Object> users = new ArrayList();
-        users.add((Object) userService.findUser(user));
-        resObj.setStatus("200");
-        resObj.setMessage("User info processed successfully.");
+        User loggedInUser=userService.findUser(user);
+        users.add((Object) loggedInUser);
+        if(loggedInUser.getEmail() == null) {
+            resObj.setStatus("400");
+            resObj.setMessage("User not found in the database.");
+        }else{
+                resObj.setStatus("200");
+                resObj.setMessage("The User was successfully found in the database.");
+        }
         resObj.setData(users);
         return resObj;
     }
@@ -45,8 +51,8 @@ public class userActions {
     public Object deleteUser(User user) throws Exception {
         List<Object> deletedUser = new ArrayList();
         deletedUser.add((Object) userService.deleteUser(user));
-        resObj.setStatus("200");
         resObj.setMessage("User info processed successfully.");
+        resObj.setStatus("200");
         resObj.setData(deletedUser);
         return resObj;
     }

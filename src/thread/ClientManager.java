@@ -1,8 +1,6 @@
 package thread;
-<<<<<<< HEAD
-=======
+
 import com.fasterxml.jackson.databind.JsonNode;
->>>>>>> d4773f6db3a04acc42721b94c66a13caf0321919
 import com.fasterxml.jackson.databind.ObjectMapper;
 import controllers.BillingController;
 import controllers.DeliveryModule.VehicleManagementController;
@@ -27,13 +25,19 @@ import java.util.List;
 public class ClientManager implements Runnable{
     private Socket clientSocket;
     private VehicleManagementController vehicleManagementController = new VehicleManagementController();
-<<<<<<< HEAD
-    private BillingController billingController = new BillingController();
 
-    public ClientManager(Socket socket) throws SQLException {
-=======
+    private BillingController billingController;
+
+    {
+        try {
+            billingController = new BillingController();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //    public ClientManager(Socket socket) throws SQLException {
     public ClientManager(Socket socket){
->>>>>>> d4773f6db3a04acc42721b94c66a13caf0321919
         this.clientSocket = socket;
     }
     @Override
@@ -69,6 +73,28 @@ public class ClientManager implements Runnable{
                         if (action.equals("POST")){
                             InventoryModel inventoryModel = objectMapper.convertValue(client.getData(), InventoryModel.class);
                             response = inventoryController.addInventory(inventoryModel);
+                        }
+                        if(action.equals("GET")){
+                            int clientData = (int) client.getData(); // the user id entered
+                            response = new InventoryController().getInventory(clientData);
+                            System.out.println(response);
+                            break;
+                        }
+                        if(action.equals("DELETE")){
+                            int clientData = (int) client.getData(); // the inventory Id entered
+                            response = new InventoryController().deleteInventory(clientData);
+                            System.out.println(response);
+                            break;
+                        }
+                        if(action.equals("VIEW")){
+                            int clientData = (int) client.getData(); // Inventory id entered
+                            response = new InventoryController().viewSingleRecord(clientData);
+                            System.out.println(response);
+                            break;
+                        }
+                        if(action.equals("UPDATE")){
+                            int clientData = (int) client.getData(); // the inventory id where we are going to update
+
                         }
                         break;
                     case "/delivery/vehicles":

@@ -1,4 +1,4 @@
-package services;
+package Services;
 
 import Utils.DatabaseConnection;
 import models.BillingModel;

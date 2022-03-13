@@ -59,6 +59,10 @@ public class ClientManager implements Runnable{
                             InventoryModel inventoryModel = objectMapper.convertValue(client.getData(), InventoryModel.class);
                             response = inventoryController.addInventory(inventoryModel);
                         }
+                        if(action.equals("GET")){
+                            int userId = (int) client.getData();
+                            response = inventoryController.getInventory(userId);
+                        }
                         break;
                     case "/delivery/vehicles":
 //                        responseData = vehicleManagementController.mainMethod(clientRequest);

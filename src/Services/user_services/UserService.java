@@ -18,30 +18,18 @@ public class UserService {
         // Test login
         User u1 = new User();
         u1.setNames("ISITE Yves");
-        u1.setEmail("yvesisite@gmail.com");
+        u1.setEmail("yvesisitae@gmail.com");
         u1.setPassword("pass123");
         u1.setPhone(18488585);
         u1.setRole(2);
         UserService service1 = new UserService();
-        service1.insertUser(u1);
+//        service1.insertUser(u1);
 //        System.out.println("Found user...." + service1.findUser(u1).getRoleAsString());
-    }
-
-    public boolean checkIfUserExists(String email) throws Exception {
-        String sql = "SELECT * FROM users WHERE email = ?";
-        PreparedStatement stmt = connection.prepareStatement(sql);
-        stmt.setString(1, email);
-        ResultSet rs = stmt.executeQuery();
-        boolean checkUser = false;
-        if (rs.next()) {
-            checkUser = true;
-        }
-        return checkUser;
     }
 
     public User findUser(User user) throws Exception {
         User returnObject = new User();
-        if (!checkIfUserExists(user.getEmail()))
+        if (isEmailRegistered(user.getEmail()).getNames() == null)
             System.out.println("User not found.");
         else
             returnObject = getUserInfo(user.getEmail(), user.getPassword());
@@ -75,11 +63,26 @@ public class UserService {
         }
         return returnObject;
     }
+    public User isEmailRegistered(String email) throws SQLException {
+        User returnObject = new User();
+        String sql = "SELECT names,phone FROM users WHERE email=? LIMIT 1";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setString(1, email);
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            returnObject.setNames(rs.getString(1));
+            returnObject.setEmail(email);
+            returnObject.setPhone(rs.getInt(2));
+            returnObject.setRoleAsString(getRoleAsString(email));
+            break;
+        }
+        return returnObject;
+    }
 
     // Returns an object instance of the deleted user
     public User deleteUser(User user) throws SQLException {
         User returnObject;
-        returnObject = getUserInfo(user.getEmail(), user.getPassword());
+        returnObject = isEmailRegistered(user.getEmail());
         String sql = "DELETE FROM users WHERE email=?";
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setString(1, user.getEmail());
@@ -89,9 +92,9 @@ public class UserService {
 
     public User updateUser(User user) throws  SQLException {
         User returnObject;
-        returnObject = getUserInfo(user.getEmail(), user.getPassword());
+        returnObject = isEmailRegistered(user.getEmail());
         if(returnObject.getEmail() != null) {
-            String sql = "UPDATE users SET email=WHERE email=?,names=?,phone=?,role=? WHERE id=?";
+            String sql = "UPDATE users SET email=?,names=?,phone=?,role=? WHERE id=?";
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, user.getEmail());
             stmt.setString(2, user.getNames());
@@ -112,7 +115,7 @@ public class UserService {
     }
 
     public boolean insertUser(User user) throws Exception {
-        boolean userExists = checkIfUserExists(user.getEmail());
+        boolean userExists = isEmailRegistered(user.getEmail())==null;
         if (!userExists) {
             String sql = "INSERT INTO users(names,email,phone,password,role)values(?,?,?,?,?)";
             String hashedPswd = hashPassword(user.getPassword());

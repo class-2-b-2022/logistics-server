@@ -17,10 +17,14 @@ public class UserService {
     public static void main(String[] args) throws Exception {
         // Test login
         User u1 = new User();
+        u1.setNames("ISITE Yves");
         u1.setEmail("yvesisite@gmail.com");
         u1.setPassword("pass123");
+        u1.setPhone(18488585);
+        u1.setRole(2);
         UserService service1 = new UserService();
-        System.out.println("Found user...." + service1.findUser(u1).getRoleAsString());
+        service1.insertUser(u1);
+//        System.out.println("Found user...." + service1.findUser(u1).getRoleAsString());
     }
 
     public boolean checkIfUserExists(String email) throws Exception {

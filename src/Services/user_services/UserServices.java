@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
-import Utils.DatabaseConnection;
+import utils.DatabaseConnection;
 import models.user_model.User;
 
 

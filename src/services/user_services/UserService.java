@@ -115,12 +115,12 @@ public class UserService {
         boolean userExists = checkIfUserExists(user.getEmail());
         if (!userExists) {
             String sql = "INSERT INTO users(names,email,phone,password,role)values(?,?,?,?,?)";
-            String hashedPswd = hashPassword(user.getPassword());
+//            String hashedPswd = hashPassword(user.getPassword());
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, user.getNames());
             stmt.setString(2, user.getEmail());
             stmt.setInt(3, user.getPhone());
-            stmt.setString(4, hashedPswd);
+            stmt.setString(4, user.getPassword());
             stmt.setInt(5, user.getRole());
             int inserted = stmt.executeUpdate();
             if (inserted == 1) {

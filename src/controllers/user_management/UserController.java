@@ -14,20 +14,18 @@ public class UserController {
         User user=new User();
         switch (action) {
             case "register":
-                user.setNames(req.getData().next().toString().split("=")[1]);
-                user.setEmail(req.getData().next().toString().split("=")[1]);
-                user.setPhone(Integer.parseInt(req.getData().next().toString().split("=")[1]));
-                user.setPassword(req.getData().next().toString().split("=")[1]);
-                user.setRole(Integer.parseInt(req.getData().next().toString().split("=")[1]));
-                res =UserActions.registerUser(user);
+                user.setNames(req.getData().next().toString().split("=")[1].replace("\"", ""));
+                user.setEmail(req.getData().next().toString().split("=")[1].replace("\"", ""));
+                user.setPhone(Integer.parseInt(req.getData().next().toString().split("=")[1].replace("\"", "")));
+                user.setPassword(req.getData().next().toString().split("=")[1].replace("\"", ""));
+                user.setRole(Integer.parseInt(req.getData().next().toString().split("=")[1].replace("\"", "")));
+                res = UserActions.registerUser(user);
                 break;
             case "view":
             	break;
             case "login":
-                user.setEmail(req.getData().next().toString().split("=")[1]);
-                user.setPassword(req.getData().next().toString().split("=")[1]);
-                user.setEmail(user.getEmail().substring(1,user.getEmail().length()-1));
-                user.setPassword(user.getPassword().substring(1,user.getPassword().length()-1));
+                user.setEmail(req.getData().next().toString().split("=")[1].replace("\"", ""));
+                user.setPassword(req.getData().next().toString().split("=")[1].replace("\"", ""));
                 res = UserActions.loginUser(user);
                 break;
             case "updateUser":

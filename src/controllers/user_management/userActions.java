@@ -11,20 +11,21 @@ import services.user_services.*;
  */
 
 public class userActions {
+
     private ResponseObject resObj = new ResponseObject();
     UserService userService = new UserService();
 
     /**
      * @author Ntagungira Ali Rashid
      */
-    public List<Object> registerUser(User user) throws Exception {
+    public Object registerUser(User user) throws Exception {
         List<Object> newUser = new ArrayList<>();
         userService.insertUser(user);
         newUser.add((Object) user);
         resObj.setStatus("200");
         resObj.setMessage("User registered successfully");
         resObj.setData(newUser);
-        return newUser;
+        return resObj;
     }
 
     /**
@@ -33,6 +34,7 @@ public class userActions {
     public Object loginUser(User user) throws Exception {
         List<Object> users = new ArrayList();
         User loggedInUser=userService.findUser(user);
+        System.out.println(loggedInUser);
         users.add((Object) loggedInUser);
         if(loggedInUser.getEmail() == null) {
             resObj.setStatus("400");

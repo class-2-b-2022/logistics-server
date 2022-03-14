@@ -40,7 +40,6 @@ public class ClientManager implements Runnable{
             clientRequest.setRoute(jsonNodeRoot.get("route").asText());
             clientRequest.setData(iterator);
             clientRequest.setAction((jsonNodeRoot.get("action").asText()));
-            System.out.println(requestData);
             String responseData = null;
 
             switch (jsonNodeRoot.get("route").asText()){

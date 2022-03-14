@@ -48,11 +48,32 @@ public class userActions {
         return resObj;
     }
 
+    public Object updateUser(User user) throws Exception {
+        List<Object> updatedUser = new ArrayList();
+        User updatedUserInfo=userService.updateUser(user);
+        updatedUser.add((Object) updatedUserInfo);
+        if(updatedUserInfo.getEmail() == null) {
+            resObj.setStatus("400");
+            resObj.setMessage("User not found in the database.");
+        }else{
+            resObj.setStatus("200");
+            resObj.setMessage("The User's info were successfully updated.");
+        }
+        resObj.setData(updatedUser);
+        return resObj;
+    }
+
     public Object deleteUser(User user) throws Exception {
         List<Object> deletedUser = new ArrayList();
-        deletedUser.add((Object) userService.deleteUser(user));
-        resObj.setMessage("User info processed successfully.");
-        resObj.setStatus("200");
+        User deletedUserInfo=userService.deleteUser(user);
+        deletedUser.add((Object) deletedUserInfo);
+        if(deletedUserInfo.getEmail() == null) {
+            resObj.setStatus("400");
+            resObj.setMessage("User not found in the database.");
+        }else{
+            resObj.setStatus("200");
+            resObj.setMessage("The User was successfully deleted from the database.");
+        }
         resObj.setData(deletedUser);
         return resObj;
     }

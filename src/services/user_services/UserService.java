@@ -76,13 +76,31 @@ public class UserService {
 
     // Returns an object instance of the deleted user
     public User deleteUser(User user) throws SQLException {
-        User returnObject = new User();
+        User returnObject;
         returnObject = getUserInfo(user.getEmail(), user.getPassword());
         String sql = "DELETE FROM users WHERE email=?";
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setString(1, user.getEmail());
         stmt.execute();
         return returnObject;
+    }
+
+    public User updateUser(User user) throws  SQLException {
+        User returnObject;
+        returnObject = getUserInfo(user.getEmail(), user.getPassword());
+        if(returnObject.getEmail() != null) {
+            String sql = "UPDATE users SET email=WHERE email=?,names=?,phone=?,role=? WHERE id=?";
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, user.getEmail());
+            stmt.setString(2, user.getNames());
+            stmt.setInt(3, user.getPhone());
+            stmt.setInt(4, user.getRole());
+            stmt.setInt(5, user.getUserId());
+            stmt.executeUpdate();
+            return user;
+        }else{
+            return returnObject;
+        }
     }
 
     private String hashPassword(String password) {

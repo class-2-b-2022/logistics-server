@@ -4,7 +4,6 @@ import models.ResponseObject;
 import models.user_model.User;
 import java.util.ArrayList;
 import java.util.List;
-import Services.user_services.UserServices;
 import services.user_services.*;
 /***
  * @author: Isite Yves
@@ -14,8 +13,6 @@ import services.user_services.*;
 public class userActions {
     private ResponseObject resObj = new ResponseObject();
     UserServices userService = new UserServices();
-    private ResponseObject resObj = new ResponseObject();
-    UserService userService = new UserService();
 
     /**
      * @author Ntagungira Ali Rashid

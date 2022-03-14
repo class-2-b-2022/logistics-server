@@ -1,7 +1,7 @@
-package Services;
+package services;
 
 
-import Utils.*;
+import utils.*;
 import models.BillingModel;
 import java.sql.*;
 

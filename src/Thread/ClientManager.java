@@ -1,15 +1,15 @@
-package Thread;
+package thread;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import controllers.*;
+import controllers.user_management.*;
+import controllers.DeliveryModule.*;
 import models.ClientRequest;
 import java.io.*;
 import java.net.Socket;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,6 +20,7 @@ public class ClientManager implements Runnable{
     private Socket clientSocket;
     private String json_data;
     private ClientRequest clientRequest = new ClientRequest();
+    private UserController userController = new UserController();
     private VehicleManagementController vehicleManagementController = new VehicleManagementController();
     public ClientManager(Socket socket){
         this.clientSocket = socket;

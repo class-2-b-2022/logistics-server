@@ -1,4 +1,4 @@
-package Utils;
+package utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,8 +15,8 @@ public class DatabaseConnection {
 //    private static final String dbUser = "root";
 //    private static final String dbPassword = "///*81esyvprog17*/";
     public static Connection myConnection;
-    private Utils.ErrorMessageLogger error = new Utils.ErrorMessageLogger();
-    private Utils.SuccessMessageLogger success = new Utils.SuccessMessageLogger();
+    private ErrorMessageLogger error = new ErrorMessageLogger();
+    private SuccessMessageLogger success = new SuccessMessageLogger();
 
     public DatabaseConnection() {
         try {

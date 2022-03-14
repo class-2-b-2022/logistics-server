@@ -1,5 +1,4 @@
 package controllers.DeliveryModule;
-
 import services.DeliveryModule.VehicleService;
 import models.DeliveryModule.Vehicle;
 

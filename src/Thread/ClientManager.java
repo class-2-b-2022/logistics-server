@@ -4,8 +4,7 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import controllers.DeliveryModule.VehicleManagementController;
-import controllers.user_management.userController;
+import controllers.*;
 import models.ClientRequest;
 import java.io.*;
 import java.net.Socket;
@@ -33,7 +32,6 @@ public class ClientManager implements Runnable{
             requestStream = new ObjectInputStream(clientSocket.getInputStream());
             responseStream = new DataOutputStream(clientSocket.getOutputStream());
             String jsonString = (String) requestStream.readObject();
-            System.out.println(jsonString);
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode jsonNodeRoot = objectMapper.readTree(jsonString);
             JsonNode requestData = jsonNodeRoot.get("data");
@@ -55,7 +53,7 @@ public class ClientManager implements Runnable{
 //                        logic related to inventory
                     break;
                 case "/delivery/vehicles":
-                    responseData = vehicleManagementController.mainMethod(clientRequest);
+                  responseData = vehicleManagementController.mainMethod(clientRequest);
                     break;
                 case "/reporting":
 //                        logic related to reporting
@@ -73,8 +71,4 @@ public class ClientManager implements Runnable{
     }
 
 }
-
-
-
-
 

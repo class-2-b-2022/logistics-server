@@ -1,6 +1,5 @@
 package main;
 import Thread.ClientManager;
-
 import Utils.DatabaseConnection;
 import Utils.ErrorMessageLogger;
 import Utils.SuccessMessageLogger;
@@ -39,7 +38,7 @@ public class LogisticsServer {
             e.printStackTrace();
         }finally{
             if(server !=null){
-                //close server
+                //close server    
                 try {
                     server.close();
                 }catch (Exception e){

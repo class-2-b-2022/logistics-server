@@ -1,11 +1,9 @@
 package Services;
 
-import Utils.DatabaseConnection;
-import models.BillingModel;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
+import Utils.*;
+import models.BillingModel;
+import java.sql.*;
 
 /**
  * @author : Gasaro leila

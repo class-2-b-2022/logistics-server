@@ -4,20 +4,22 @@ import models.ResponseObject;
 import models.user_model.User;
 import java.util.ArrayList;
 import java.util.List;
-
 import Services.user_services.UserServices;
-
+import services.user_services.*;
 /***
  * @author: Isite Yves
  * @author: Ntagungira Ali Rashid
  */
 
 public class userActions {
-	 /**
-     * @author Ntagungira Ali Rashid
-     */
     private ResponseObject resObj = new ResponseObject();
     UserServices userService = new UserServices();
+    private ResponseObject resObj = new ResponseObject();
+    UserService userService = new UserService();
+
+    /**
+     * @author Ntagungira Ali Rashid
+     */
     public List<Object> registerUser(User user) throws Exception {
         List<Object> newUser = new ArrayList<>();
         userService.insertUser(user);
@@ -31,11 +33,27 @@ public class userActions {
     /**
      * @author: Isite Yves
      */
-     public List<Object> loginUser(User user) throws Exception {
-         System.out.println("User info..."+user.getEmail());
-         List<Object> userObject = new ArrayList<>();
-         User foundUser = userService.findUser(user);
-         userObject.add((Object) foundUser);
-         return userObject;
-     }
+    public Object loginUser(User user) throws Exception {
+        List<Object> users = new ArrayList();
+        User loggedInUser=userService.findUser(user);
+        users.add((Object) loggedInUser);
+        if(loggedInUser.getEmail() == null) {
+            resObj.setStatus("400");
+            resObj.setMessage("User not found in the database.");
+        }else{
+                resObj.setStatus("200");
+                resObj.setMessage("The User was successfully found in the database.");
+        }
+        resObj.setData(users);
+        return resObj;
+    }
+
+    public Object deleteUser(User user) throws Exception {
+        List<Object> deletedUser = new ArrayList();
+        deletedUser.add((Object) userService.deleteUser(user));
+        resObj.setMessage("User info processed successfully.");
+        resObj.setStatus("200");
+        resObj.setData(deletedUser);
+        return resObj;
+    }
 }

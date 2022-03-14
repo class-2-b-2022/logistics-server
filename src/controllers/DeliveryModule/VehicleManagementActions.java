@@ -50,12 +50,10 @@ public class VehicleManagementActions {
             vehicles = vehicleService.deleteVehicle(vehicle);
             responseObject.setStatus("200");
             responseObject.setMessage("Vehicle deleted successfully");
-            responseObject.setData(vehicles);
         }
         else{
             responseObject.setStatus("404");
             responseObject.setMessage("Vehicle not found");
-            responseObject.setData(vehicles);
         }
         return responseObject;
     }

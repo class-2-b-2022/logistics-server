@@ -56,7 +56,6 @@ public class VehicleService {
         preparedStatement.setString(5, vehicle.getDescription());
         preparedStatement.setInt(6, vehicle.getVehicleId());
 
-
         int rowsUpdated=preparedStatement.executeUpdate();
         if(rowsUpdated==1){
             updatedVehicle.add((Object) vehicle);

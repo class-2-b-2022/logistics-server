@@ -33,6 +33,7 @@ public class ClientManager implements Runnable{
             requestStream = new ObjectInputStream(clientSocket.getInputStream());
             responseStream = new DataOutputStream(clientSocket.getOutputStream());
             String jsonString = (String) requestStream.readObject();
+            System.out.println(jsonString);
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode jsonNodeRoot = objectMapper.readTree(jsonString);
             JsonNode requestData = jsonNodeRoot.get("data");

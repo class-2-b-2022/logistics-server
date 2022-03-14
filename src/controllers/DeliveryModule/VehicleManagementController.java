@@ -19,7 +19,7 @@ public class VehicleManagementController {
                 vehicle.setBrand(clientRequest.getData().next().toString().split("=")[1]);
                 vehicle.setDescription(clientRequest.getData().next().toString().split("=")[1]);
                 vehicle.setOwner("owner");
-                vehicle.setModel("model");
+                vehicle.setModel(clientRequest.getData().next().toString().split("=")[1]);
                 vehicle.setCreatedAt(new Date(2020,02,03));
                 responseObject = actions.registerVehicle(vehicle);
                 break;
@@ -27,24 +27,25 @@ public class VehicleManagementController {
                 responseObject = actions.getVehicles();
                 break;
             case "update":
-                vehicle.setVehicleId(Integer.valueOf(clientRequest.getData().next().toString().split("=")[1]));
                 vehicle.setPlateNbr(clientRequest.getData().next().toString().split("=")[1]);
                 vehicle.setBrand(clientRequest.getData().next().toString().split("=")[1]);
+                vehicle.setOwner(clientRequest.getData().next().toString().split("=")[1]);
                 vehicle.setDescription(clientRequest.getData().next().toString().split("=")[1]);
-                vehicle.setOwner("owner");
-                vehicle.setModel("model");
+                vehicle.setModel(clientRequest.getData().next().toString().split("=")[1]);
+                vehicle.setVehicleId(Integer.valueOf(clientRequest.getData().next().toString().split("=")[1]));
+                String createdAt = clientRequest.getData().next().toString().split("=")[1];
                 vehicle.setCreatedAt(new Date(2020,02,03));
-                responseObject = actions.updatedVehicles((Vehicle) clientRequest.getData());
+                responseObject = actions.updatedVehicles(vehicle);
                 break;
             case "delete":
-                vehicle.setVehicleId(Integer.valueOf(clientRequest.getData().next().toString().split("=")[1]));
                 vehicle.setPlateNbr(clientRequest.getData().next().toString().split("=")[1]);
                 vehicle.setBrand(clientRequest.getData().next().toString().split("=")[1]);
+                vehicle.setOwner(clientRequest.getData().next().toString().split("=")[1]);
                 vehicle.setDescription(clientRequest.getData().next().toString().split("=")[1]);
-                vehicle.setOwner("owner");
-                vehicle.setModel("model");
-                vehicle.setCreatedAt(new Date(2020,02,03));
-                responseObject = actions.deleteVehicle((Vehicle) clientRequest.getData());
+                vehicle.setModel(clientRequest.getData().next().toString().split("=")[1]);
+                String created = clientRequest.getData().next().toString().split("=")[1];
+                vehicle.setVehicleId(Integer.valueOf(clientRequest.getData().next().toString().split("=")[1]));
+                responseObject = actions.deleteVehicle(vehicle);
                 break;
         }
         return new ObjectMapper().writeValueAsString(responseObject);

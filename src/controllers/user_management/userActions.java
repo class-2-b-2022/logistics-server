@@ -2,24 +2,24 @@ package controllers.user_management;
 
 import models.ResponseObject;
 import models.user_model.User;
-import services.user_services.*;
-
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
+import Services.user_services.UserServices;
+import services.user_services.*;
 /***
  * @author: Isite Yves
  * @author: Ntagungira Ali Rashid
  */
 
 public class userActions {
-    /**
-     * @author Ntagungira Ali Rashid
-     */
+    private ResponseObject resObj = new ResponseObject();
+    UserServices userService = new UserServices();
     private ResponseObject resObj = new ResponseObject();
     UserService userService = new UserService();
 
+    /**
+     * @author Ntagungira Ali Rashid
+     */
     public List<Object> registerUser(User user) throws Exception {
         List<Object> newUser = new ArrayList<>();
         userService.insertUser(user);

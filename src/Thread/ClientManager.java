@@ -1,11 +1,10 @@
-package thread;
+package Thread;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import controllers.DeliveryModule.VehicleManagementController;
-import controllers.user_management.UserController;
+import controllers.*;
 import models.ClientRequest;
 import java.io.*;
 import java.net.Socket;
@@ -40,6 +39,7 @@ public class ClientManager implements Runnable{
             clientRequest.setRoute(jsonNodeRoot.get("route").asText());
             clientRequest.setData(iterator);
             clientRequest.setAction((jsonNodeRoot.get("action").asText()));
+            System.out.println(requestData);
             String responseData = null;
 
             switch (jsonNodeRoot.get("route").asText()){
@@ -47,13 +47,13 @@ public class ClientManager implements Runnable{
 //                        logic related to company registration
                     break;
                 case "/users":
-                    responseData= UserController.mainMethod(clientRequest);
+                   responseData = userController.mainMethod(clientRequest);
                     break;
                 case "/inventory":
 //                        logic related to inventory
                     break;
                 case "/delivery/vehicles":
-                    responseData = vehicleManagementController.mainMethod(clientRequest);
+                  responseData = vehicleManagementController.mainMethod(clientRequest);
                     break;
                 case "/reporting":
 //                        logic related to reporting
@@ -71,7 +71,4 @@ public class ClientManager implements Runnable{
     }
 
 }
-
-
-
 

@@ -6,11 +6,18 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
+<<<<<<< HEAD
+	<classpathentry kind="lib" path="lib/jackson-annotations-2.12.1.jar"/>
+	<classpathentry kind="lib" path="lib/jackson-core-2.12.1.jar"/>
+	<classpathentry kind="lib" path="lib/jackson-databind-2.12.1.jar"/>
+	<classpathentry kind="lib" path="lib/mysql-connector-java-8.0.27.jar"/>
+=======
 	<classpathentry kind="lib" path="lib/mysql-connector-java-8.0.27.jar"/>
 	<classpathentry kind="lib" path="lib/jackson-annotations-2.12.1.jar"/>
 	<classpathentry kind="lib" path="lib/jackson-core-2.12.1.jar"/>
 	<classpathentry kind="lib" path="lib/jackson-databind-2.12.1.jar"/>
 	<classpathentry kind="lib" path="lib/bcrypt-2.3.0.jar"/>
+>>>>>>> 088252a37e46381dbcf58ff2e136e05f9e3943b9
 	<classpathentry kind="lib" path="lib/spring-security-crypto-4.1.0.RELEASE.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

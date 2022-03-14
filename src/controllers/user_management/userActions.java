@@ -12,7 +12,7 @@ import services.user_services.*;
 
 public class userActions {
     private ResponseObject resObj = new ResponseObject();
-    UserServices userService = new UserServices();
+    UserService userService = new UserService();
 
     /**
      * @author Ntagungira Ali Rashid

@@ -1,7 +1,7 @@
 package services.user_services;
 
 import models.user_model.User;
-import Utils.DatabaseConnection;
+import utils.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -2,7 +2,7 @@
 
 import models.ResponseObject;
 import models.user_model.User;
-import Services.user_services.UserService;
+import services.user_services.UserService;
 
 import java.util.ArrayList;
 import java.util.List;

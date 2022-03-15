@@ -2,7 +2,7 @@ package controllers;
 
 import models.ClientRequest;
 import models.Wallet;
-import Services.BillingService;
+import services.BillingService;
 
 import java.sql.SQLException;
 

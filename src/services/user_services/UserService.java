@@ -1,4 +1,4 @@
-package Services.user_services;
+package services.user_services;
 
 import models.user_model.User;
 import utils.DatabaseConnection;

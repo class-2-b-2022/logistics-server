@@ -29,7 +29,7 @@ public class VehicleManagementActions {
     }
 
     public Object updatedVehicles(Vehicle vehicle) throws Exception {
-        List<Object> vehicles = new ArrayList();
+        List<Object> vehicles = new ArrayList<Object>();
         if(vehicleService.findVehicleById(vehicle.getVehicleId())){
             vehicles = vehicleService.updateVehicle(vehicle);
             responseObject.setStatus("200");
@@ -45,7 +45,7 @@ public class VehicleManagementActions {
     }
 
     public Object deleteVehicle(Vehicle vehicle) throws Exception {
-        List<Object> vehicles = new ArrayList();
+        List<Object> vehicles = new ArrayList<Object>();
         if(vehicleService.findVehicleById(vehicle.getVehicleId())){
             vehicles = vehicleService.deleteVehicle(vehicle);
             responseObject.setStatus("200");

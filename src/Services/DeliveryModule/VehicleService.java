@@ -1,12 +1,11 @@
-package services.DeliveryModule;
+package Services.DeliveryModule;
 
 import models.DeliveryModule.Vehicle;
+import Utils.DatabaseConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import utils.DatabaseConnection;
 
 public class VehicleService {
     private DatabaseConnection databaseConnection = new DatabaseConnection();

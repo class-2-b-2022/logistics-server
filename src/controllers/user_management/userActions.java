@@ -4,7 +4,7 @@ import models.ResponseObject;
 import models.user_model.User;
 import java.util.ArrayList;
 import java.util.List;
-import services.user_services.*;
+import Services.user_services.UserService;
 /***
  * @author: Isite Yves
  * @author: Ntagungira Ali Rashid
@@ -14,24 +14,21 @@ public class userActions {
     private ResponseObject resObj = new ResponseObject();
     UserService userService = new UserService();
 
-    /**
-     * @author Ntagungira Ali Rashid
-     */
-    public List<Object> registerUser(User user) throws Exception {
-        List<Object> newUser = new ArrayList<>();
+    public Object registerUser(User user) throws Exception {
+        List<Object> newUser = new ArrayList<Object>();
         userService.insertUser(user);
         newUser.add((Object) user);
         resObj.setStatus("200");
         resObj.setMessage("User registered successfully");
         resObj.setData(newUser);
-        return newUser;
+        return resObj;  
     }
 
     /**
      * @author: Isite Yves
      */
     public Object loginUser(User user) throws Exception {
-        List<Object> users = new ArrayList();
+        List<Object> users = new ArrayList<Object>();
         User loggedInUser=userService.findUser(user);
         users.add((Object) loggedInUser);
         if(loggedInUser.getEmail() == null) {
@@ -46,7 +43,7 @@ public class userActions {
     }
 
     public Object updateUser(User user) throws Exception {
-        List<Object> updatedUser = new ArrayList();
+        List<Object> updatedUser = new ArrayList<Object>();
         User updatedUserInfo=userService.updateUser(user);
         updatedUser.add((Object) updatedUserInfo);
         if(updatedUserInfo.getEmail() == null) {
@@ -61,7 +58,7 @@ public class userActions {
     }
 
     public Object deleteUser(User user) throws Exception {
-        List<Object> deletedUser = new ArrayList();
+        List<Object> deletedUser = new ArrayList<Object>();
         User deletedUserInfo=userService.deleteUser(user);
         deletedUser.add((Object) deletedUserInfo);
         if(deletedUserInfo.getEmail() == null) {

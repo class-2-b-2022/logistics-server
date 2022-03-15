@@ -2,7 +2,7 @@ package controllers;
 
 import models.InventoryModel;
 import models.ProductModel;
-import utils.*;
+import Utils.*;
 
 import java.sql.*;
 import java.util.ArrayList;

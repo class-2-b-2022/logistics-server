@@ -1,7 +1,7 @@
 package controllers;
 
 import models.ProductModel;
-import utils.DatabaseConnection;
+import Utils.DatabaseConnection;
 
 import java.sql.*;
 import java.util.ArrayList;

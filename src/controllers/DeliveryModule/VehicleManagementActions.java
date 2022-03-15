@@ -1,13 +1,13 @@
 package controllers.DeliveryModule;
-import services.DeliveryModule.*;
+
 import models.DeliveryModule.Vehicle;
 
-import java.sql.*;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class VehicleManagementActions<ResponseStatus> {
-    private VehicleService vehicleService = new VehicleService();
+    private Services.DeliveryModule.VehicleService vehicleService = new Services.DeliveryModule.VehicleService();
 
     public List<Object> registerVehicle(Vehicle vehicle) throws SQLException {
         List<Object> vehicleObject = new ArrayList<>();

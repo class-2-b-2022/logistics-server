@@ -2,6 +2,7 @@ package controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import models.Wallet;
 import models.ClientRequest;
 import models.ResponseBody;
@@ -12,10 +13,12 @@ import java.util.List;
 
 public class TestingController {
     public static  String test(ClientRequest clientRequest) throws JsonProcessingException {
+
        ParserObj parserObj = new ParserObj();
         Wallet wallet = parserObj.parseData(clientRequest.getData(), Wallet.class);
         System.out.println(wallet.getAmount());
         System.out.println(wallet.getUserId());
+
         ObjectMapper mapper = new ObjectMapper();
         ResponseBody res = new ResponseBody();
 //        String json = mapper.writeValueAsString(billingModel);

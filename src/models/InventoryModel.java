@@ -18,6 +18,7 @@ public class InventoryModel implements Serializable {
     }
 
     public void setStatus(String status) {
+
         Status = status;
     }
 
@@ -39,6 +40,9 @@ public class InventoryModel implements Serializable {
     }
 
     public String getStatus() {
+
         return Status;
+
+
     }
 }

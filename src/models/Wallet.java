@@ -1,5 +1,6 @@
 package models;
 
+
 import java.io.Serializable;
 
 /**
@@ -11,6 +12,12 @@ public class Wallet implements Serializable {
     private String dateOfCreation;
     private double amount;
 
+    public Wallet(int id, int userId, String doc,double amount) {
+        this.id = id;
+        this.userId = userId;
+        this.dateOfCreation = doc;
+        this.amount = amount;
+    };
 
     public Wallet() {}
 

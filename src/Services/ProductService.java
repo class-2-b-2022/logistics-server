@@ -1,7 +1,7 @@
-package services;
+package Services;
 
 import models.ProductModel;
-import utils.DatabaseConnection;
+import Utils.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -2,7 +2,8 @@ package controllers;
 
 
 import models.InventoryModel;
-import utils.DatabaseConnection;
+import models.ProductModel;
+import Utils.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

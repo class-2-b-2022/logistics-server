@@ -1,7 +1,4 @@
-package utils;
-/***
-@author: Nkubito pacis
- */
+package Utils;
 
 public class ErrorMessageLogger {
     private static final String RED = "\u001B[31m";

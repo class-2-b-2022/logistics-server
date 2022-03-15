@@ -7,7 +7,7 @@ public class ProductModel implements Serializable {
     String productName;
     String productType;
     int companyId;
-    String pricePerBulk;
+    int pricePerBulk;
 
     public void setProductId(int productId) {
         this.productId = productId;
@@ -37,7 +37,7 @@ public class ProductModel implements Serializable {
         return productId;
     }
 
-    public String getPricePerBulk() {
+    public int getPricePerBulk() {
         return pricePerBulk;
     }
 

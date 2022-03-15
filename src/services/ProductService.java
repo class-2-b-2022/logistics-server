@@ -1,11 +1,13 @@
 package services;
 
 import models.ProductModel;
+import models.Wallet;
 import utils.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +19,8 @@ public class ProductService {
     PreparedStatement p;
     ResultSet rs;
 
-    public List<Object> getProducts(int companyId){
+    @SuppressWarnings("finally")
+	public List<Object> getProducts(int companyId){
         List<Object> result = new ArrayList();
         try {
             String getProductsQuery = ("select * from products where companyId = " +  companyId);
@@ -40,5 +43,21 @@ public class ProductService {
         finally {
             return result;
         }
+    }
+    public boolean createProduct(ProductModel product) throws SQLException {
+        try {
+        	String sql="INSERT INTO products(productName,productType,companyId,pricePBulk)values(?,?,?,?)";
+          PreparedStatement preparedStatement = con.prepareStatement(sql);
+          preparedStatement.setString(1,product.getProductName());
+          preparedStatement.setString(2,product.getProductType());
+          preparedStatement.setInt(3,product.getCompanyId());
+          preparedStatement.setInt(4,product.getPricePerBulk());
+          preparedStatement.executeQuery();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return true;
+
     }
 }

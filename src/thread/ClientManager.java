@@ -64,9 +64,8 @@ public class ClientManager implements Runnable{
 //                        logic related to user management
                         break;
                     case "/products":
-                        int data = (int) client.getData();
-                        response = new ProductController().getProducts(data);
-                        System.out.println(response);
+//                    	response = billingController.processPayment(client);
+                    	response=ProductController.processProduct(client);
                         break;
                     case "/inventory":
                         InventoryController inventoryController = new InventoryController();

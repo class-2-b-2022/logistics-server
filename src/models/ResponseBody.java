@@ -14,7 +14,7 @@ public class ResponseBody implements Serializable {
     private String status;//201
     private Object data;
     public ResponseBody(){}
-    public ResponseBody(String message, String status, String data){
+    public ResponseBody(String message, String data,String status){
         this.status = status;
         this.message = message;
         this.data = data;

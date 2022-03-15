@@ -74,27 +74,33 @@ public class ClientManager implements Runnable{
                             InventoryModel inventoryModel = objectMapper.convertValue(client.getData(), InventoryModel.class);
                             response = inventoryController.addInventory(inventoryModel);
                         }
-                        if(action.equals("GET")){
+                        else if(action.equals("GET")){
                             int clientData = (int) client.getData(); // the user id entered
-                            response = new InventoryController().getInventory(clientData);
+                            response = inventoryController.getInventory(clientData);
                             System.out.println(response);
                             break;
                         }
-                        if(action.equals("DELETE")){
+                        else if(action.equals("DELETE")){
                             int clientData = (int) client.getData(); // the inventory Id entered
-                            response = new InventoryController().deleteInventory(clientData);
+                            response = inventoryController.deleteInventory(clientData);
                             System.out.println(response);
                             break;
                         }
-                        if(action.equals("VIEW")){
+                        else if(action.equals("VIEW")){
                             int clientData = (int) client.getData(); // Inventory id entered
-                            response = new InventoryController().viewSingleRecord(clientData);
+                            response = inventoryController.viewSingleRecord(clientData);
                             System.out.println(response);
                             break;
                         }
-                        if(action.equals("UPDATE")){
+                        else if(action.equals("UPDATE")){
                             int clientData = (int) client.getData(); // the inventory id where we are going to update
 
+                        }
+                        else if(action.equals("VIEW QUANTITY")){
+                            List<Integer> requestBody = (List<Integer>) client.getData();
+                            int branchId = requestBody.get(0);
+                            int productId = requestBody.get(1);
+                            response = inventoryController.checkCurrentProductQuantityInStock(productId, branchId);
                         }
                         break;
                     case "/delivery/vehicles":

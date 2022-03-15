@@ -30,6 +30,7 @@ public class ProductService {
                 product.setProductName(rs.getString("productName"));
                 product.setProductType(rs.getString("productType"));
                 product.setPricePerBulk(rs.getString("pricePBulk"));
+                product.setCompanyId(rs.getInt("companyId"));
 
                 result.add(product);
             }

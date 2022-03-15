@@ -1,29 +1,21 @@
 package controllers;
 
-import com.fasterxml.jackson.core.util.DefaultIndenter;
-import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import models.InventoryModel;
-import models.ProductModel;
 import models.ResponseBody;
 import services.*;
-import utils.*;
 
-import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 /* Author: Sarah*/
 public class InventoryController {
-    private DatabaseConnection databaseConnection = new DatabaseConnection();
-    Connection con = databaseConnection.getConnection();
     ResponseBody responseBody = new ResponseBody();
     ObjectMapper objectMapper = new ObjectMapper();
     String resultFromReponseObject = "";
+    InventoryService inventoryService = new InventoryService();
     public String addInventory(InventoryModel inv){
         try{
-            int result = new InventoryService().createInventory(inv);
+            int result = inventoryService.createInventory(inv);
             if(result > 0){
                 responseBody.setStatus("201");
                 responseBody.setMessage("Successfully created inventory");
@@ -40,10 +32,9 @@ public class InventoryController {
             return resultFromReponseObject;
         }
     }
-
     public String getInventory(int userId) {
         try{
-            List result = new InventoryService().readInventory(userId);
+            List result = inventoryService.readInventory(userId);
             if(result.isEmpty()){
                 responseBody.setMessage("Failed to fetch inventory");
                 responseBody.setData(result);
@@ -54,8 +45,6 @@ public class InventoryController {
                 responseBody.setMessage("successfully fetched inventory");
                 responseBody.setStatus("200");
             }
-
-            ObjectMapper objectMapper = new ObjectMapper();
             resultFromReponseObject = objectMapper.writeValueAsString(responseBody);
         }catch(Exception e){
             e.printStackTrace();
@@ -66,7 +55,7 @@ public class InventoryController {
     }
     public String deleteInventory(int inventoryId){
         try{
-            int result = new InventoryService().deleteInventory(inventoryId);
+            int result = inventoryService.deleteInventory(inventoryId);
             if(result > 0){
                 responseBody.setStatus("201");
                 responseBody.setMessage("Successfully deleted inventory");
@@ -84,9 +73,8 @@ public class InventoryController {
             return resultFromReponseObject;
         }
     }
-
     public String viewSingleRecord(int inventoryId){
-        List result = new InventoryService().returnSingleRecord(inventoryId);
+        List result = inventoryService.returnSingleRecord(inventoryId);
         try{
             if(result.isEmpty()){
                 responseBody.setMessage("Failed to fetch inventory");
@@ -98,8 +86,6 @@ public class InventoryController {
                 responseBody.setMessage("successfully fetched inventory");
                 responseBody.setStatus("200");
             }
-
-            ObjectMapper objectMapper = new ObjectMapper();
             resultFromReponseObject = objectMapper.writeValueAsString(responseBody);
         }catch (Exception e){
             e.printStackTrace();
@@ -107,5 +93,18 @@ public class InventoryController {
         finally {
             return resultFromReponseObject;
         }
+    }
+    public String checkCurrentProductQuantityInStock(int productId, int branchId){
+       try{
+           String result = inventoryService.getCurrentProductQuantityInStock(productId, branchId);
+           responseBody.setMessage("fetched quantity successfully");
+           responseBody.setData(result);
+           responseBody.setStatus("200");
+           resultFromReponseObject = objectMapper.writeValueAsString(responseBody);
+       }catch (Exception e){
+           e.printStackTrace();
+       }finally {
+           return resultFromReponseObject;
+       }
     }
 }

@@ -17,6 +17,43 @@ public class InventoryService {
     PreparedStatement p;
     ResultSet rs;
     int rowsAffected = 0;
+    public String getCurrentProductQuantityInStock(int productId, int branchId){
+        int finalResult = 0;
+        String result = " ";
+        try {
+            int inResult = 0;
+            int outResult = 0;
+
+            System.out.println("branch: " + branchId + " productId " + productId);
+
+            String inSum = "select SUM(quantity) AS INSTOCK from Inventory where (branchId = " + branchId +
+                        " AND productId = " +  productId  + ") AND status = 'IN'";
+
+            String outSum = "select SUM(quantity) AS OUTSTOCK from Inventory where (branchId = " + branchId + " AND productId = " + productId + " ) AND status = 'OUT'";
+
+            System.out.println("Before execution: ");
+            this.p = con.prepareStatement(inSum);
+            this.rs = p.executeQuery();
+
+            rs.next();
+             inResult = rs.getInt("INSTOCK");
+
+            this.p = con.prepareStatement(outSum);
+            this.rs = p.executeQuery();
+
+            rs.next();
+            outResult = rs.getInt("OUTSTOCK");
+            System.out.println("out " + outResult);
+
+            finalResult = inResult - outResult;
+            result = ""+finalResult;
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            return result;
+        }
+    }
+
     public int createInventory(InventoryModel inv){
         try{
             long millis = System.currentTimeMillis();

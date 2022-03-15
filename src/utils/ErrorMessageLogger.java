@@ -1,4 +1,4 @@
-package Utils;
+package utils;
 
 public class ErrorMessageLogger {
     private static final String RED = "\u001B[31m";

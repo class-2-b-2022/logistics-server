@@ -1,4 +1,4 @@
-package Services.DeliveryModule;
+package services.DeliveryModule;
 
 import models.DeliveryModule.Vehicle;
 import utils.DatabaseConnection;

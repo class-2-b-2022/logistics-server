@@ -1,7 +1,7 @@
 package controllers.DeliveryModule;
 
 import models.DeliveryModule.Vehicle;
-import Services.DeliveryModule.*;
+import services.DeliveryModule.VehicleService;
 import models.ResponseObject;
 
 import java.sql.SQLException;

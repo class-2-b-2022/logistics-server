@@ -27,6 +27,7 @@ public class ClientManager implements Runnable{
     private VehicleManagementController vehicleManagementController = new VehicleManagementController();
 
     private BillingController billingController;
+   private ProductController productController=new ProductController();
 
     {
         try {
@@ -50,11 +51,12 @@ public class ClientManager implements Runnable{
             responseStream = new DataOutputStream(clientSocket.getOutputStream());
             System.out.println("New client with adresss: "+ clientSocket.getInetAddress().getHostAddress());
             ObjectMapper objectMapper = new ObjectMapper();
-            List<String> clientRequest;
+         
               List<String> json = (List) requestStream.readObject();
                 ClientRequest client = objectMapper.readValue(json.get(0), ClientRequest.class);
                 String route = client.getRoute();
                 String action = client.getAction();
+                System.out.println("------server get route----"+client.getRoute());
              String response = null;
                 switch (route){
                     case "/companyregistration":
@@ -64,8 +66,9 @@ public class ClientManager implements Runnable{
 //                        logic related to user management
                         break;
                     case "/products":
-//                    	response = billingController.processPayment(client);
-                    	response=ProductController.processProduct(client);
+                    	System.out.println("------Gotten on client manager----");
+                    	response=productController.processProduct(client);
+                        
                         break;
                     case "/inventory":
                         InventoryController inventoryController = new InventoryController();

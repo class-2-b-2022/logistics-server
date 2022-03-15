@@ -32,7 +32,7 @@ public class ProductService {
                 product.setProductId(rs.getInt("productId"));
                 product.setProductName(rs.getString("productName"));
                 product.setProductType(rs.getString("productType"));
-                product.setPricePerBulk(rs.getString("pricePBulk"));
+                product.setPricePerBulk(rs.getInt("pricePBulk"));
 
                 result.add(product);
             }
@@ -51,7 +51,7 @@ public class ProductService {
           preparedStatement.setString(2,product.getProductType());
           preparedStatement.setInt(3,product.getCompanyId());
           preparedStatement.setInt(4,product.getPricePerBulk());
-          preparedStatement.executeQuery();
+          preparedStatement.executeUpdate();
         }catch (SQLException e) {
             e.printStackTrace();
         }

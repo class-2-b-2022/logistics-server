@@ -32,18 +32,20 @@ public class ProductController {
         }
     }
     
-    public static String processProduct(ClientRequest clientRequest) throws SQLException, JsonProcessingException  {
+    public String processProduct(ClientRequest clientRequest) throws SQLException, JsonProcessingException  {
         ParserObj parse = new ParserObj();
 //        Wallet wallet = parse.parseData(clientRequest.getData(), Wallet.class);
         ProductModel product=parse.parseData(clientRequest.getData(), ProductModel.class);
         ObjectMapper mapper = new ObjectMapper();
         ResponseBody res = new ResponseBody();
         String result;
+        System.out.println("-------action-----CREATE"+clientRequest.getAction());
         switch (clientRequest.getAction()) {
-            case "CREATE":
+            case "POST":
+            	
                 if(createProduct(product)) {
                     res.setStatus("201");
-                    res.setMessage("Wallet Created Successfully!");
+                    res.setMessage("Product Created Successfully!");
                 }
                 break;
             case "READ":
@@ -58,10 +60,14 @@ public class ProductController {
             case "DELETE":
              
                 break;
+//            case :
+//            	System.out.println("Select better option");
+//            	break;
         }
 
-
+        System.out.println(mapper.writeValueAsString(res));
         return mapper.writeValueAsString(res);
+        
   
     }
     public static boolean createProduct(ProductModel product) throws SQLException {

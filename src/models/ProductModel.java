@@ -17,8 +17,8 @@ public class ProductModel implements Serializable {
         this.companyId = companyId;
     }
 
-    public void setPricePerBulk(String pricePerBulk) {
-        this.pricePerBulk = pricePerBulk;
+    public void setPricePerBulk(int pricePerBulk) {
+        this.pricePerBulk=pricePerBulk;
     }
 
     public void setProductName(String productName) {

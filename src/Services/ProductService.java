@@ -1,4 +1,4 @@
-package controllers;
+package Services;
 
 import models.ProductModel;
 import Utils.DatabaseConnection;
@@ -6,24 +6,20 @@ import Utils.DatabaseConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
-public class ProductController {
-
-
-    DatabaseConnection connection = new DatabaseConnection();
-    Connection con = connection.getConnection();
+/* Author : Sarah */
+public class ProductService {
+    //    connect to DB
+    private DatabaseConnection databaseConnection = new DatabaseConnection();
+    Connection con = databaseConnection.getConnection();
     PreparedStatement p;
     ResultSet rs;
 
-    public List getProducts(int userId) {
-        List result = new ArrayList();
+    public List<Object> getProducts(int userId){
+        List<Object> result = new ArrayList();
         try {
-            Statement statement = con.createStatement();
-            Scanner scanner = new Scanner(System.in);
             String getProductsQuery = ("select * from products where userId = " + userId);
             this.p = con.prepareStatement(getProductsQuery);
             this.rs = p.executeQuery();
@@ -41,7 +37,7 @@ public class ProductController {
             e.printStackTrace();
         }
         finally {
-            return  result;
+            return result;
         }
     }
 }

@@ -59,4 +59,27 @@ public class ProductService {
         return true;
 
     }
+    //@Author INEZA Ange Michaella
+    public ProductModel viewProducts(int companyId) throws SQLException {
+
+    	ProductModel productmodel=new ProductModel();
+        try {
+        	
+            String query = "select * from products";
+            PreparedStatement preparedStatement = con.prepareStatement(query);
+            
+            ResultSet result = preparedStatement.executeQuery();
+            while (result.next()) {
+            	  productmodel.setProductId(rs.getInt("productId"));
+                  productmodel.setProductName(rs.getString("productName"));
+                  productmodel.setProductType(rs.getString("productType"));
+                  productmodel.setPricePerBulk(rs.getInt("pricePBulk"));
+return productmodel;
+              
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return productmodel;
+    }
 }

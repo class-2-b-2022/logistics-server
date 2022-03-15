@@ -66,7 +66,7 @@ public class ClientManager implements Runnable{
 //                        logic related to user management
                         break;
                     case "/products":
-                    	System.out.println("------Gotten on client manager----");
+                 
                     	response=productController.processProduct(client);
                         
                         break;

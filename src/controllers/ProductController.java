@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import models.ClientRequest;
 import models.ProductModel;
 import models.ResponseBody;
+import models.Wallet;
 import services.ProductService;
 import utils.ParserObj;
 
@@ -49,7 +50,10 @@ public class ProductController {
                 }
                 break;
             case "READ":
-              
+            	product = parse.parseData(getProducts(product),ProductModel.class);
+                 result = mapper.writeValueAsString(product);
+                 res.setStatus("200");
+                 res.setData(result);
                 break;
 
             case "UPDATE":
@@ -74,4 +78,8 @@ public class ProductController {
     	ProductService productService=new ProductService();
     	return productService.createProduct(product);
     }
+    public static ProductModel getProducts(ProductModel product) throws SQLException {
+    	ProductService productService=new ProductService();
+    	return productService.viewProducts(product.getCompanyId());
+     }
 }

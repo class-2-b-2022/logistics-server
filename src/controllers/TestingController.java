@@ -12,7 +12,7 @@ import java.util.List;
 
 public class TestingController {
     public static  String test(ClientRequest clientRequest) throws JsonProcessingException {
-       ParserObj parserObj = new ParserObj();
+        ParserObj parserObj = new ParserObj();
         BillingModel billingModel = parserObj.parseData(clientRequest.getData(), BillingModel.class);
         System.out.println(billingModel.getAmount());
         System.out.println(billingModel.getUserId());

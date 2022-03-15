@@ -17,10 +17,10 @@ public class ProductService {
     PreparedStatement p;
     ResultSet rs;
 
-    public List<Object> getProducts(int userId){
+    public List<Object> getProducts(int companyId){
         List<Object> result = new ArrayList();
         try {
-            String getProductsQuery = ("select * from products where userId = " + userId);
+            String getProductsQuery = ("select * from products where companyId = " +  companyId);
             this.p = con.prepareStatement(getProductsQuery);
             this.rs = p.executeQuery();
 

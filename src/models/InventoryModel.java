@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class InventoryModel implements Serializable {
     int quantity;
     int productId;
-    int userId;
+    int branchId;
     String status;
 
     public void setProductId(int productId) {
@@ -21,8 +21,8 @@ public class InventoryModel implements Serializable {
         this.status = status;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setBranchId(int branchId) {
+        this.branchId = branchId;
     }
 
 
@@ -34,8 +34,8 @@ public class InventoryModel implements Serializable {
         return quantity;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getBranchId() {
+        return branchId;
     }
 
     public String getStatus() {

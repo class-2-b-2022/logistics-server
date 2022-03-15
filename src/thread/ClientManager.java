@@ -1,6 +1,8 @@
 package thread;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import controllers.BillingController;
 import controllers.DeliveryModule.VehicleManagementController;
 import controllers.InventoryController;
 import controllers.ProductController;
@@ -11,6 +13,7 @@ import models.InventoryModel;
 
 import java.io.*;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -22,6 +25,18 @@ import java.util.List;
 public class ClientManager implements Runnable{
     private Socket clientSocket;
     private VehicleManagementController vehicleManagementController = new VehicleManagementController();
+
+    private BillingController billingController;
+
+    {
+        try {
+            billingController = new BillingController();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //    public ClientManager(Socket socket) throws SQLException {
     public ClientManager(Socket socket){
         this.clientSocket = socket;
     }
@@ -60,8 +75,26 @@ public class ClientManager implements Runnable{
                             response = inventoryController.addInventory(inventoryModel);
                         }
                         if(action.equals("GET")){
-                            int userId = (int) client.getData();
-                            response = inventoryController.getInventory(userId);
+                            int clientData = (int) client.getData(); // the user id entered
+                            response = new InventoryController().getInventory(clientData);
+                            System.out.println(response);
+                            break;
+                        }
+                        if(action.equals("DELETE")){
+                            int clientData = (int) client.getData(); // the inventory Id entered
+                            response = new InventoryController().deleteInventory(clientData);
+                            System.out.println(response);
+                            break;
+                        }
+                        if(action.equals("VIEW")){
+                            int clientData = (int) client.getData(); // Inventory id entered
+                            response = new InventoryController().viewSingleRecord(clientData);
+                            System.out.println(response);
+                            break;
+                        }
+                        if(action.equals("UPDATE")){
+                            int clientData = (int) client.getData(); // the inventory id where we are going to update
+
                         }
                         break;
                     case "/delivery/vehicles":
@@ -73,10 +106,13 @@ public class ClientManager implements Runnable{
                     case "/testing":
                       response = TestingController.test(client);
                         break;
+                     case "/billing":
+                       response = billingController.processPayment(client);
                 }
 
                 //return response to the client;
-                responseStream.writeUTF(response);
+            assert response != null;
+            responseStream.writeUTF(response);
 
 
         } catch (EOFException e){

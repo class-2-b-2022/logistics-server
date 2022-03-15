@@ -1,18 +1,22 @@
 package controllers.DeliveryModule;
 
 import models.DeliveryModule.Vehicle;
+import models.user_model.User;
 import models.ClientRequest;
 
 import java.sql.Date;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import Utils.ParserObj;
+
 
 public class VehicleManagementController {
     public String mainMethod(ClientRequest clientRequest) throws Exception {
         String action = clientRequest.getAction();
+        ParserObj parse = new ParserObj();
         VehicleManagementActions actions = new VehicleManagementActions();
         Object responseObject = new Object();
-        Vehicle vehicle = new Vehicle();
+        Vehicle vehicle =parse.parseData(clientRequest.getData(), Vehicle.class);
         switch(action){
             case "register":
 //                vehicle.setPlateNbr(clientRequest.getData().next().toString().split("=")[1]);

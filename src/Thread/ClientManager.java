@@ -1,7 +1,5 @@
 package Thread;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import controllers.user_management.*;
@@ -18,7 +16,6 @@ import java.util.Map;
  */
 public class ClientManager implements Runnable{
     private Socket clientSocket;
-    private String json_data;
     private ClientRequest clientRequest = new ClientRequest();
     private UserController userController = new UserController();
     private VehicleManagementController vehicleManagementController = new VehicleManagementController();
@@ -48,7 +45,7 @@ public class ClientManager implements Runnable{
 //                        logic related to company registration
                     break;
                 case "/users":
-                   responseData = userController.mainMethod(clientRequest);
+                   responseData = UserController.mainMethod(clientRequest);
                     break;
                 case "/inventory":
 //                        logic related to inventory
@@ -72,4 +69,3 @@ public class ClientManager implements Runnable{
     }
 
 }
-

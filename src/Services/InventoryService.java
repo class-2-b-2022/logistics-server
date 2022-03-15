@@ -1,7 +1,7 @@
 package Services;
 
 import models.InventoryModel;
-import Utils.DatabaseConnection;
+import utils.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

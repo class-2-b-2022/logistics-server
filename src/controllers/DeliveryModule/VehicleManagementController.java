@@ -2,12 +2,11 @@ package controllers.DeliveryModule;
 
 import models.DeliveryModule.Vehicle;
 import models.user_model.User;
+import utils.ParserObj;
 import models.ClientRequest;
 
 import java.sql.Date;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import Utils.ParserObj;
 
 
 public class VehicleManagementController {

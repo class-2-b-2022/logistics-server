@@ -1,11 +1,8 @@
 package controllers;
 import java.sql.*;
 
-import Utils.DatabaseConnection;
-
-
-
 import models.RegisterProduct;
+import utils.DatabaseConnection;
 
 public class ProductRegister {
 

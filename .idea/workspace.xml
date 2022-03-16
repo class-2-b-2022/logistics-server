@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6e54074b-1f2f-4e73-8c30-7fea04f4c5da" name="Changes" comment="" />
+    <list default="true" id="6e54074b-1f2f-4e73-8c30-7fea04f4c5da" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/logistics-server/controllers/BillingController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/logistics-server/main/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/logistics-server/models/BillingModel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/logistics-server/models/Wallet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/BillingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/BillingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/Wallet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Wallet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/BillingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/BillingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/thread/ClientManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/thread/ClientManager.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -42,15 +52,16 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../logistics-client" />
-    <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/logdel-server.iml" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunManager">
     <configuration name="LogisticsServer" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="main.LogisticsServer" />
-      <module name="logistics-server" />
+      <module name="logdel-server" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>

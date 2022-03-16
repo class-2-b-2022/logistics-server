@@ -1,11 +1,11 @@
 package main;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import Thread.ClientManager;
-import Utils.DatabaseConnection;
-import Utils.*;
+import thread.ClientManager;
+import utils.*;
 
 /**
  * @author : Mudahemuka Manzi
@@ -48,4 +48,5 @@ public class LogisticsServer {
         }
 
     }
+
 }

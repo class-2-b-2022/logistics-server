@@ -1,8 +1,8 @@
-package Utils;
+package utils;
 
 import java.sql.*;
 
-/**
+/** 
  * @author : Nkubito Pacis
  * @author : Mudahemuka Manzi
  */

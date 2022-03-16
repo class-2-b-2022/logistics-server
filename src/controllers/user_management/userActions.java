@@ -1,10 +1,11 @@
-package controllers.user_management;
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																													package controllers.user_management;
 
 import models.ResponseObject;
 import models.user_model.User;
+import services.user_services.UserService;
+
 import java.util.ArrayList;
 import java.util.List;
-import services.user_services.UserService;
 /***
  * @author: Isite Yves
  * @author: Ntagungira Ali Rashid

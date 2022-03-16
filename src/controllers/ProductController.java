@@ -1,14 +1,18 @@
 package controllers;
 
 import models.ProductModel;
-import Utils.DatabaseConnection;
+import utils.DatabaseConnection;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class ProductController {
+
 
     DatabaseConnection connection = new DatabaseConnection();
     Connection con = connection.getConnection();

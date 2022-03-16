@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6e54074b-1f2f-4e73-8c30-7fea04f4c5da" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/out/production/logistics-server/controllers/BillingController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/logistics-server/controllers/BillingController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/logistics-server/services/BillingService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/logistics-server/services/BillingService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/logistics-server/thread/ClientManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/logistics-server/thread/ClientManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Services/DeliveryModule/VehicleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/DeliveryModule/VehicleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/BillingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/BillingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/BillingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/BillingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/thread/ClientManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/thread/ClientManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

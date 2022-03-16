@@ -37,10 +37,11 @@ public class ClientManager implements Runnable{
             System.out.println("New client with adresss: "+ clientSocket.getInetAddress().getHostAddress());
             ObjectMapper objectMapper = new ObjectMapper();
             List<String> clientRequest;
-              List<String> json = (List) requestStream.readObject();
-                ClientRequest client = objectMapper.readValue(json.get(0), ClientRequest.class);
-                String route = client.getRoute();
-                String action = client.getAction();
+
+            List<String> json = (List) requestStream.readObject();
+            ClientRequest client = objectMapper.readValue(json.get(0), ClientRequest.class);
+            String route = client.getRoute();
+            String action = client.getAction();
 
              String response = null;
                 switch (route){

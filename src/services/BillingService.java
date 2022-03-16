@@ -1,16 +1,16 @@
 package services;
+
 import models.Wallet;
 import utils.*;
-
 import java.sql.*;
 
-/**
- * @author : Gasaro leila
- */
-public class BillingService  {
-    DatabaseConnection dbConn = new DatabaseConnection();
-    Connection conn = dbConn.getConnection();
-    Statement statement = conn.createStatement();
+	/**
+	 * @author : Gasaro leila
+	 */
+	public class BillingService  {
+	    DatabaseConnection dbConn = new DatabaseConnection();
+	    Connection conn = dbConn.getConnection();
+	    Statement statement = conn.createStatement();
 
     public BillingService() throws SQLException {
     }

@@ -10,7 +10,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/mysql-connector-java-8.0.27.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/jackson-core-2.12.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -19,7 +19,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/jackson-core-2.12.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/jackson-annotations-2.12.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -37,14 +37,20 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/jackson-annotations-2.12.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/spring-security-crypto-4.1.0.RELEASE.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-
-    <orderEntry type="library" name="mysql-connector-java-8.0.27" level="project" />
-
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/mysql-connector-java-8.0.27.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

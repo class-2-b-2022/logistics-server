@@ -1,11 +1,11 @@
 package main;
-import thread.ClientManager;
-
-import utils.*;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+
+import thread.ClientManager;
+import utils.*;
 
 /**
  * @author : Mudahemuka Manzi
@@ -37,7 +37,7 @@ public class LogisticsServer {
             e.printStackTrace();
         }finally{
             if(server !=null){
-                //close server
+                //close server    
                 try {
                     server.close();
                 }catch (Exception e){

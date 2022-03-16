@@ -31,7 +31,7 @@ public class BillingController {
     }
 
     public static Wallet getDistWallet(Wallet wallet) throws SQLException {
-       return billService.viewUserWallet(wallet.getUserId());
+       return billService.viewUserWallet(wallet);
     }
 
     public static Wallet updateUserWallet(Wallet wallet, String action) throws SQLException {
@@ -52,12 +52,6 @@ public class BillingController {
                 }
                 break;
             case "Deposit":
-                wallet = parse.parseData(updateUserWallet(wallet, clientRequest.getAction()), Wallet.class);
-                result = mapper.writeValueAsString(wallet);
-                res.setStatus("204");
-                res.setMessage("Wallet updated successfully!");
-                res.setData(result);
-                break;
 
             case "Withdraw":
                 wallet = parse.parseData(updateUserWallet(wallet, clientRequest.getAction()), Wallet.class);
@@ -71,6 +65,7 @@ public class BillingController {
             case "GetWallet":
                 wallet = parse.parseData(getDistWallet(wallet), Wallet.class);
                 result = mapper.writeValueAsString(wallet);
+                res.setMessage("Current User Wallet!");
                 res.setStatus("200");
                 res.setData(result);
                 break;

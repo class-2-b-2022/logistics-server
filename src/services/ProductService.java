@@ -51,7 +51,7 @@ public class ProductService {
           preparedStatement.setString(1,product.getProductName());
           preparedStatement.setString(2,product.getProductType());
           preparedStatement.setInt(3,product.getCompanyId());
-          preparedStatement.setInt(4,product.getPricePerBulk());
+          preparedStatement.setString(4,product.getPricePerBulk());
           preparedStatement.executeQuery();
         }catch (SQLException e) {
             e.printStackTrace();

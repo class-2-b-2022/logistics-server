@@ -31,7 +31,6 @@ public class InventoryService {
 
             String outSum = "select SUM(quantity) AS OUTSTOCK from Inventory where (branchId = " + branchId + " AND productId = " + productId + " ) AND status = 'OUT'";
 
-            System.out.println("Before execution: ");
             this.p = con.prepareStatement(inSum);
             this.rs = p.executeQuery();
 
@@ -43,7 +42,6 @@ public class InventoryService {
 
             rs.next();
             outResult = rs.getInt("OUTSTOCK");
-            System.out.println("out " + outResult);
 
             finalResult = inResult - outResult;
             result = ""+finalResult;
@@ -67,7 +65,6 @@ public class InventoryService {
             statement.setInt(5,inv.getBranchId());
 
             rowsAffected = statement.executeUpdate();
-//            System.out.println(rowsAffected);
             if (rowsAffected > 0) {
                 System.out.println("successfully created inventory");
             }

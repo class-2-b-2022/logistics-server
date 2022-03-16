@@ -13,12 +13,10 @@ import services.ProductService;
 import utils.ParserObj;
 
 public class ProductController {
-	
-
-    public String getProducts(int userId) {
+    public String getProducts(int companyId) {
         String resultFromReponseObject = "";
         try{
-            List result = new ProductService().getProducts(userId);
+            List result = new ProductService().getProducts(companyId);
             ResponseBody responseBody = new ResponseBody();
             responseBody.setData(result);
             responseBody.setMessage("successfully fetched products");
@@ -33,21 +31,16 @@ public class ProductController {
     }
     
     public static String processProduct(ClientRequest clientRequest) throws SQLException, JsonProcessingException  {
-        ParserObj parse = new ParserObj();
-//        Wallet wallet = parse.parseData(clientRequest.getData(), Wallet.class);
-        ProductModel product=parse.parseData(clientRequest.getData(), ProductModel.class);
         ObjectMapper mapper = new ObjectMapper();
         ResponseBody res = new ResponseBody();
-        String result;
+        String result = "";
+        ProductController productController = new ProductController();
         switch (clientRequest.getAction()) {
             case "CREATE":
-                if(createProduct(product)) {
-                    res.setStatus("201");
-                    res.setMessage("Wallet Created Successfully!");
-                }
                 break;
-            case "READ":
-              
+            case "GET":
+                int companyId = (int) clientRequest.getData();
+                result = productController.getProducts(companyId);
                 break;
 
             case "UPDATE":
@@ -61,7 +54,7 @@ public class ProductController {
         }
 
 
-        return mapper.writeValueAsString(res);
+        return result;
   
     }
     public static boolean createProduct(ProductModel product) throws SQLException {

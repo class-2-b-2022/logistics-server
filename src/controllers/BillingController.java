@@ -52,12 +52,17 @@ public class BillingController {
                 }
                 break;
             case "Deposit":
+                wallet = parse.parseData(updateUserWallet(wallet, clientRequest.getAction()), Wallet.class);
+                result = mapper.writeValueAsString(wallet);
+                res.setStatus("204");
+                res.setMessage("Amount deposited successfully!");
+                res.setData(result);
 
             case "Withdraw":
                 wallet = parse.parseData(updateUserWallet(wallet, clientRequest.getAction()), Wallet.class);
                 result = mapper.writeValueAsString(wallet);
                 res.setStatus("204");
-                res.setMessage("Wallet updated successfully!");
+                res.setMessage("Amount Withdrawn successfully!");
                 res.setData(result);
                 break;
 

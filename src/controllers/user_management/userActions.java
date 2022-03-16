@@ -36,8 +36,8 @@ public class userActions {
             resObj.setStatus("400");
             resObj.setMessage("User not found in the database.");
         }else{
-                resObj.setStatus("200");
-                resObj.setMessage("The User was successfully found in the database.");
+            resObj.setStatus("200");
+            resObj.setMessage("The User was successfully found in the database.");
         }
         resObj.setData(users);
         return resObj;

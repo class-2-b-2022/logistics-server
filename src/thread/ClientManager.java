@@ -23,7 +23,7 @@ import java.util.List;
  */
 public class ClientManager implements Runnable{
     private Socket clientSocket;
-    // private VehicleManagementController vehicleManagementController = new VehicleManagementController();
+    private VehicleManagementController vehicleManagementController = new VehicleManagementController();
     // private BillingController billingController = new BillingController();
     UserController userController=new UserController();
     
@@ -45,6 +45,7 @@ public class ClientManager implements Runnable{
                 String route = client.getRoute();
                 String action = client.getAction();
                 System.out.println("route"+route+client.getData());
+                System.out.println(action);
              String response = null;
                 switch (route){
                     case "/companyregistration":
@@ -66,10 +67,10 @@ public class ClientManager implements Runnable{
 //                        }
                         break;
                     case "/delivery/vehicles":
-//                        responseData = vehicleManagementController.mainMethod(clientRequest);
+                        response = vehicleManagementController.mainMethod(client);
                         break;
                     case "/reporting":
-//                        logic related to reporting
+//                        logic related to reporting-
                         break;
                     case "/testing":
                       response = TestingController.test(client);

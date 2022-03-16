@@ -63,7 +63,7 @@ public class BillingController {
                 wallet = parse.parseData(updateUserWallet(wallet, clientRequest.getAction()), Wallet.class);
                 result = mapper.writeValueAsString(wallet);
                 res.setStatus("204");
-                res.setMessage("Amount withdrawn successfully!");
+                res.setMessage("Amount Withdrawn successfully!");
                 res.setData(result);
                 break;
 

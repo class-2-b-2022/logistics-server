@@ -1,6 +1,7 @@
 package thread;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import controllers.BillingController;
 import controllers.TestingController;
 import controllers.DeliveryModule.VehicleManagementController;
 import controllers.user_management.UserController;
@@ -17,12 +18,12 @@ import java.util.List;
  */
 public class ClientManager implements Runnable{
     private Socket clientSocket;
-    private VehicleManagementController vehicleManagementController = new VehicleManagementController();
-    // private BillingController billingController = new BillingController();
+    private final VehicleManagementController vehicleManagementController = new VehicleManagementController();
+     private final BillingController billingController = new BillingController();
     UserController userController=new UserController();
-    
- public ClientManager(Socket socket) throws SQLException {
-  
+
+    public ClientManager(Socket socket) throws SQLException {
+
         this.clientSocket = socket;
     }
     @Override
@@ -44,36 +45,36 @@ public class ClientManager implements Runnable{
                 switch (route){
                     case "/companyregistration":
 //                        logic related to company registration
-                        break;
-                    case "/users":
-					response = userController.mainMethod(client);
-                        break;
-                    case "/products":
+                    break;
+                case "/users":
+                    response = userController.mainMethod(client);
+                    break;
+                case "/products":
 //                        int data = (int) client.getData();
 //                        response = new ProductController().getProducts(data);
 //                        System.out.println(response);
-                        break;
-                    case "/inventory":
+                    break;
+                case "/inventory":
 //                        InventoryController inventoryController = new InventoryController();
 //                        if (action.equals("POST")){
 //                            InventoryModel inventoryModel = objectMapper.convertValue(client.getData(), InventoryModel.class);
 //                            response = inventoryController.addInventory(inventoryModel);
 //                        }
-                        break;
-                    case "/delivery/vehicles":
-                        response = vehicleManagementController.mainMethod(client);
-                        break;
-                    case "/reporting":
+                    break;
+                case "/delivery/vehicles":
+                    response = vehicleManagementController.mainMethod(client);
+                    break;
+                case "/reporting":
 //                        logic related to reporting-
-                        break;
-                    case "/testing":
-                      response = TestingController.test(client);
-                        break;
-                     case "/billing":
-//                       response = billingController.processPayment(client);
-                }
+                    break;
+                case "/testing":
+                    response = TestingController.test(client);
+                    break;
+                case "/billing":
+                    response = billingController.processPayment(client);
+            }
 
-                //return response to the client;
+            //return response to the client;
             assert response != null;
             responseStream.writeUTF(response);
 

@@ -7,6 +7,7 @@ import controllers.DeliveryModule.VehicleManagementController;
 import controllers.InventoryController;
 import controllers.ProductController;
 import controllers.TestingController;
+import controllers.DeliveryModule.VehicleManagementController;
 import controllers.user_management.UserController;
 
 import models.*;
@@ -21,14 +22,12 @@ import java.util.List;
  */
 public class ClientManager implements Runnable{
     private Socket clientSocket;
-    private VehicleManagementController vehicleManagementController = new VehicleManagementController();
+    private final VehicleManagementController vehicleManagementController = new VehicleManagementController();
+     private final BillingController billingController = new BillingController();
+    UserController userController=new UserController();
 
-    private BillingController billingController;
-   private ProductController productController=new ProductController();
+    public ClientManager(Socket socket) throws SQLException {
 
-
-    //    public ClientManager(Socket socket) throws SQLException {
-    public ClientManager(Socket socket){
         this.clientSocket = socket;
     }
     @Override
@@ -45,16 +44,16 @@ public class ClientManager implements Runnable{
                 ClientRequest client = objectMapper.readValue(json.get(0), ClientRequest.class);
                 String route = client.getRoute();
                 String action = client.getAction();
-                System.out.println("------server get route----"+client.getRoute());
              String response = null;
                 switch (route){
                     case "/companyregistration":
 //                        logic related to company registration
                         break;
                     case "/users":
-//					response = userController.mainMethod(client);
+					response = userController.mainMethod(client);
                         break;
                     case "/products":
+                        ProductController productController = new ProductController();
                  response=productController.processProduct(client);
                     		
                         break;
@@ -94,7 +93,7 @@ public class ClientManager implements Runnable{
                         }
                         break;
                     case "/delivery/vehicles":
-//                        responseData = vehicleManagementController.mainMethod(clientRequest);
+                       response = vehicleManagementController.mainMethod(client);
                         break;
                     case "/reporting":
 //                        logic related to reporting
@@ -103,10 +102,11 @@ public class ClientManager implements Runnable{
                       response = TestingController.test(client);
                         break;
                      case "/billing":
-//                       response = billingController.processPayment(client);
+                      response = billingController.processPayment(client);
+                      break;
                 }
 
-                //return response to the client;
+            //return response to the client;
             assert response != null;
             responseStream.writeUTF(response);
 

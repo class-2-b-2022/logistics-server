@@ -37,7 +37,7 @@ public class VehicleManagementController {
                 vehicle.setOwner("owner");
                 vehicle.setModel("model");
                 vehicle.setCreatedAt(new Date(2020,02,03));
-                responseObject = actions.updatedVehicles((Vehicle) clientRequest.getData());
+                responseObject = actions.updatedVehicles(vehicle);
                 break;
             case "delete":
 //                vehicle.setVehicleId(Integer.valueOf(clientRequest.getData().next().toString().split("=")[1]));
@@ -47,7 +47,7 @@ public class VehicleManagementController {
                 vehicle.setOwner("owner");
                 vehicle.setModel("model");
                 vehicle.setCreatedAt(new Date(2020,02,03));
-                responseObject = actions.deleteVehicle((Vehicle) clientRequest.getData());
+                responseObject = actions.deleteVehicle(vehicle);
                 break;
         }
         return new ObjectMapper().writeValueAsString(responseObject);

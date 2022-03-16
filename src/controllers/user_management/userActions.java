@@ -36,8 +36,8 @@ public class userActions {
             resObj.setStatus("400");
             resObj.setMessage("Invalid email or password.");
         }else{
-                resObj.setStatus("200");
-                resObj.setMessage("logged in correctly.");
+            resObj.setStatus("200");
+            resObj.setMessage("The User was successfully found in the database.");
         }
         resObj.setData(users);
         return resObj;

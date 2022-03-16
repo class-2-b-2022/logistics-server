@@ -18,8 +18,8 @@ import java.util.List;
  */
 public class ClientManager implements Runnable{
     private Socket clientSocket;
-    private VehicleManagementController vehicleManagementController = new VehicleManagementController();
-     private BillingController billingController = new BillingController();
+    private final VehicleManagementController vehicleManagementController = new VehicleManagementController();
+     private final BillingController billingController = new BillingController();
     UserController userController=new UserController();
 
     public ClientManager(Socket socket) throws SQLException {
@@ -36,14 +36,14 @@ public class ClientManager implements Runnable{
 //            System.out.println("New client with adresss: "+ clientSocket.getInetAddress().getHostAddress());
             ObjectMapper objectMapper = new ObjectMapper();
             List<String> json = (List) requestStream.readObject();
-            ClientRequest client = objectMapper.readValue(json.get(0), ClientRequest.class);
-            String route = client.getRoute();
-            String action = client.getAction();
-            System.out.println("route"+route+client.getData());
-            System.out.println(action);
-            String response = null;
-            switch (route){
-                case "/companyregistration":
+                ClientRequest client = objectMapper.readValue(json.get(0), ClientRequest.class);
+                String route = client.getRoute();
+                String action = client.getAction();
+                System.out.println("route"+route+client.getData());
+                System.out.println(action);
+             String response = null;
+                switch (route){
+                    case "/companyregistration":
 //                        logic related to company registration
                     break;
                 case "/users":

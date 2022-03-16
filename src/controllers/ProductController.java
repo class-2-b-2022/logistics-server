@@ -14,18 +14,19 @@ import services.ProductService;
 import utils.ParserObj;
 
 public class ProductController {
-	
-
-    public String getProducts(int userId) {
+	ResponseBody res = new ResponseBody();
+	ParserObj parse = new ParserObj();
+    ObjectMapper mapper = new ObjectMapper();
+ String getProducts(int companyId) {
         String resultFromReponseObject = "";
         try{
-            List result = new ProductService().getProducts(userId);
-            ResponseBody responseBody = new ResponseBody();
-            responseBody.setData(result);
-            responseBody.setMessage("successfully fetched products");
-            responseBody.setStatus("200");
+            List<Object> result = new ProductService().getProducts(companyId);
+            res.setData(result);
+            res.setMessage("successfully fetched products");
+            res.setStatus("200");
             ObjectMapper objectMapper = new ObjectMapper();
-            resultFromReponseObject = objectMapper.writeValueAsString(responseBody);
+            resultFromReponseObject = objectMapper.writeValueAsString(res);
+            
         }catch(Exception e){
             e.printStackTrace();
         }finally {
@@ -34,26 +35,20 @@ public class ProductController {
     }
     
     public String processProduct(ClientRequest clientRequest) throws SQLException, JsonProcessingException  {
-        ParserObj parse = new ParserObj();
-//        Wallet wallet = parse.parseData(clientRequest.getData(), Wallet.class);
-        ProductModel product=parse.parseData(clientRequest.getData(), ProductModel.class);
-        ObjectMapper mapper = new ObjectMapper();
-        ResponseBody res = new ResponseBody();
-        String result;
+        
+        
+        String result = "";
         System.out.println("-------action-----CREATE"+clientRequest.getAction());
         switch (clientRequest.getAction()) {
             case "POST":
+              ProductModel product=parse.parseData(clientRequest.getData(), ProductModel.class);
+              result=createProduct(product);
+
+    break;
+            case "GET":
+            	int companyId = (int) clientRequest.getData();
+            	result =getProducts(companyId);
             	
-                if(createProduct(product)) {
-                    res.setStatus("201");
-                    res.setMessage("Product Created Successfully!");
-                }
-                break;
-            case "READ":
-            	product = parse.parseData(getProducts(product),ProductModel.class);
-                 result = mapper.writeValueAsString(product);
-                 res.setStatus("200");
-                 res.setData(result);
                 break;
 
             case "UPDATE":
@@ -64,22 +59,28 @@ public class ProductController {
             case "DELETE":
              
                 break;
-//            case :
-//            	System.out.println("Select better option");
-//            	break;
+            default :
+            	System.out.println("Select better option");
+            	break;
         }
 
-        System.out.println(mapper.writeValueAsString(res));
-        return mapper.writeValueAsString(res);
+//        System.out.println(mapper.writeValueAsString(res));
+        return result;
         
   
     }
-    public static boolean createProduct(ProductModel product) throws SQLException {
+    public String createProduct(ProductModel product) throws SQLException, JsonProcessingException {
     	ProductService productService=new ProductService();
-    	return productService.createProduct(product);
+    	Boolean result = productService.createProduct(product);
+    	if(result) {
+            res.setStatus("201");
+             res.setMessage("Product Created Successfully!");
+         }
+    	else {
+    		res.setMessage("Product failed to create");
+    	}
+    	return mapper.writeValueAsString(res);
     }
-    public static ProductModel getProducts(ProductModel product) throws SQLException {
-    	ProductService productService=new ProductService();
-    	return productService.viewProducts(product.getCompanyId());
-     }
+  
+
 }

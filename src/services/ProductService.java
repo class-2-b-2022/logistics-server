@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/* Author : Sarah */
+/* Author : INEZA Ange Michaella*/
 public class ProductService {
     //    connect to DB
     private DatabaseConnection databaseConnection = new DatabaseConnection();
@@ -32,6 +32,7 @@ public class ProductService {
                 product.setProductId(rs.getInt("productId"));
                 product.setProductName(rs.getString("productName"));
                 product.setProductType(rs.getString("productType"));
+                product.setCompanyId(rs.getInt("companyId"));
                 product.setPricePerBulk(rs.getInt("pricePBulk"));
 
                 result.add(product);
@@ -43,6 +44,7 @@ public class ProductService {
             return result;
         }
     }
+    //@Author INEZA Ange Michaella
     public boolean createProduct(ProductModel product) throws SQLException {
         try {
         	String sql="INSERT INTO products(productName,productType,companyId,pricePBulk)values(?,?,?,?)";
@@ -55,31 +57,9 @@ public class ProductService {
         }catch (SQLException e) {
             e.printStackTrace();
         }
-
         return true;
 
     }
-    //@Author INEZA Ange Michaella
-    public ProductModel viewProducts(int companyId) throws SQLException {
 
-    	ProductModel productmodel=new ProductModel();
-        try {
-        	
-            String query = "select * from products";
-            PreparedStatement preparedStatement = con.prepareStatement(query);
-            
-            ResultSet result = preparedStatement.executeQuery();
-            while (result.next()) {
-            	  productmodel.setProductId(rs.getInt("productId"));
-                  productmodel.setProductName(rs.getString("productName"));
-                  productmodel.setProductType(rs.getString("productType"));
-                  productmodel.setPricePerBulk(rs.getInt("pricePBulk"));
-return productmodel;
-              
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return productmodel;
-    }
+ 
 }

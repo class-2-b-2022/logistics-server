@@ -9,20 +9,24 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import models.ClientRequest;
 import models.ProductModel;
 import models.ResponseBody;
+import models.Wallet;
 import services.ProductService;
 import utils.ParserObj;
 
 public class ProductController {
-    public String getProducts(int companyId) {
+	ResponseBody res = new ResponseBody();
+	ParserObj parse = new ParserObj();
+    ObjectMapper mapper = new ObjectMapper();
+ String getProducts(int companyId) {
         String resultFromReponseObject = "";
         try{
-            List result = new ProductService().getProducts(companyId);
-            ResponseBody responseBody = new ResponseBody();
-            responseBody.setData(result);
-            responseBody.setMessage("successfully fetched products");
-            responseBody.setStatus("200");
+            List<Object> result = new ProductService().getProducts(companyId);
+            res.setData(result);
+            res.setMessage("successfully fetched products");
+            res.setStatus("200");
             ObjectMapper objectMapper = new ObjectMapper();
-            resultFromReponseObject = objectMapper.writeValueAsString(responseBody);
+            resultFromReponseObject = objectMapper.writeValueAsString(res);
+            
         }catch(Exception e){
             e.printStackTrace();
         }finally {
@@ -30,17 +34,21 @@ public class ProductController {
         }
     }
     
-    public static String processProduct(ClientRequest clientRequest) throws SQLException, JsonProcessingException  {
-        ObjectMapper mapper = new ObjectMapper();
-        ResponseBody res = new ResponseBody();
+    public String processProduct(ClientRequest clientRequest) throws SQLException, JsonProcessingException  {
+        
+        
         String result = "";
-        ProductController productController = new ProductController();
+        System.out.println("-------action-----CREATE"+clientRequest.getAction());
         switch (clientRequest.getAction()) {
             case "POST":
-                break;
+              ProductModel product=parse.parseData(clientRequest.getData(), ProductModel.class);
+              result=createProduct(product);
+
+    break;
             case "GET":
-                int companyId = (int) clientRequest.getData();
-                result = productController.getProducts(companyId);
+            	int companyId = (int) clientRequest.getData();
+            	result =getProducts(companyId);
+            	
                 break;
 
             case "UPDATE":
@@ -51,14 +59,27 @@ public class ProductController {
             case "DELETE":
              
                 break;
+            default :
+            	System.out.println("Select better option");
+            	break;
         }
 
-
         return result;
+        
   
     }
-    public static boolean createProduct(ProductModel product) throws SQLException {
+    public String createProduct(ProductModel product) throws SQLException, JsonProcessingException {
     	ProductService productService=new ProductService();
-    	return productService.createProduct(product);
+    	Boolean result = productService.createProduct(product);
+    	if(result) {
+            res.setStatus("201");
+             res.setMessage("Product Created Successfully!");
+         }
+    	else {
+    		res.setMessage("Product failed to create");
+    	}
+    	return mapper.writeValueAsString(res);
     }
+  
+
 }

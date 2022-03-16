@@ -2,6 +2,8 @@ package thread;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import controllers.BillingController;
+import controllers.DeliveryModule.VehicleManagementController;
 import controllers.InventoryController;
 import controllers.ProductController;
 import controllers.TestingController;
@@ -19,12 +21,14 @@ import java.util.List;
  */
 public class ClientManager implements Runnable{
     private Socket clientSocket;
-    // private VehicleManagementController vehicleManagementController = new VehicleManagementController();
-    // private BillingController billingController = new BillingController();
-    UserController userController=new UserController();
-    
- public ClientManager(Socket socket) throws SQLException {
-  
+    private VehicleManagementController vehicleManagementController = new VehicleManagementController();
+
+    private BillingController billingController;
+   private ProductController productController=new ProductController();
+
+
+    //    public ClientManager(Socket socket) throws SQLException {
+    public ClientManager(Socket socket){
         this.clientSocket = socket;
     }
     @Override
@@ -36,21 +40,23 @@ public class ClientManager implements Runnable{
             responseStream = new DataOutputStream(clientSocket.getOutputStream());
 //            System.out.println("New client with adresss: "+ clientSocket.getInetAddress().getHostAddress());
             ObjectMapper objectMapper = new ObjectMapper();
-            List<String> json = (List) requestStream.readObject();
+         
+              List<String> json = (List) requestStream.readObject();
                 ClientRequest client = objectMapper.readValue(json.get(0), ClientRequest.class);
                 String route = client.getRoute();
                 String action = client.getAction();
-                System.out.println("route"+route+client.getData());
+                System.out.println("------server get route----"+client.getRoute());
              String response = null;
                 switch (route){
                     case "/companyregistration":
 //                        logic related to company registration
                         break;
                     case "/users":
-					response = userController.mainMethod(client);
+//					response = userController.mainMethod(client);
                         break;
                     case "/products":
-                    	response= ProductController.processProduct(client);
+                 response=productController.processProduct(client);
+                    		
                         break;
                     case "/inventory":
                         InventoryController inventoryController = new InventoryController();

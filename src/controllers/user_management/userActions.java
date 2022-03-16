@@ -35,9 +35,11 @@ public class userActions {
         if(loggedInUser.getEmail() == null) {
             resObj.setStatus("400");
             resObj.setMessage("Invalid email or password.");
+            System.out.println("Invalid email or password.");
         }else{
             resObj.setStatus("200");
-            resObj.setMessage("The User was successfully found in the database.");
+            resObj.setMessage("The User was successfully logged in(was found in the database)");
+            System.out.println("The User was successfully logged in(was found in the database)");
         }
         resObj.setData(users);
         return resObj;
@@ -53,6 +55,7 @@ public class userActions {
         }else{
             resObj.setStatus("200");
             resObj.setMessage("The User's info were successfully updated.");
+            System.out.println("The User's info were successfully updated.");
         }
         resObj.setData(updatedUser);
         return resObj;
@@ -65,9 +68,11 @@ public class userActions {
         if(deletedUserInfo.getEmail() == null) {
             resObj.setStatus("400");
             resObj.setMessage("User not found in the database.");
+            System.out.println("User not found in the database.");
         }else{
             resObj.setStatus("200");
             resObj.setMessage("The User was successfully deleted from the database.");
+            System.out.println("The User was successfully deleted from the database.");
         }
         resObj.setData(deletedUser);
         return resObj;

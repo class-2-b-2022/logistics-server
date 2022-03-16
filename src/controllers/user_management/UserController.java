@@ -18,20 +18,11 @@ public class UserController {
         Object res = new Object();
         switch (action) {
             case "register":
-//                user.setNames(req.getData().next().toString().split("=")[1]);
-//                user.setEmail(req.getData().next().toString().split("=")[1]);
-//                user.setPhone(Integer.parseInt(req.getData().next().toString().split("=")[1]));
-//                user.setPassword(req.getData().next().toString().split("=")[1]);
-//                user.setRole(Integer.parseInt(req.getData().next().toString().split("=")[1]));
                 res =UserActions.registerUser(user);
                 break;
             case "view":
             	break;
             case "login":
-//                user.setEmail(req.getData().next().toString().split("=")[1]);
-//                user.setPassword(req.getData().next().toString().split("=")[1]);
-//                user.setEmail(user.getEmail().substring(1,user.getEmail().length()-1));
-//                user.setPassword(user.getPassword().substring(1,user.getPassword().length()-1));
                 res = UserActions.loginUser(user);
                 break;
             case "updateUser":
@@ -52,9 +43,7 @@ public class UserController {
 //                user.setPassword(user.getPassword().substring(1,user.getPassword().length()-1));
                 res = UserActions.updateUser(user);
                 break;
-            case "deleteUser":
-//                user.setEmail(req.getData().next().toString().split("=")[1]);
-//                user.setEmail(user.getEmail().substring(1,user.getEmail().length()-1));
+            case "deleteuser":
                 res=UserActions.deleteUser(user);
                 break;
         }

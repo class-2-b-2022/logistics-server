@@ -1,5 +1,6 @@
 package controllers;
 
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import models.InventoryModel;
 import models.ResponseBody;
@@ -28,8 +29,9 @@ public class InventoryController {
             resultFromReponseObject = objectMapper.writeValueAsString(responseBody);
         }catch (Exception e){
             e.printStackTrace();
-        }finally {
-            return resultFromReponseObject;
+        }
+        finally {
+            return  resultFromReponseObject;
         }
     }
     public String getInventory(int userId) {

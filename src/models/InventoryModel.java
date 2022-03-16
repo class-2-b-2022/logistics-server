@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class InventoryModel implements Serializable {
     int quantity;
+    String Status;
     int productId;
     int branchId;
     String status;
@@ -18,7 +19,8 @@ public class InventoryModel implements Serializable {
     }
 
     public void setStatus(String status) {
-        this.status = status;
+
+        Status = status;
     }
 
     public void setBranchId(int branchId) {
@@ -39,6 +41,9 @@ public class InventoryModel implements Serializable {
     }
 
     public String getStatus() {
-        return status;
+
+        return Status;
+
+
     }
 }

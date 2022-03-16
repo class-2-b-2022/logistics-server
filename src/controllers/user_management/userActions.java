@@ -61,6 +61,7 @@ public class userActions {
     }
 
     public Object deleteUser(User user) throws Exception {
+        System.out.println("Email..."+user.getEmail());
         List<Object> deletedUser = new ArrayList();
         User deletedUserInfo=userService.deleteUser(user);
         deletedUser.add((Object) deletedUserInfo);

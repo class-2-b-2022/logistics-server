@@ -49,10 +49,9 @@ public class UserController {
                 res = UserActions.updateUser(user);
                 break;
             case "deleteUser":
-                user.setEmail(req.getData().next().toString().split("=")[1]);
-                user.setEmail(user.getEmail().substring(1,user.getEmail().length()-1));
+                String reqEmail=req.getData().next().toString().split("=")[1];
+                user.setEmail(reqEmail.substring(1,reqEmail.length()-1));
                 res=UserActions.deleteUser(user);
-                break;
         }
         return new ObjectMapper().writeValueAsString(res);
    }

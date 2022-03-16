@@ -36,7 +36,7 @@ public class ProductController {
         String result = "";
         ProductController productController = new ProductController();
         switch (clientRequest.getAction()) {
-            case "CREATE":
+            case "POST":
                 break;
             case "GET":
                 int companyId = (int) clientRequest.getData();

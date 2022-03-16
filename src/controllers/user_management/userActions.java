@@ -1,5 +1,6 @@
 																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																													package controllers.user_management;
 
+import models.ResponseBody;
 import models.ResponseObject;
 import models.user_model.User;
 import services.user_services.UserService;
@@ -13,6 +14,7 @@ import java.util.List;
 
 public class userActions {
     private ResponseObject resObj = new ResponseObject();
+    private ResponseBody resbody = new ResponseBody();
     UserService userService = new UserService();
 
     public Object registerUser(User user) throws Exception {
@@ -29,18 +31,18 @@ public class userActions {
      * @author: Isite Yves
      */
     public Object loginUser(User user) throws Exception {
-        List<Object> users = new ArrayList<Object>();
+//        List<Object> users = new ArrayList<Object>();
         User loggedInUser=userService.findUser(user);
-        users.add((Object) loggedInUser);
+//        users.add((Object) loggedInUser);
         if(loggedInUser.getEmail() == null) {
-            resObj.setStatus("400");
-            resObj.setMessage("Invalid email or password.");
+            resbody.setStatus("400");
+            resbody.setMessage("Invalid email or password.");
         }else{
-                resObj.setStatus("200");
-                resObj.setMessage("logged in correctly.");
+                resbody.setStatus("200");
+                resbody.setMessage("logged in correctly.");
         }
-        resObj.setData(users);
-        return resObj;
+        resbody.setData(loggedInUser);
+        return resbody;
     }
 
     public Object updateUser(User user) throws Exception {

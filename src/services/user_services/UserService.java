@@ -1,7 +1,8 @@
-package Services.user_services;
+package services.user_services;
 
 import models.user_model.User;
-import Utils.DatabaseConnection;
+import utils.DatabaseConnection;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -141,19 +142,5 @@ public class UserService {
         return false;
     }
     
-    public static void main(String[] args) throws Exception {
-        // Test login
-        User u1 = new User();
-        u1.setNames("ISITE Yves");
-        u1.setEmail("yvesisitae@gmail.com");
-        u1.setPassword("pass123");
-        u1.setPhone(18488585);
-        u1.setRole(2);
-        UserService service1 = new UserService();
- //       service1.insertUser(u1);
-        System.out.println(service1.insertUser(u1));
-//          System.out.println(service1.getUserInfo(u1.getEmail(), u1.getPassword()));
-    }
-
 
 }

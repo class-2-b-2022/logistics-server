@@ -1,16 +1,18 @@
 package controllers.DeliveryModule;
-import Services.DeliveryModule.*;
+
 import models.DeliveryModule.Vehicle;
+import services.DeliveryModule.VehicleService;
 import models.ResponseObject;
 
-import java.sql.*;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class VehicleManagementActions {
     private VehicleService vehicleService = new VehicleService();
     private ResponseObject responseObject = new ResponseObject();
-    public Object registerVehicle(Vehicle vehicle) throws SQLException{
+   
+    public Object registerVehicle(Vehicle vehicle) throws SQLException {
         List<Object> vehicleObject = new ArrayList<>();
         vehicleService.insertIntoVehicles(vehicle);
         vehicleObject.add((Object) vehicle);
@@ -29,7 +31,7 @@ public class VehicleManagementActions {
     }
 
     public Object updatedVehicles(Vehicle vehicle) throws Exception {
-        List<Object> vehicles = new ArrayList();
+        List<Object> vehicles = new ArrayList<Object>();
         if(vehicleService.findVehicleById(vehicle.getVehicleId())){
             vehicles = vehicleService.updateVehicle(vehicle);
             responseObject.setStatus("200");
@@ -45,7 +47,7 @@ public class VehicleManagementActions {
     }
 
     public Object deleteVehicle(Vehicle vehicle) throws Exception {
-        List<Object> vehicles = new ArrayList();
+        List<Object> vehicles = new ArrayList<Object>();
         if(vehicleService.findVehicleById(vehicle.getVehicleId())){
             vehicles = vehicleService.deleteVehicle(vehicle);
             responseObject.setStatus("200");

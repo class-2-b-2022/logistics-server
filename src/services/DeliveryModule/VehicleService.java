@@ -1,7 +1,7 @@
-package Services.DeliveryModule;
+package services.DeliveryModule;
 
 import models.DeliveryModule.Vehicle;
-import Utils.DatabaseConnection;
+import utils.DatabaseConnection;
 
 import java.sql.*;
 import java.util.ArrayList;

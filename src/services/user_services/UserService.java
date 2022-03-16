@@ -1,13 +1,13 @@
 package services.user_services;
 
 import models.user_model.User;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import utils.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 
 public class UserService {
     private DatabaseConnection databaseConnection = new DatabaseConnection();

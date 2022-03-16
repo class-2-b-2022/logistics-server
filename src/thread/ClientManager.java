@@ -1,19 +1,13 @@
 package thread;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import controllers.BillingController;
-import controllers.DeliveryModule.VehicleManagementController;
-import controllers.user_management.UserController;
-import controllers.InventoryController;
-import controllers.ProductController;
 import controllers.TestingController;
+import controllers.user_management.UserController;
+
 import models.*;
 import java.io.*;
 import java.net.Socket;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 /**

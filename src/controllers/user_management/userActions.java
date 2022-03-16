@@ -34,10 +34,10 @@ public class userActions {
         users.add((Object) loggedInUser);
         if(loggedInUser.getEmail() == null) {
             resObj.setStatus("400");
-            resObj.setMessage("User not found in the database.");
+            resObj.setMessage("Invalid email or password.");
         }else{
                 resObj.setStatus("200");
-                resObj.setMessage("The User was successfully found in the database.");
+                resObj.setMessage("logged in correctly.");
         }
         resObj.setData(users);
         return resObj;

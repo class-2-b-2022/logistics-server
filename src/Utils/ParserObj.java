@@ -1,11 +1,8 @@
-package utils;
+package Utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import models.BillingModel;
-import java.io.DataInput;
-import java.util.*;
+
 
 public class ParserObj{
 

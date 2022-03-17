@@ -21,7 +21,7 @@ public class UserService {
     public User findUser(User user) throws Exception {
         User returnObject = new User();
         if (isEmailRegistered(user.getEmail()).getNames() == null)
-            System.out.println("User not found.");
+            System.out.println("Unregistered email.");
         else
             returnObject = getUserInfo(user.getEmail(), user.getPassword());
         return returnObject;
@@ -43,16 +43,17 @@ public class UserService {
         String sql = "SELECT names,phone,password FROM users WHERE email=? LIMIT 1";
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setString(1, email);
-        //stmt.setString(2, Pass);
         ResultSet rs = stmt.executeQuery();
+        String dbPswd;
         while (rs.next()) {
-            returnObject.setNames(rs.getString(1));
-            returnObject.setEmail(email);
-            returnObject.setPhone(rs.getInt(2));
-//            String Pass=rs.getString(3);
-//            returnObject.setRoleAsString(getRoleAsString(email));
-//            boolean equalPass=BCrypt.checkpw(password,Pass);
-//            System.out.println(equalPass);
+            dbPswd=rs.getString(3);
+            returnObject.setRoleAsString(getRoleAsString(email));
+            boolean arePswdsTheSame=BCrypt.checkpw(password,dbPswd);
+            if(arePswdsTheSame) {
+                returnObject.setNames(rs.getString(1));
+                returnObject.setEmail(email);
+                returnObject.setPhone(rs.getInt(2));
+            }
             break;
         }
         return returnObject;

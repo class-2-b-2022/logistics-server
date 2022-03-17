@@ -15,7 +15,7 @@ import java.io.*;
 import java.net.Socket;
 import java.sql.SQLException;
 import java.util.List;
-
+import controllers.user_management.*;
 /**
  * @author : Mudahemuka Manzi
  * @author : Ntagungira Ali Rashid
@@ -24,7 +24,7 @@ public class ClientManager implements Runnable{
     private Socket clientSocket;
     private final VehicleManagementController vehicleManagementController = new VehicleManagementController();
      private final BillingController billingController = new BillingController();
-    UserController userController=new UserController();
+//    UserController userController=new UserController();
 
     public ClientManager(Socket socket) throws SQLException {
 
@@ -50,7 +50,7 @@ public class ClientManager implements Runnable{
 //                        logic related to company registration
                         break;
                     case "/users":
-					response = userController.mainMethod(client);
+//					response = userController.mainMethod(client);
                         break;
                     case "/products":
                         ProductController productController = new ProductController();

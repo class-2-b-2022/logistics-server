@@ -1,10 +1,10 @@
 
 package controllers.user_management;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import models.ClientRequest;
 import models.user_model.User;
 import utils.ParserObj;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class UserController {
 	/**
@@ -20,7 +20,7 @@ public class UserController {
             case "register":
                 res =UserActions.registerUser(user);
                 break;
-            case "view":
+            case "profile":
             	break;
             case "login":
                 res = UserActions.loginUser(user);

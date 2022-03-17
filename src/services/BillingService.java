@@ -41,13 +41,11 @@ import java.sql.*;
                 case "Withdraw" -> {
                     if (oldBalance >= amountToUpdate) {
                         newBalance = oldBalance - amountToUpdate;
-                    }
-                    ;
+                    };
                 }
                 case "Deposit" -> newBalance = oldBalance + amountToUpdate;
             }
 
-            System.out.println("new"+newBalance);
 
             String updateQuery = "UPDATE wallet set amount=? WHERE userId=?";
             PreparedStatement preparedStatement = conn.prepareStatement(updateQuery);
@@ -55,8 +53,7 @@ import java.sql.*;
             preparedStatement.setDouble(1, newBalance);
             preparedStatement.setInt(2, wallet.getUserId());
 
-            int rowsUpdated=preparedStatement.executeUpdate();
-            if(rowsUpdated==1){
+            if(preparedStatement.executeUpdate() == 1){
                 return viewUserWallet(wallet);
             }
         }catch(SQLException e) {

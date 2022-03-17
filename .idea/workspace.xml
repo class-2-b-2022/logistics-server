@@ -1,8 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7fe43156-4b0a-4864-a8d8-eb798caf3a35" name="Changes" comment="">
+    <list default="true" id="b30d4b0f-e72c-4f86-94a1-97b01e3eea3f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/lib/jackson-core-2.13.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/jackson-databind-2.13.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/logistics-server/controllers/InventoryController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/logistics-server/controllers/ProductController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/logistics-server/models/InventoryModel.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/logistics-server/models/ProductModel.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/logistics-server/models/ResponseBody.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/logistics-server/services/DeliveryModule/VehicleService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/InventoryService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/ProductService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jackson-annotations-2.12.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/lib/jackson-annotations-2.13.1.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jackson-core-2.12.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jackson-databind-2.12.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logdel-server.iml" beforeDir="false" afterPath="$PROJECT_DIR$/logdel-server.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/logistics-server/controllers/BillingController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/logistics-server/controllers/BillingController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/logistics-server/main/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/logistics-server/models/BillingModel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/logistics-server/models/Wallet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/logistics-server/services/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/logistics-server/services/BillingService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/logistics-server/services/InventoryService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/logistics-server/services/ProductService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/logistics-server/thread/ClientManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/logistics-server/thread/ClientManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/BillingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/BillingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/DeliveryModule/VehicleManagementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/DeliveryModule/VehicleManagementController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/InventoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/InventoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/user_management/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/user_management/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/user_management/userActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/user_management/userActions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/InventoryModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/InventoryModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/ProductModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/ProductModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/ResponseBody.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/ResponseBody.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/Wallet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Wallet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/BillingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/BillingService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/thread/ClientManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/thread/ClientManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -13,7 +47,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="26SKWtqNiaP1TJ0sqzK3XU8S8Lf" />
+  <component name="ProjectId" id="26WXzvmKpmgIpbkeJmPEOUTY7N7" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -22,46 +56,26 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/logdel-server.iml" />
-    <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
   </component>
-  <component name="RunManager" selected="Application.LogisticsServer">
-    <configuration name="LogisticsServer" type="Application" factoryName="Application" nameIsGenerated="true">
+  <component name="RunManager">
+    <configuration name="LogisticsServer" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="$PROJECT_DIR$/../../../../Program Files/Java/jdk-17" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="main.LogisticsServer" />
       <module name="logdel-server" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="main.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
-      <module name="logdel-server" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <list>
-      <item itemvalue="Application.LogisticsServer" />
-      <item itemvalue="Application.Unnamed" />
-    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="7fe43156-4b0a-4864-a8d8-eb798caf3a35" name="Changes" comment="" />
-      <created>1647411591699</created>
+      <changelist id="b30d4b0f-e72c-4f86-94a1-97b01e3eea3f" name="Changes" comment="" />
+      <created>1647540603877</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1647411591699</updated>
+      <updated>1647540603877</updated>
     </task>
     <servers />
   </component>

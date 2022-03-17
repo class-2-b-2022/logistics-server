@@ -4,7 +4,7 @@ package models;
 import java.io.Serializable;
 
 /**
- * @author : Niyigena-Yves
+ * @author : Gasaro leila
  */
 public class Wallet implements Serializable {
     private int id;

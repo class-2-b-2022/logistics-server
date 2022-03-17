@@ -1,6 +1,7 @@
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																													package controllers.user_management;
 
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																													package controllers.user_management;
 import models.ResponseBody;
+package controllers.user_management;
 import models.ResponseObject;
 import models.user_model.User;
 import services.user_services.UserService;
@@ -40,7 +41,6 @@ public class userActions {
         }else{
                 resbody.setStatus("200");
                 resbody.setMessage("logged in correctly.");
-
         }
         resbody.setData(loggedInUser);
         return resbody;
@@ -56,6 +56,7 @@ public class userActions {
         }else{
             resObj.setStatus("200");
             resObj.setMessage("The User's info were successfully updated.");
+            System.out.println("The User's info were successfully updated.");
         }
         resObj.setData(updatedUser);
         return resObj;
@@ -68,9 +69,11 @@ public class userActions {
         if(deletedUserInfo.getEmail() == null) {
             resObj.setStatus("400");
             resObj.setMessage("User not found in the database.");
+            System.out.println("User not found in the database.");
         }else{
             resObj.setStatus("200");
             resObj.setMessage("The User was successfully deleted from the database.");
+            System.out.println("The User was successfully deleted from the database.");
         }
         resObj.setData(deletedUser);
         return resObj;

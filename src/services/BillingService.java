@@ -1,19 +1,5 @@
 package services;
 
-<<<<<<< HEAD
-
-import utils.*;
-import models.BillingModel;
-import java.sql.*;
-
-/**
- * @author : Gasaro leila
- */
-public class BillingService  {
-    DatabaseConnection dbConn = new DatabaseConnection();
-    Connection conn = dbConn.getConnection();
-    Statement statement = conn.createStatement();
-=======
 import models.Wallet;
 import utils.*;
 import java.sql.*;
@@ -25,33 +11,10 @@ import java.sql.*;
 	    DatabaseConnection dbConn = new DatabaseConnection();
 	    Connection conn = dbConn.getConnection();
 	    Statement statement = conn.createStatement();
->>>>>>> 768c3f3addc3d44775ad4f3e9ad1125eefcef0d8
 
     public BillingService() throws SQLException {
     }
 
-<<<<<<< HEAD
-    public Object updateDistributorWallet(BillingModel billing) throws SQLException {
-        Object rs = null;
-        try {
-            rs = (Object) statement.executeQuery("update payments set `balance`=" + billing.getAmount() + "WHERE `id`=" + billing.getUserId());
-        }catch(SQLException e) {
-            e.printStackTrace();
-        }
-       return rs;
-    }
-
-
-    public Object viewUserWallet(int userId) throws SQLException {
-        Object rs = null;
-        try {
-            rs = (Object) statement.executeQuery("select * from payments where `id`="+userId);
-        }catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return rs;
-    }
-=======
     public boolean createWallet(Wallet wallet) throws SQLException {
         try {
             String sql = "INSERT INTO wallet(userId) values(?)";
@@ -121,5 +84,4 @@ import java.sql.*;
         return wallet;
     }
 
->>>>>>> 768c3f3addc3d44775ad4f3e9ad1125eefcef0d8
 }

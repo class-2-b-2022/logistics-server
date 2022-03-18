@@ -19,26 +19,14 @@ public class userActions {
     private ResponseBody resbody = new ResponseBody();
     UserService userService = new UserService();
 
-<<<<<<< HEAD
-    /**
-     * @author Ntagungira Ali Rashid
-     */
-    public Object registerUser(User user) throws Exception {
-        List<Object> newUser = new ArrayList<>();
-=======
     public Object registerUser(User user) throws Exception {
         List<Object> newUser = new ArrayList<Object>();
->>>>>>> 768c3f3addc3d44775ad4f3e9ad1125eefcef0d8
         userService.insertUser(user);
         newUser.add((Object) user);
         resObj.setStatus("200");
         resObj.setMessage("User registered successfully");
         resObj.setData(newUser);
-<<<<<<< HEAD
-        return resObj;
-=======
         return resObj;  
->>>>>>> 768c3f3addc3d44775ad4f3e9ad1125eefcef0d8
     }
 
     /**
@@ -47,12 +35,7 @@ public class userActions {
     public Object loginUser(User user) throws Exception {
 //        List<Object> users = new ArrayList<Object>();
         User loggedInUser=userService.findUser(user);
-<<<<<<< HEAD
-        System.out.println(loggedInUser);
-        users.add((Object) loggedInUser);
-=======
 //        users.add((Object) loggedInUser);
->>>>>>> 768c3f3addc3d44775ad4f3e9ad1125eefcef0d8
         if(loggedInUser.getEmail() == null) {
             resbody.setStatus("400");
             resbody.setMessage("Invalid email or password.");

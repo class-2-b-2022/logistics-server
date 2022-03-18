@@ -118,24 +118,15 @@ public class UserService {
     public boolean insertUser(User user) throws Exception {
         boolean userExists = checkIfUserExists(user.getEmail());
         if (!userExists) {
-<<<<<<< HEAD
-            String sql = "INSERT INTO users(names,email,phone,password,role)values(?,?,?,?,?)";
-//            String hashedPswd = hashPassword(user.getPassword());
-=======
            String sql = "INSERT INTO users(names,email,phone,password,role)values(?,?,?,?,?)";
            String hashedPswd = hashPassword(user.getPassword());
 //           System.out.println(BCrypt.checkpw(user.getPassword(),"$2a$12$Da8MomfA5DXHcJpGXnX7e.VNne3B7NDHGcJlU3dFL7cMd0efQ1DLC"));
 //           System.out.println(hashedPswd);
->>>>>>> 768c3f3addc3d44775ad4f3e9ad1125eefcef0d8
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, user.getNames());
             stmt.setString(2, user.getEmail());
             stmt.setInt(3, user.getPhone());
-<<<<<<< HEAD
-            stmt.setString(4, user.getPassword());
-=======
             stmt.setString(4,hashedPswd);
->>>>>>> 768c3f3addc3d44775ad4f3e9ad1125eefcef0d8
             stmt.setInt(5, user.getRole());
             int inserted = stmt.executeUpdate();
             if (inserted == 1) {

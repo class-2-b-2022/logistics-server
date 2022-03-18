@@ -18,25 +18,11 @@ public class UserController {
         Object res = new Object();
         switch (action) {
             case "register":
-<<<<<<< HEAD
-                user.setNames(req.getData().next().toString().split("=")[1].replace("\"", ""));
-                user.setEmail(req.getData().next().toString().split("=")[1].replace("\"", ""));
-                user.setPhone(Integer.parseInt(req.getData().next().toString().split("=")[1].replace("\"", "")));
-                user.setPassword(req.getData().next().toString().split("=")[1].replace("\"", ""));
-                user.setRole(Integer.parseInt(req.getData().next().toString().split("=")[1].replace("\"", "")));
-                res = UserActions.registerUser(user);
-=======
                 res =UserActions.registerUser(user);
->>>>>>> 768c3f3addc3d44775ad4f3e9ad1125eefcef0d8
                 break;
             case "profile":
             	break;
             case "login":
-<<<<<<< HEAD
-                user.setEmail(req.getData().next().toString().split("=")[1].replace("\"", ""));
-                user.setPassword(req.getData().next().toString().split("=")[1].replace("\"", ""));
-=======
->>>>>>> 768c3f3addc3d44775ad4f3e9ad1125eefcef0d8
                 res = UserActions.loginUser(user);
                 break;
             case "updateUser":

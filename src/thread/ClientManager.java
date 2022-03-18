@@ -1,30 +1,4 @@
 package thread;
-<<<<<<< HEAD
-
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import controllers.user_management.*;
-import controllers.DeliveryModule.*;
-import models.ClientRequest;
-import java.io.*;
-import java.net.Socket;
-import java.util.Iterator;
-import java.util.Map;
-
-/**
- * @author: Mudahemuka Manzi
- * @author: Ntagungira Ali Rashid
- */
-public class ClientManager implements Runnable{
-    private Socket clientSocket;
-    private String json_data;
-    private ClientRequest clientRequest = new ClientRequest();
-    private UserController userController = new UserController();
-    private VehicleManagementController vehicleManagementController = new VehicleManagementController();
-    public ClientManager(Socket socket){
-=======
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import controllers.BillingController;
@@ -53,7 +27,6 @@ public class ClientManager implements Runnable{
 
     public ClientManager(Socket socket) throws SQLException {
 
->>>>>>> 768c3f3addc3d44775ad4f3e9ad1125eefcef0d8
         this.clientSocket = socket;
     }
     @Override
@@ -63,41 +36,6 @@ public class ClientManager implements Runnable{
         try {
             requestStream = new ObjectInputStream(clientSocket.getInputStream());
             responseStream = new DataOutputStream(clientSocket.getOutputStream());
-<<<<<<< HEAD
-            String jsonString = (String) requestStream.readObject();
-            System.out.println(jsonString);
-            ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode jsonNodeRoot = objectMapper.readTree(jsonString);
-            JsonNode requestData = jsonNodeRoot.get("data");
-            Iterator<Map.Entry<String, JsonNode>> iterator = requestData.fields();
-            clientRequest.setRoute(jsonNodeRoot.get("route").asText());
-            clientRequest.setData(iterator);
-            clientRequest.setAction((jsonNodeRoot.get("action").asText()));
-            String responseData = null;
-
-            switch (jsonNodeRoot.get("route").asText()){
-                case "/companyregistration":
-//                        logic related to company registration
-                    break;
-                case "/users":
-                   responseData = userController.mainMethod(clientRequest);
-                    break;
-                case "/inventory":
-//                        logic related to inventory
-                    break;
-                case "/delivery/vehicles":
-                  responseData = vehicleManagementController.mainMethod(clientRequest);
-                    break;
-                case "/reporting":
-//                        logic related to reporting
-                    break;
-            }
-            //return response to the client;
-            System.out.println(responseData);
-            responseStream.writeUTF(responseData);
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-=======
 //            System.out.println("New client with adresss: "+ clientSocket.getInetAddress().getHostAddress());
             ObjectMapper objectMapper = new ObjectMapper();
          
@@ -177,16 +115,10 @@ public class ClientManager implements Runnable{
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
->>>>>>> 768c3f3addc3d44775ad4f3e9ad1125eefcef0d8
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
-<<<<<<< HEAD
 }
-
-=======
-}
->>>>>>> 768c3f3addc3d44775ad4f3e9ad1125eefcef0d8

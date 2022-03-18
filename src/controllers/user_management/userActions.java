@@ -6,6 +6,7 @@ import services.user_services.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
+
 /***
  * @author: Isite Yves
  * @author: Ntagungira Ali Rashid
@@ -31,7 +32,7 @@ public class userActions {
 	        resObj.setMessage("User registration Successful");
         }
         resObj.setData(newUser);
-        return resObj;  
+        return resObj;
     }
     
 	public Object getUsers() throws Exception {
@@ -52,14 +53,14 @@ public class userActions {
      */
     public Object loginUser(User user) throws Exception {
 //        List<Object> users = new ArrayList<Object>();
-        User loggedInUser=userService.findUser(user);
+        User loggedInUser = userService.findUser(user);
 //        users.add((Object) loggedInUser);
-        if(loggedInUser.getEmail() == null) {
+        if (loggedInUser.getEmail() == null) {
             resbody.setStatus("400");
             resbody.setMessage("Invalid email or password.");
-        }else{
-                resbody.setStatus("200");
-                resbody.setMessage("logged in correctly.");
+        } else {
+            resbody.setStatus("200");
+            resbody.setMessage("logged in correctly.");
         }
         resbody.setData(loggedInUser);
         return resbody;
@@ -67,7 +68,7 @@ public class userActions {
 
     public Object updateUser(User user) throws Exception {
         List<Object> updatedUser = new ArrayList<Object>();
-        User updatedUserInfo=userService.updateUser(user);
+        User updatedUserInfo = userService.updateUser(user);
         updatedUser.add((Object) updatedUserInfo);
         if(updatedUserInfo.getEmail() == null) {
             resbody.setStatus("400");
@@ -83,7 +84,7 @@ public class userActions {
 
     public Object deleteUser(User user) throws Exception {
         List<Object> deletedUser = new ArrayList<Object>();
-        User deletedUserInfo=userService.deleteUser(user);
+        User deletedUserInfo = userService.deleteUser(user);
         deletedUser.add((Object) deletedUserInfo);
         if(deletedUserInfo.getEmail() == null) {
             resbody.setStatus("400");

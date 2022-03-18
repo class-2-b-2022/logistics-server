@@ -2,25 +2,28 @@ package controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import models.BillingModel;
+
 import models.ClientRequest;
 import models.ResponseBody;
-import utils.*;
+import models.Wallet;
+import utils.ParserObj;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TestingController {
     public static  String test(ClientRequest clientRequest) throws JsonProcessingException {
+
        ParserObj parserObj = new ParserObj();
-        BillingModel billingModel = parserObj.parseData(clientRequest.getData(), BillingModel.class);
-        System.out.println(billingModel.getAmount());
-        System.out.println(billingModel.getUserId());
+        Wallet wallet = parserObj.parseData(clientRequest.getData(), Wallet.class);
+        System.out.println(wallet.getAmount());
+        System.out.println(wallet.getUserId());
+
         ObjectMapper mapper = new ObjectMapper();
         ResponseBody res = new ResponseBody();
 //        String json = mapper.writeValueAsString(billingModel);
       List<Object> obj = new ArrayList<>();
-      obj.add(billingModel);
+      obj.add(wallet);
         String response;
         switch (clientRequest.getAction()){
             case "testing":

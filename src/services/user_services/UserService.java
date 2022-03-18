@@ -1,6 +1,7 @@
 package services.user_services;
 
 import models.user_model.User;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import utils.DatabaseConnection;
 
 import java.sql.Connection;
@@ -8,41 +9,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.springframework.security.crypto.bcrypt.BCrypt;
-
 public class UserService {
     private DatabaseConnection databaseConnection = new DatabaseConnection();
     Connection connection = databaseConnection.getConnection();
-
-    public static void main(String[] args) throws Exception {
-        // Test login
-        User u1 = new User();
-        u1.setNames("ISITE Yves");
-        u1.setEmail("yvesisite@gmail.com");
-        u1.setPassword("pass123");
-        u1.setPhone(18488585);
-        u1.setRole(2);
-        UserService service1 = new UserService();
-        service1.insertUser(u1);
-//        System.out.println("Found user...." + service1.findUser(u1).getRoleAsString());
+   
+    private String hashPassword(String password) {
+    	 //       System.out.println(BCrypt.gensalt(12));
+    	        return BCrypt.hashpw(password, BCrypt.gensalt(12));
     }
-
-    public boolean checkIfUserExists(String email) throws Exception {
-        String sql = "SELECT * FROM users WHERE email = ?";
-        PreparedStatement stmt = connection.prepareStatement(sql);
-        stmt.setString(1, email);
-        ResultSet rs = stmt.executeQuery();
-        boolean checkUser = false;
-        if (rs.next()) {
-            checkUser = true;
-        }
-        return checkUser;
-    }
-
+                     
     public User findUser(User user) throws Exception {
         User returnObject = new User();
-        if (!checkIfUserExists(user.getEmail()))
-            System.out.println("User not found.");
+        if (isEmailRegistered(user.getEmail()).getNames() == null)
+            System.out.println("Unregistered email.");
         else
             returnObject = getUserInfo(user.getEmail(), user.getPassword());
         return returnObject;
@@ -61,10 +40,29 @@ public class UserService {
 
     public User getUserInfo(String email, String password) throws SQLException {
         User returnObject = new User();
-        String sql = "SELECT names,phone FROM users WHERE email=? AND password=? LIMIT 1";
+        String sql = "SELECT names,phone,password FROM users WHERE email=? LIMIT 1";
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setString(1, email);
-        stmt.setString(2, password);
+        ResultSet rs = stmt.executeQuery();
+        String dbPswd;
+        while (rs.next()) {
+            dbPswd=rs.getString(3);
+            returnObject.setRoleAsString(getRoleAsString(email));
+            boolean arePswdsTheSame=BCrypt.checkpw(password,dbPswd);
+            if(arePswdsTheSame) {
+                returnObject.setNames(rs.getString(1));
+                returnObject.setEmail(email);
+                returnObject.setPhone(rs.getInt(2));
+            }
+            break;
+        }
+        return returnObject;
+    }
+    public User isEmailRegistered(String email) throws SQLException {
+        User returnObject = new User();
+        String sql = "SELECT names,phone FROM users WHERE email=? LIMIT 1";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setString(1, email);
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {
             returnObject.setNames(rs.getString(1));
@@ -79,7 +77,7 @@ public class UserService {
     // Returns an object instance of the deleted user
     public User deleteUser(User user) throws SQLException {
         User returnObject;
-        returnObject = getUserInfo(user.getEmail(), user.getPassword());
+        returnObject = isEmailRegistered(user.getEmail());
         String sql = "DELETE FROM users WHERE email=?";
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setString(1, user.getEmail());
@@ -89,9 +87,9 @@ public class UserService {
 
     public User updateUser(User user) throws  SQLException {
         User returnObject;
-        returnObject = getUserInfo(user.getEmail(), user.getPassword());
+        returnObject = isEmailRegistered(user.getEmail());
         if(returnObject.getEmail() != null) {
-            String sql = "UPDATE users SET email=WHERE email=?,names=?,phone=?,role=? WHERE id=?";
+            String sql = "UPDATE users SET email=?,names=?,phone=?,role=? WHERE id=?";
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, user.getEmail());
             stmt.setString(2, user.getNames());
@@ -105,22 +103,39 @@ public class UserService {
         }
     }
 
-    private String hashPassword(String password) {
-        System.out.println(BCrypt.gensalt(12));
-        return BCrypt.hashpw(password, BCrypt.gensalt(12));
-
+    public boolean checkIfUserExists(String email) throws Exception {
+        String sql = "SELECT * FROM users WHERE email = ?";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setString(1, email);
+        ResultSet rs = stmt.executeQuery();
+        boolean checkUser = false;
+        if (rs.next()) {
+            checkUser = true;
+        }
+        return checkUser;
     }
 
     public boolean insertUser(User user) throws Exception {
         boolean userExists = checkIfUserExists(user.getEmail());
         if (!userExists) {
+<<<<<<< HEAD
             String sql = "INSERT INTO users(names,email,phone,password,role)values(?,?,?,?,?)";
 //            String hashedPswd = hashPassword(user.getPassword());
+=======
+           String sql = "INSERT INTO users(names,email,phone,password,role)values(?,?,?,?,?)";
+           String hashedPswd = hashPassword(user.getPassword());
+//           System.out.println(BCrypt.checkpw(user.getPassword(),"$2a$12$Da8MomfA5DXHcJpGXnX7e.VNne3B7NDHGcJlU3dFL7cMd0efQ1DLC"));
+//           System.out.println(hashedPswd);
+>>>>>>> 768c3f3addc3d44775ad4f3e9ad1125eefcef0d8
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, user.getNames());
             stmt.setString(2, user.getEmail());
             stmt.setInt(3, user.getPhone());
+<<<<<<< HEAD
             stmt.setString(4, user.getPassword());
+=======
+            stmt.setString(4,hashedPswd);
+>>>>>>> 768c3f3addc3d44775ad4f3e9ad1125eefcef0d8
             stmt.setInt(5, user.getRole());
             int inserted = stmt.executeUpdate();
             if (inserted == 1) {
@@ -136,5 +151,6 @@ public class UserService {
         }
         return false;
     }
+    
 
 }

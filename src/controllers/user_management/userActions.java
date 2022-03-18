@@ -14,6 +14,7 @@ import java.util.List;
  */
 
 public class userActions {
+
     private ResponseObject resObj = new ResponseObject();
     private ResponseBody resbody = new ResponseBody();
     UserService userService = new UserService();

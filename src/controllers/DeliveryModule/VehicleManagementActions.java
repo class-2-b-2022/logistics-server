@@ -11,7 +11,7 @@ import java.util.List;
 public class VehicleManagementActions {
     private VehicleService vehicleService = new VehicleService();
     private ResponseObject responseObject = new ResponseObject();
-   
+
     public Object registerVehicle(Vehicle vehicle) throws SQLException {
         List<Object> vehicleObject = new ArrayList<>();
         vehicleService.insertIntoVehicles(vehicle);
@@ -23,7 +23,7 @@ public class VehicleManagementActions {
     }
 
     public Object getVehicles() throws SQLException {
-        List<Object> vehicles =  vehicleService.getListOfVehicles();
+        List<Object> vehicles = vehicleService.getListOfVehicles();
         responseObject.setStatus("201");
         responseObject.setMessage("Vehicles");
         responseObject.setData(vehicles);
@@ -32,13 +32,12 @@ public class VehicleManagementActions {
 
     public Object updatedVehicles(Vehicle vehicle) throws Exception {
         List<Object> vehicles = new ArrayList<Object>();
-        if(vehicleService.findVehicleById(vehicle.getVehicleId())){
+        if (vehicleService.findVehicleById(vehicle.getVehicleId())) {
             vehicles = vehicleService.updateVehicle(vehicle);
             responseObject.setStatus("200");
             responseObject.setMessage("Vehicle updated successfully");
             responseObject.setData(vehicles);
-        }
-        else{
+        } else {
             responseObject.setStatus("404");
             responseObject.setMessage("Vehicle not found");
             responseObject.setData(vehicles);
@@ -48,16 +47,13 @@ public class VehicleManagementActions {
 
     public Object deleteVehicle(Vehicle vehicle) throws Exception {
         List<Object> vehicles = new ArrayList<Object>();
-        if(vehicleService.findVehicleById(vehicle.getVehicleId())){
+        if (vehicleService.findVehicleById(vehicle.getVehicleId())) {
             vehicles = vehicleService.deleteVehicle(vehicle);
             responseObject.setStatus("200");
             responseObject.setMessage("Vehicle deleted successfully");
-            responseObject.setData(vehicles);
-        }
-        else{
+        } else {
             responseObject.setStatus("404");
             responseObject.setMessage("Vehicle not found");
-            responseObject.setData(vehicles);
         }
         return responseObject;
     }

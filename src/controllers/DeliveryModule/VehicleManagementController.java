@@ -9,7 +9,6 @@ import java.sql.Date;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-
 public class VehicleManagementController {
     public String mainMethod(ClientRequest clientRequest) throws Exception {
         String action = clientRequest.getAction();
@@ -24,7 +23,7 @@ public class VehicleManagementController {
 //                vehicle.setDescription(clientRequest.getData().next().toString().split("=")[1]);
                 vehicle.setOwner("owner");
                 vehicle.setModel("model");
-                vehicle.setCreatedAt(new Date(2020, 02, 03));
+                vehicle.setCreatedAt(new Date(2020,02,03));
                 responseObject = actions.registerVehicle(vehicle);
                 break;
             case "view":

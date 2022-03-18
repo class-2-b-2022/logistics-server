@@ -36,9 +36,6 @@ public class UserController {
 //                String phoneAsString=req.getData().next().toString().split("=")[1];
 //                String phoneWithNoQuotes=phoneAsString.substring(1,phoneAsString.length()-1);
 //                user.setPhone(Integer.parseInt(phoneWithNoQuotes));
-//                String roleAsString=req.getData().next().toString().split("=")[1];
-//                String roleWithNoQuotes=roleAsString.substring(1,roleAsString.length()-1);
-//                user.setRole(Integer.parseInt(roleWithNoQuotes));
 //                user.setEmail(user.getEmail().substring(1,user.getEmail().length()-1));
 //                user.setPassword(user.getPassword().substring(1,user.getPassword().length()-1));
                 res = UserActions.updateUser(user);

@@ -22,7 +22,7 @@ public class VehicleManagementController {
 //                vehicle.setBrand(clientRequest.getData().next().toString().split("=")[1]);
 //                vehicle.setDescription(clientRequest.getData().next().toString().split("=")[1]);
                 vehicle.setOwner("owner");
-                vehicle.setModel(clientRequest.getData().next().toString().split("=")[1]);
+                vehicle.setModel("model");
                 vehicle.setCreatedAt(new Date(2020,02,03));
                 responseObject = actions.registerVehicle(vehicle);
                 break;

@@ -3,11 +3,13 @@ package services.user_services;
 import models.user_model.User;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import utils.DatabaseConnection;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserService {
     private DatabaseConnection databaseConnection = new DatabaseConnection();
@@ -156,6 +158,25 @@ public class UserService {
         }
         return false;
     }
+    
+	public List<Object> allUsers() throws SQLException {
+		 List<Object> users = new ArrayList<Object>();
+	        String sql = "SELECT * FROM users";
+	        Statement stmt = connection.createStatement();
+	        ResultSet res = stmt.executeQuery(sql);
+	        while (res.next()){
+	           User user = new User();
+	            user.setUserId(res.getInt("user_id"));
+	            user.setNames(res.getString("names"));
+	            user.setEmail(res.getString("email"));
+	            user.setPhone(res.getInt("phone"));
+	            user.setRoleAsString(getRoleAsString(res.getString("email")));
+	            user.setStatus(res.getString("status"));
+	            users.add((Object) user);
+	        }
+	       
+		return users;
+	}
     
 
 }

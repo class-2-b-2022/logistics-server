@@ -19,13 +19,33 @@ public class userActions {
 
     public Object registerUser(User user) throws Exception {
         List<Object> newUser = new ArrayList<Object>();
-        userService.insertUser(user);
-        newUser.add((Object) user);
-        resObj.setStatus("200");
-        resObj.setMessage("User registered successfully");
+        boolean IsInserted=userService.insertUser(user);
+        if(IsInserted) {
+        	newUser.add((Object) user);
+        }
+        if(newUser.isEmpty()) {
+	        resObj.setStatus("400");
+	        resObj.setMessage("User registration failed");
+        }else {
+        	resObj.setStatus("200");
+	        resObj.setMessage("User registration Successful");
+        }
         resObj.setData(newUser);
         return resObj;  
     }
+    
+	public Object getUsers() throws Exception {
+		List<Object>users=userService.allUsers();
+		if(users.isEmpty()) {
+			resObj.setStatus("200");
+	        resObj.setMessage("No users available");
+		}else {
+			resObj.setStatus("200");
+	        resObj.setMessage("List Of all users");
+		}
+		 resObj.setData( users);
+		return resObj;
+	}
 
     /**
      * @author: Isite Yves

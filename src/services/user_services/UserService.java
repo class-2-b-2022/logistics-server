@@ -3,11 +3,13 @@ package services.user_services;
 import models.user_model.User;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import utils.DatabaseConnection;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserService {
     private DatabaseConnection databaseConnection = new DatabaseConnection();
@@ -40,19 +42,21 @@ public class UserService {
 
     public User getUserInfo(String email, String password) throws SQLException {
         User returnObject = new User();
-        String sql = "SELECT names,phone,password FROM users WHERE email=? LIMIT 1";
+        String sql = "SELECT user_id,names,phone,role,password FROM users WHERE email=? LIMIT 1";
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setString(1, email);
         ResultSet rs = stmt.executeQuery();
         String dbPswd;
         while (rs.next()) {
-            dbPswd=rs.getString(3);
+            dbPswd=rs.getString(5);
             returnObject.setRoleAsString(getRoleAsString(email));
             boolean arePswdsTheSame=BCrypt.checkpw(password,dbPswd);
             if(arePswdsTheSame) {
-                returnObject.setNames(rs.getString(1));
+                returnObject.setUserId(rs.getInt(1));
+                returnObject.setNames(rs.getString(2));
                 returnObject.setEmail(email);
-                returnObject.setPhone(rs.getInt(2));
+                returnObject.setPhone(rs.getInt(3));
+                returnObject.setRole(rs.getInt(4));
             }
             break;
         }
@@ -85,17 +89,29 @@ public class UserService {
         return returnObject;
     }
 
+    private boolean isEmailAlreadyTaken(int userId, String email) throws SQLException {
+        String sql = "SELECT * FROM users WHERE userId<>? AND email=? LIMIT 1";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setInt(1, userId);
+        stmt.setString(2, email);
+        ResultSet rs= stmt.executeQuery();
+        boolean isTaken=false;
+        while(rs.next()) {
+            isTaken=true;
+        }
+        return isTaken;
+    }
+
     public User updateUser(User user) throws  SQLException {
-        User returnObject;
-        returnObject = isEmailRegistered(user.getEmail());
-        if(returnObject.getEmail() != null) {
-            String sql = "UPDATE users SET email=?,names=?,phone=?,role=? WHERE id=?";
+        User returnObject=new User();
+        boolean isEmailTaken = isEmailAlreadyTaken(user.getUserId(),user.getEmail());
+        if(!isEmailTaken) {
+            String sql = "UPDATE users SET email=?,names=?,phone=? WHERE id=?";
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, user.getEmail());
             stmt.setString(2, user.getNames());
             stmt.setInt(3, user.getPhone());
-            stmt.setInt(4, user.getRole());
-            stmt.setInt(5, user.getUserId());
+            stmt.setInt(4, user.getUserId());
             stmt.executeUpdate();
             return user;
         }else{
@@ -142,6 +158,25 @@ public class UserService {
         }
         return false;
     }
+    
+	public List<Object> allUsers() throws SQLException {
+		 List<Object> users = new ArrayList<Object>();
+	        String sql = "SELECT * FROM users";
+	        Statement stmt = connection.createStatement();
+	        ResultSet res = stmt.executeQuery(sql);
+	        while (res.next()){
+	           User user = new User();
+	            user.setUserId(res.getInt("user_id"));
+	            user.setNames(res.getString("names"));
+	            user.setEmail(res.getString("email"));
+	            user.setPhone(res.getInt("phone"));
+	            user.setRoleAsString(getRoleAsString(res.getString("email")));
+	            user.setStatus(res.getString("status"));
+	            users.add((Object) user);
+	        }
+	       
+		return users;
+	}
     
 
 }

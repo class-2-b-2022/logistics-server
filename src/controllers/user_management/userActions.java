@@ -1,7 +1,5 @@
-
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																													package controllers.user_management;
-import models.ResponseBody;
 package controllers.user_management;
+import models.ResponseBody;
 import models.ResponseObject;
 import models.user_model.User;
 import services.user_services.UserService;
@@ -51,15 +49,15 @@ public class userActions {
         User updatedUserInfo=userService.updateUser(user);
         updatedUser.add((Object) updatedUserInfo);
         if(updatedUserInfo.getEmail() == null) {
-            resObj.setStatus("400");
-            resObj.setMessage("User not found in the database.");
+            resbody.setStatus("400");
+            resbody.setMessage("New email was already taken by another user.");
         }else{
-            resObj.setStatus("200");
-            resObj.setMessage("The User's info were successfully updated.");
+            resbody.setStatus("200");
+            resbody.setMessage("The User's info were successfully updated.");
             System.out.println("The User's info were successfully updated.");
         }
-        resObj.setData(updatedUser);
-        return resObj;
+        resbody.setData(updatedUser);
+        return resbody;
     }
 
     public Object deleteUser(User user) throws Exception {
@@ -67,15 +65,15 @@ public class userActions {
         User deletedUserInfo=userService.deleteUser(user);
         deletedUser.add((Object) deletedUserInfo);
         if(deletedUserInfo.getEmail() == null) {
-            resObj.setStatus("400");
-            resObj.setMessage("User not found in the database.");
+            resbody.setStatus("400");
+            resbody.setMessage("User not found in the database.");
             System.out.println("User not found in the database.");
         }else{
-            resObj.setStatus("200");
-            resObj.setMessage("The User was successfully deleted from the database.");
+            resbody.setStatus("200");
+            resbody.setMessage("The User was successfully deleted from the database.");
             System.out.println("The User was successfully deleted from the database.");
         }
-        resObj.setData(deletedUser);
-        return resObj;
+        resbody.setData(deletedUser);
+        return resbody;
     }
 }

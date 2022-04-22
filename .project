@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-<<<<<<< HEAD
 	<name>login-server</name>
 	<name>logistics-server</name>
 	<comment></comment>
@@ -12,7 +11,7 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
-	</buildSpec>
+	</buildSpec>s
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>

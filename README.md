@@ -1,6 +1,5 @@
-<<<<<<< HEAD
  ## Logistics server
-=======
+
  #delivery-module
 
 **Authors**
@@ -25,4 +24,3 @@
 
 @Dushime Grace Fidele
 ```
->>>>>>> de9f252aa394f2d7ca7aceb028c578bbd4ab9120

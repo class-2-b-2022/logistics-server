@@ -3,7 +3,10 @@ package services;
 import models.Company;
 import utils.*;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
+/**@author  Teta Butera Nelly */
 
 public class CompanyService {
     // connecting to database
@@ -26,34 +29,28 @@ public class CompanyService {
 
             rowsInserted = preparedStatement.executeUpdate();
             if (rowsInserted > 0) {
-                System.out.println("successfully created inventory");
+                System.out.println("company successfully registered");
             }
         }catch(Exception e) {
                 e.printStackTrace();
         }
         return rowsInserted;
     }
+    public List<Object> getListOfCompanies() throws SQLException{
+        List<Object> companiesObject = new ArrayList();
+        String sql = " SELECT * FROM companies";
+        Statement statement = connection.createStatement();
+        ResultSet result = statement.executeQuery(sql);
+        while(result.next()){
+            Company company = new Company();
+            company.setTIN(result.getInt(1));
+            company.setName(result.getString(2));
+            company.setEmail(result.getString(3));
+            company.setType(result.getString(4));
+            company.setPhone(result.getInt(5));
+            company.setDescription(result.getString(6));
+            companiesObject.add((Object) company);
+        }
+        return companiesObject;
+    }
 }
-
-//    public List<Object> getListOfCompanies() throws SQLException{
-//        List<Object> companiesObject = new ArrayList();
-//        String sql = "SELECT * FROM companies";
-//        Statement statement = connection.createStatement();
-//        ResultSet result = statement.executeQuery(sql);
-//
-//        while (result.next()){
-//            Company company = new Company();
-//            company.setTIN(result.getInt(1));
-//            company.setName(result.getString(2));
-//            company.setEmail(result.getString(3));
-//            company.setType(result.getString(4));
-//            company.setPhone(result.getInt(5));
-//            company.setDescription(result.getString(6));
-//            company.setCreatedAt(result.getDate(7));
-//            companiesObject.add((Object) company);
-//        }
-//
-//        return companiesObject;
-//    }
-
-//}

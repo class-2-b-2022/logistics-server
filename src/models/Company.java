@@ -5,6 +5,8 @@ import com.fasterxml.jackson.core.SerializableString;
 import java.io.Serializable;
 import java.util.Date;
 
+/**@author Teta Butera Nelly*/
+
 public class Company implements Serializable {
 
     private Integer TIN;
@@ -12,34 +14,25 @@ public class Company implements Serializable {
     private String email;
     private String type;
     private Integer phone;
+    private String description;
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String description) {
-        Description = description;
+        this.description = description;
     }
-
-    public java.sql.Date getCreatedAt() {
-        return (java.sql.Date) createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    private String Description;
-    private Date createdAt;
 
     public Company(){}
 
-    public Company(Integer TIN, String name, String email, String type, Integer phone){
+    public Company(Integer TIN, String name, String email, String type, Integer phone,String description){
         this.TIN = TIN;
         this.name = name;
         this.email = email;
         this.type = type;
         this.phone = phone;
+        this.description = description;
     }
 
     public Integer getTIN() {

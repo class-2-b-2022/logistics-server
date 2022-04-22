@@ -9,8 +9,6 @@ import models.*;
 import java.io.*;
 import java.net.Socket;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -31,15 +29,17 @@ public class ClientManager implements Runnable{
         ObjectInputStream requestStream = null;
         ClientRequest req= null;
         try {
-            requestStream = new ObjectInputStream(clientSocket.getInputStream());
-            responseStream = new DataOutputStream(clientSocket.getOutputStream());
-            System.out.println("New client with adresss: "+ clientSocket.getInetAddress().getHostAddress());
-            ObjectMapper objectMapper = new ObjectMapper();
-            List<String> clientRequest = null;
-              List<String> json = (List) requestStream.readObject();
-                ClientRequest client = objectMapper.readValue(json.get(0), ClientRequest.class);
-                String route = client.getRoute();
-                String action = client.getAction();
+             requestStream = new ObjectInputStream(clientSocket.getInputStream());
+             responseStream = new DataOutputStream(clientSocket.getOutputStream());
+             System.out.println("New client with adresss: "+ clientSocket.getInetAddress().getHostAddress());
+             ObjectMapper objectMapper = new ObjectMapper();
+             List<String> clientRequest = null;
+             List<String> json = (List) requestStream.readObject();
+             List<Object> companyList = null;
+
+            ClientRequest client = objectMapper.readValue(json.get(0), ClientRequest.class);
+             String route = client.getRoute();
+             String action = client.getAction();
              String response = null;
                 switch (route){
                     case "/companyregistration":
@@ -66,8 +66,10 @@ public class ClientManager implements Runnable{
                     case "/company":
                         CompanyManagementController companyManagementController = new CompanyManagementController();
                         if(action.equals("INSERT")){
-                            Company company = objectMapper.convertValue(client.getData(), Company.class);
+                            Company company = objectMapper.convertValue(client.getData(),Company.class);
                             response = companyManagementController.addCompany(company);
+                        }else if(action.equals("GET")){
+//                             companyList = companyManagementController.getCompanies();
                         }
                         break;
                     case "/reporting":

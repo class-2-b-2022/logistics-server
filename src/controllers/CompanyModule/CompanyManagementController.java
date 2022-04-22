@@ -3,15 +3,17 @@ package controllers.CompanyModule;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import models.*;
 import services.CompanyService;
-import services.CompanyService.*;
 
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.List;
+
+/**@author  Teta Butera Nelly*/
 
 public class CompanyManagementController {
 
     ResponseBody responseBody = new ResponseBody();
     ObjectMapper objectMapper = new ObjectMapper();
+    CompanyService companyService = new CompanyService();
 
     public String addCompany(Company company){
         String resultFromResponseObject = "";
@@ -32,5 +34,8 @@ public class CompanyManagementController {
         }finally {
             return resultFromResponseObject;
         }
+    }
+    public List<Object> getCompanies() throws SQLException{
+        return companyService.getListOfCompanies();
     }
 }

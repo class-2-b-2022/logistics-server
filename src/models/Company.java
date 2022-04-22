@@ -1,8 +1,11 @@
 package models;
 
+import com.fasterxml.jackson.core.SerializableString;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class Company {
+public class Company implements Serializable {
 
     private Integer TIN;
     private String name;

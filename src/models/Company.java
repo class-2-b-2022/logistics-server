@@ -1,4 +1,8 @@
-public class CompanyModel {
+package models;
+
+import java.util.Date;
+
+public class Company {
 
     private Integer TIN;
     private String name;
@@ -6,9 +10,28 @@ public class CompanyModel {
     private String type;
     private Integer phone;
 
-    public CompanyModel(){}
+    public String getDescription() {
+        return Description;
+    }
 
-    public CompanyModel(Integer TIN,String name, String email, String type, Integer phone){
+    public void setDescription(String description) {
+        Description = description;
+    }
+
+    public java.sql.Date getCreatedAt() {
+        return (java.sql.Date) createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    private String Description;
+    private Date createdAt;
+
+    public Company(){}
+
+    public Company(Integer TIN, String name, String email, String type, Integer phone){
         this.TIN = TIN;
         this.name = name;
         this.email = email;

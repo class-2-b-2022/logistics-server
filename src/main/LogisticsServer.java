@@ -1,12 +1,6 @@
 package main;
 import thread.ClientManager;
-<<<<<<< HEAD
-import utils.DatabaseConnection;
-import utils.ErrorMessageLogger;
-import utils.SuccessMessageLogger;
-=======
 import utils.*;
->>>>>>> 10e4e2eda6647624b8c37d7f7c6505b5af69d7f2
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -16,7 +10,7 @@ import java.net.Socket;
  * @author : Mudahemuka Manzi
  */
 public class LogisticsServer {
-    private static final int serverPort = 8987;
+    private static final int serverPort = 9050;
     public static void main(String[] args) throws IOException {
         ServerSocket server = null;
         ErrorMessageLogger logError = new ErrorMessageLogger();

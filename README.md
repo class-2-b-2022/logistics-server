@@ -10,3 +10,15 @@
 
 @Muhoza Olivier Ivan
 ```
+#company-module
+
+**Authors**
+```java
+@Teta Butera Nelly
+
+@Umutoniwabo Hasbiyallah
+
+@Impano Alliance
+
+@Dushime Grace Fidele
+```

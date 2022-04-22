@@ -1,7 +1,7 @@
 package controllers.DeliveryModule;
 
-import models.DeliveryModule.Vehicle;
-import models.ClientRequest;
+import models.DeliveryModule.*;
+import models.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +9,7 @@ public class VehicleManagementController {
     public List<Object> mainMethod(ClientRequest clientRequest) throws Exception {
         String action = clientRequest.getAction();
         VehicleManagementActions actions = new VehicleManagementActions();
-        List<Object> responseObject = new ArrayList();
+        List<Object> responseObject = new ArrayList<>();
 
         switch(action){
             case "register":

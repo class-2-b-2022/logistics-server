@@ -1,6 +1,6 @@
 package controllers.DeliveryModule;
 import services.DeliveryModule.VehicleService;
-import models.DeliveryModule.Vehicle;
+import models.DeliveryModule.*;
 
 import java.sql.*;
 import java.util.ArrayList;

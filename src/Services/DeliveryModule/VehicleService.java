@@ -1,14 +1,15 @@
 package services.DeliveryModule;
 
-import utils.DatabaseConnection;
-import models.DeliveryModule.Vehicle;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import utils.*;
+import models.DeliveryModule.*;
+
+
 public class VehicleService {
-    private DatabaseConnection databaseConnection = new DatabaseConnection();
+    DatabaseConnection databaseConnection = new DatabaseConnection();
     Connection connection = databaseConnection.getConnection();
 
     public void insertIntoVehicles(Vehicle vehicle) throws SQLException {

@@ -2,6 +2,7 @@ package thread;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import controllers.*;
+import controllers.CompanyModule.CompanyManagementController;
 import controllers.DeliveryModule.VehicleManagementController;
 import models.*;
 
@@ -22,7 +23,6 @@ public class ClientManager implements Runnable{
     private BillingController billingController = new BillingController();
 
     public ClientManager(Socket socket) throws SQLException {
-    public ClientManager(Socket socket){
         this.clientSocket = socket;
     }
     @Override
@@ -35,7 +35,7 @@ public class ClientManager implements Runnable{
             responseStream = new DataOutputStream(clientSocket.getOutputStream());
             System.out.println("New client with adresss: "+ clientSocket.getInetAddress().getHostAddress());
             ObjectMapper objectMapper = new ObjectMapper();
-            List<String> clientRequest;
+            List<String> clientRequest = null;
               List<String> json = (List) requestStream.readObject();
                 ClientRequest client = objectMapper.readValue(json.get(0), ClientRequest.class);
                 String route = client.getRoute();
@@ -62,6 +62,13 @@ public class ClientManager implements Runnable{
                         break;
                     case "/delivery/vehicles":
 //                        responseData = vehicleManagementController.mainMethod(clientRequest);
+                        break;
+                    case "/company":
+                        CompanyManagementController companyManagementController = new CompanyManagementController();
+                        if(action.equals("INSERT")){
+                            Company company = objectMapper.convertValue(client.getData(), Company.class);
+                            response = companyManagementController.addCompany(company);
+                        }
                         break;
                     case "/reporting":
 //                        logic related to reporting

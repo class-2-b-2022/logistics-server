@@ -5,12 +5,16 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="openjdk-17" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
+<<<<<<< HEAD:logdel-server.iml
           <root url="jar://$MODULE_DIR$/lib/jackson-core-2.12.1.jar!/" />
+=======
+          <root url="jar://$MODULE_DIR$/lib/jackson-databind-2.12.1.jar!/" />
+>>>>>>> de9f252aa394f2d7ca7aceb028c578bbd4ab9120:logistics-server.iml
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -28,34 +32,45 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/jackson-databind-2.12.1.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/spring-security-crypto-4.1.0.RELEASE.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/mysql-connector-java-8.0.27.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+<<<<<<< HEAD:logdel-server.iml
+          <root url="jar://$MODULE_DIR$/lib/spring-security-crypto-4.1.0.RELEASE.jar!/" />
+=======
+          <root url="jar://$MODULE_DIR$/lib/jackson-core-2.12.1.jar!/" />
+>>>>>>> de9f252aa394f2d7ca7aceb028c578bbd4ab9120:logistics-server.iml
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+<<<<<<< HEAD:logdel-server.iml
+          <root url="jar://$MODULE_DIR$/lib/mysql-connector-java-8.0.27.jar!/" />
+=======
+          <root url="jar://$MODULE_DIR$/../../../../Desktop/Y2 Courses/EMBEDDED SYSTEMS/jar_files.zip!/" />
+>>>>>>> de9f252aa394f2d7ca7aceb028c578bbd4ab9120:logistics-server.iml
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+<<<<<<< HEAD:logdel-server.iml
     <orderEntry type="library" name="mysql-connector-java-8.0.27" level="project" />
     <orderEntry type="library" name="jackson-annotations-2.12.1" level="project" />
     <orderEntry type="library" name="jackson-core-2.12.1" level="project" />
     <orderEntry type="library" name="jackson-databind-2.12.1" level="project" />
     <orderEntry type="library" name="jackson-annotations-2.13.1" level="project" />
+=======
+>>>>>>> de9f252aa394f2d7ca7aceb028c578bbd4ab9120:logistics-server.iml
   </component>
 </module>

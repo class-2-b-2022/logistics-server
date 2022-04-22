@@ -10,7 +10,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../Desktop/Y2 Courses/JAVA/mysql-connector.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/jackson-databind-2.12.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -19,7 +19,16 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/jar_files/json-20211205.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/jackson-annotations-2.12.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/mysql-connector-java-8.0.27.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -37,23 +46,11 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/jackson-databind-2.12.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../../../Desktop/Y2 Courses/EMBEDDED SYSTEMS/jar_files.zip!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/jackson-annotations-2.12.1.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-
-    <orderEntry type="library" name="mysql-connector-java-8.0.27" level="project" />
-
   </component>
 </module>

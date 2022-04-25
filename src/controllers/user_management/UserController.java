@@ -22,7 +22,10 @@ public class UserController {
                 break;
             case "users":
             	 res= UserActions.getUsers();
-            	break;
+            	break;	
+            case "GET":
+           	 res= UserActions.getUser(Integer.parseInt(req.getData().toString()));
+           	break;
             case "login":
                 res = UserActions.loginUser(user);
                 break;

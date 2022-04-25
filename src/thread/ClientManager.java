@@ -43,6 +43,7 @@ public class ClientManager implements Runnable{
                 ClientRequest client = objectMapper.readValue(json.get(0), ClientRequest.class);
                 String route = client.getRoute();
                 String action = client.getAction();
+                System.out.println(client.getData());
              String response = null;
                 switch (route){
                     case "/companyregistration":
@@ -53,7 +54,7 @@ public class ClientManager implements Runnable{
                         break;
                     case "/products":
                         ProductController productController = new ProductController();
-                 response=productController.processProduct(client);
+                    response=productController.processProduct(client);
                     		
                         break;
                     case "/inventory":

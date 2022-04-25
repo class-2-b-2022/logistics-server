@@ -1,13 +1,10 @@
 package controllers.DeliveryModule;
-<<<<<<< HEAD
 
 import models.DeliveryModule.Vehicle;
 import services.DeliveryModule.VehicleService;
 import models.ResponseObject;
-=======
 import services.DeliveryModule.VehicleService;
 import models.DeliveryModule.*;
->>>>>>> de9f252aa394f2d7ca7aceb028c578bbd4ab9120
 
 import java.sql.SQLException;
 import java.util.ArrayList;

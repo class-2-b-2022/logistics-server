@@ -177,6 +177,32 @@ public class UserService {
 	       
 		return users;
 	}
+
+	public Object getUser(Integer id) throws Exception{
+		// TODO Auto-generated method stub
+		
+		String sql = "SELECT * FROM users Where user_id = "+id;
+        Statement stmt = connection.createStatement();
+        ResultSet res = stmt.executeQuery(sql);
+        User user = new User();
+          try {
+        	   while (res.next()){
+  
+                    user.setUserId(res.getInt("user_id"));
+                    user.setNames(res.getString("names"));
+                    user.setEmail(res.getString("email"));
+                    user.setPhone(res.getInt("phone"));
+                    user.setRoleAsString(getRoleAsString(res.getString("email")));
+                    user.setStatus(res.getString("status"));
+                    
+                } 
+        	  
+          }catch(Exception e) {
+        	  e.printStackTrace();
+        	  
+          }
+		return user;
+	}
     
 
 }

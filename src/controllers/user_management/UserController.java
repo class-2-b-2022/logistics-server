@@ -14,7 +14,10 @@ public class UserController {
         String action = req.getAction();
         userActions UserActions = new userActions();
         ParserObj parse = new ParserObj();
-        User user=parse.parseData(req.getData(), User.class);
+        User user = null;
+        if(!req.getAction().equals("GET")){
+            user = parse.parseData(req.getData(), User.class);
+        }
         Object res = new Object();
         switch (action) {
             case "register":

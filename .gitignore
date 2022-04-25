@@ -1,4 +1,7 @@
 .idea/
 out/
+temp_auto_push.bat
 logistics-server.iml
 /bin/
+.gitignore
+branch_structure.json

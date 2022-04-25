@@ -12,7 +12,6 @@ import utils.*;
  */
 public class LogisticsServer {
     private static final int serverPort = 5450;
-
     public static void main(String[] args) throws IOException {
         ServerSocket server = null;
         ErrorMessageLogger logError = new ErrorMessageLogger();

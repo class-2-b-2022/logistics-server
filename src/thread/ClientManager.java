@@ -1,14 +1,10 @@
 package thread;
-import com.fasterxml.jackson.databind.JsonNode;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
-import controllers.BillingController;
-import controllers.DeliveryModule.VehicleManagementController;
-import controllers.InventoryController;
-import controllers.ProductController;
-import controllers.TestingController;
+import controllers.*;
+//import controllers.CompanyModule.CompanyManagementController;
 import controllers.DeliveryModule.VehicleManagementController;
 import controllers.user_management.UserController;
-
 import models.*;
 import java.io.*;
 import java.net.Socket;
@@ -21,12 +17,10 @@ import java.util.List;
  */
 public class ClientManager implements Runnable{
     private Socket clientSocket;
-    private final VehicleManagementController vehicleManagementController = new VehicleManagementController();
-     private final BillingController billingController = new BillingController();
-    UserController userController=new UserController();
-
+    private VehicleManagementController vehicleManagementController = new VehicleManagementController();
+    private BillingController billingController = new BillingController();
+    private UserController userController= new UserController();
     public ClientManager(Socket socket) throws SQLException {
-
         this.clientSocket = socket;
     }
     @Override
@@ -34,16 +28,18 @@ public class ClientManager implements Runnable{
         DataOutputStream responseStream = null;
         ObjectInputStream requestStream = null;
         try {
-            requestStream = new ObjectInputStream(clientSocket.getInputStream());
-            responseStream = new DataOutputStream(clientSocket.getOutputStream());
-//            System.out.println("New client with adresss: "+ clientSocket.getInetAddress().getHostAddress());
-            ObjectMapper objectMapper = new ObjectMapper();
-         
-              List<String> json = (List) requestStream.readObject();
-                ClientRequest client = objectMapper.readValue(json.get(0), ClientRequest.class);
-                String route = client.getRoute();
-                String action = client.getAction();
-                System.out.println(client.getData());
+
+             requestStream = new ObjectInputStream(clientSocket.getInputStream());
+             responseStream = new DataOutputStream(clientSocket.getOutputStream());
+             System.out.println("New client with adresss: "+ clientSocket.getInetAddress().getHostAddress());
+             ObjectMapper objectMapper = new ObjectMapper();
+             List<String> clientRequest = null;
+             List<String> json = (List) requestStream.readObject();
+             List<Object> companyList = null;
+
+            ClientRequest client = objectMapper.readValue(json.get(0), ClientRequest.class);
+             String route = client.getRoute();
+             String action = client.getAction();
              String response = null;
                 switch (route){
                     case "/companyregistration":
@@ -94,6 +90,15 @@ public class ClientManager implements Runnable{
                         break;
                     case "/delivery/vehicles":
                        response = vehicleManagementController.mainMethod(client);
+                        break;
+                    case "/company":
+//                        CompanyManagementController companyManagementController = new CompanyManagementController();
+//                        if(action.equals("INSERT")){
+//                            Company company = objectMapper.convertValue(client.getData(),Company.class);
+//                            response = companyManagementController.addCompany(company);
+//                        }else if(action.equals("GET")){
+////                             companyList = companyManagementController.getCompanies();
+//                        }
                         break;
                     case "/reporting":
 //                        logic related to reporting

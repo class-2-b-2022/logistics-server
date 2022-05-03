@@ -21,9 +21,8 @@ public class ReportService {
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
 
+
         while(resultSet.next()){
-            String status = resultSet.getString("Status");
-            Integer quantity= resultSet.getInt("quantity");
             Integer TIN = resultSet.getInt("companyTIN");
             Integer productId = resultSet.getInt("productId");
             Date date = resultSet.getDate("Date");
@@ -40,20 +39,20 @@ public class ReportService {
             String companyName = null;
             String productName = null;
 
+            ReportModel reportModel = new ReportModel();
+            reportModel.setDate(resultSet.getDate("Date"));
+
             while(resultSet1.next()){
-                productName = resultSet1.getString("productName");
-            }
-            while(resultSet2.next()){
-                companyName = resultSet2.getString("name");
+                reportModel.setProduct(resultSet1.getString("productName"));
             }
 
-            ReportModel reportModel = new ReportModel();
-            reportModel.setCompanyName(companyName);
-            reportModel.setProduct(productName);
-            reportModel.setDate(date);
-            reportModel.setStatus(status);
-            reportModel.setQuantity(quantity);
-            reportsObject.add((Object) reportModel);
+            reportModel.setStatus(resultSet.getString("Status"));
+            reportModel.setQuantity(resultSet.getInt("quantity"));
+
+            while(resultSet2.next()){
+                reportModel.setCompanyName(resultSet2.getString("name"));
+            }
+            reportsObject.add( reportModel);
         }
         return reportsObject;
 

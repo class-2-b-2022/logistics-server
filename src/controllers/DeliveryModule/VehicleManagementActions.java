@@ -3,8 +3,6 @@ package controllers.DeliveryModule;
 import models.DeliveryModule.Vehicle;
 import services.DeliveryModule.VehicleService;
 import models.ResponseObject;
-import services.DeliveryModule.VehicleService;
-import models.DeliveryModule.*;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

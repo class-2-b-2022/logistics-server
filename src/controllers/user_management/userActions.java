@@ -20,33 +20,13 @@ public class userActions {
 
     public Object registerUser(User user) throws Exception {
         List<Object> newUser = new ArrayList<Object>();
-        boolean IsInserted=userService.insertUser(user);
-        if(IsInserted) {
-        	newUser.add((Object) user);
-        }
-        if(newUser.isEmpty()) {
-	        resObj.setStatus("400");
-	        resObj.setMessage("User registration failed");
-        }else {
-        	resObj.setStatus("200");
-	        resObj.setMessage("User registration Successful");
-        }
+        userService.insertUser(user);
+        newUser.add((Object) user);
+        resObj.setStatus("200");
+        resObj.setMessage("User registered successfully");
         resObj.setData(newUser);
         return resObj;
     }
-    
-	public Object getUsers() throws Exception {
-		List<Object>users=userService.allUsers();
-		if(users.isEmpty()) {
-			resObj.setStatus("200");
-	        resObj.setMessage("No users available");
-		}else {
-			resObj.setStatus("200");
-	        resObj.setMessage("List Of all users");
-		}
-		 resObj.setData( users);
-		return resObj;
-	}
 
 	
 	public Object getUser(Integer id) throws Exception {
@@ -84,32 +64,32 @@ public class userActions {
         List<Object> updatedUser = new ArrayList<Object>();
         User updatedUserInfo = userService.updateUser(user);
         updatedUser.add((Object) updatedUserInfo);
-        if(updatedUserInfo.getEmail() == null) {
-            resbody.setStatus("400");
-            resbody.setMessage("New email was already taken by another user.");
-        }else{
-            resbody.setStatus("200");
-            resbody.setMessage("The User's info were successfully updated.");
+        if (updatedUserInfo.getEmail() == null) {
+            resObj.setStatus("400");
+            resObj.setMessage("User not found in the database.");
+        } else {
+            resObj.setStatus("200");
+            resObj.setMessage("The User's info were successfully updated.");
             System.out.println("The User's info were successfully updated.");
         }
-        resbody.setData(updatedUser);
-        return resbody;
+        resObj.setData(updatedUser);
+        return resObj;
     }
 
     public Object deleteUser(User user) throws Exception {
         List<Object> deletedUser = new ArrayList<Object>();
         User deletedUserInfo = userService.deleteUser(user);
         deletedUser.add((Object) deletedUserInfo);
-        if(deletedUserInfo.getEmail() == null) {
-            resbody.setStatus("400");
-            resbody.setMessage("User not found in the database.");
+        if (deletedUserInfo.getEmail() == null) {
+            resObj.setStatus("400");
+            resObj.setMessage("User not found in the database.");
             System.out.println("User not found in the database.");
-        }else{
-            resbody.setStatus("200");
-            resbody.setMessage("The User was successfully deleted from the database.");
+        } else {
+            resObj.setStatus("200");
+            resObj.setMessage("The User was successfully deleted from the database.");
             System.out.println("The User was successfully deleted from the database.");
         }
-        resbody.setData(deletedUser);
-        return resbody;
+        resObj.setData(deletedUser);
+        return resObj;
     }
 }

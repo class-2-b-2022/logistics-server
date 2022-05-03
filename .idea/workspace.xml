@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
-  </component>
   <component name="ChangeListManager">
     <list default="true" id="b30d4b0f-e72c-4f86-94a1-97b01e3eea3f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-side.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/DeliveryModule/VehicleManagementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/DeliveryModule/VehicleManagementController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/user_management/userActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/user_management/userActions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logdel-server.iml" beforeDir="false" afterPath="$PROJECT_DIR$/logdel-server.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/user_management/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/user_management/UserController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,9 +13,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="26WXzvmKpmgIpbkeJmPEOUTY7N7" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -30,15 +23,10 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/logdel-server.iml" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/jackson-annotations-2.12.1.jar" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/logdel-server.iml" />
-    <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.20689656" />
   </component>
   <component name="RunManager">
     <configuration name="LogisticsServer" type="Application" factoryName="Application">
@@ -46,6 +34,19 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="main.LogisticsServer" />
       <module name="logdel-server" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="logdel-server" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="logdel-server" />
+      <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -59,13 +60,10 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1647540603877</updated>
-      <workItem from="1647593259910" duration="564000" />
     </task>
     <servers />
   </component>
-</project>
-
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
-    <SUITE FILE_PATH="coverage/logdel_server$LogisticsServer.ic" NAME="LogisticsServer Coverage Results" MODIFIED="1647593760664" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
+</project>

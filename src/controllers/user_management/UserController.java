@@ -6,9 +6,9 @@ import models.user_model.User;
 import utils.ParserObj;
 
 public class UserController {
-    /**
-     * @Author Ntagungira Ali
-     */
+	/**
+	 * @Author Ntagungira Ali
+	 */
     public String mainMethod(ClientRequest req) throws Exception {
         String action = req.getAction();
         userActions UserActions = new userActions();
@@ -20,7 +20,7 @@ public class UserController {
                 res =UserActions.registerUser(user);
                 break;
             case "profile":
-                break;
+            	break;
             case "login":
                 res = UserActions.loginUser(user);
                 break;
@@ -47,5 +47,5 @@ public class UserController {
                 break;
         }
         return new ObjectMapper().writeValueAsString(res);
-    }
+   }
 }

@@ -2,20 +2,16 @@ package services;
 
 import models.Wallet;
 import utils.*;
-<<<<<<< HEAD
-=======
-import utils.DatabaseConnection;
-import models.BillingModel;
->>>>>>> de9f252aa394f2d7ca7aceb028c578bbd4ab9120
 import java.sql.*;
+import java.util.Objects;
 
-	/**
-	 * @author : Gasaro leila
-	 */
-	public class BillingService  {
-	    DatabaseConnection dbConn = new DatabaseConnection();
-	    Connection conn = dbConn.getConnection();
-	    Statement statement = conn.createStatement();
+/**
+ * @author : Gasaro leila
+ */
+public class BillingService  {
+    DatabaseConnection dbConn = new DatabaseConnection();
+    Connection conn = dbConn.getConnection();
+    Statement statement = conn.createStatement();
 
     public BillingService() throws SQLException {
     }
@@ -36,57 +32,83 @@ import java.sql.*;
 
 
     public Wallet updateUserWallet(Wallet wallet, String action) throws SQLException {
+        Wallet currentUserWallet = new Wallet();
         try {
-            Wallet currentUserWallet = viewUserWallet(wallet);
-            double oldBalance = currentUserWallet.getAmount();
-            double amountToUpdate = wallet.getAmount();
-            double newBalance = 0.0;
+            currentUserWallet = viewUserWallet(wallet);
+            System.out.println(currentUserWallet.getStatus());
+            if(Objects.equals(currentUserWallet.getStatus(), "Active"))  {
+                System.out.println(currentUserWallet.getAmount());
+                double oldBalance = currentUserWallet.getAmount();
+                double amountToUpdate = wallet.getAmount();
+                double newBalance = 0.0;
 
-            switch (action) {
-                case "Withdraw" -> {
-                    if (oldBalance >= amountToUpdate) {
-                        newBalance = oldBalance - amountToUpdate;
-                    };
+                switch (action) {
+                    case "Withdraw" -> {
+                        if (oldBalance >= amountToUpdate) {
+                            newBalance = oldBalance - amountToUpdate;
+                        };
+                    }
+                    case "Deposit" -> newBalance = oldBalance + amountToUpdate;
                 }
-                case "Deposit" -> newBalance = oldBalance + amountToUpdate;
-            }
 
 
-            String updateQuery = "UPDATE wallet set amount=? WHERE userId=?";
-            PreparedStatement preparedStatement = conn.prepareStatement(updateQuery);
+                String updateQuery = "UPDATE wallet set amount=? WHERE userId=?";
+                PreparedStatement preparedStatement = conn.prepareStatement(updateQuery);
 
-            preparedStatement.setDouble(1, newBalance);
-            preparedStatement.setInt(2, wallet.getUserId());
+                preparedStatement.setDouble(1, newBalance);
+                preparedStatement.setInt(2, wallet.getUserId());
 
-            if(preparedStatement.executeUpdate() == 1){
-                return viewUserWallet(wallet);
-            }
+                if(preparedStatement.executeUpdate() == 1){
+                    System.out.println("there");
+                    return viewUserWallet(wallet);
+                }}
         }catch(SQLException e) {
             e.printStackTrace();
         }
-        return wallet;
+        return currentUserWallet;
     }
 
 
     public Wallet viewUserWallet(Wallet wallet) throws SQLException {
+        Wallet fetchedWallet = new Wallet();
         try {
-            Wallet fetchedWallet = new Wallet();
             String query = "select * from wallet where userId=?";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
             preparedStatement.setInt(1, wallet.getUserId());
             ResultSet result = preparedStatement.executeQuery();
-            while (result.next()) {
+
+            result.next();
+            System.out.println(result.getString("status"));
+            if(Objects.equals(result.getString("status"), "Active")) {
+                System.out.println("Inside while");
                 fetchedWallet.setId(result.getInt("id"));
                 fetchedWallet.setUserId(result.getInt("userId"));
                 fetchedWallet.setAmount(result.getDouble("amount"));
                 fetchedWallet.setDateOfCreation(String.valueOf(result.getDate("dateOfCreation")));
+                fetchedWallet.setStatus(result.getString("status"));
                 return fetchedWallet;
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return fetchedWallet;
+    }
+
+    public Wallet deleteWallet(Wallet wallet) throws SQLException {
+        try {
+            String updateQuery = "UPDATE wallet set status=? WHERE userId=?";
+            PreparedStatement preparedStatement = conn.prepareStatement(updateQuery);
+            preparedStatement.setString(1, "Inactive");
+            preparedStatement.setInt(2, wallet.getUserId());
+            if(preparedStatement.executeUpdate() == 1){
+                return viewUserWallet(wallet);
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return wallet;
     }
 
-}
+};

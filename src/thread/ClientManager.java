@@ -19,6 +19,7 @@ public class ClientManager implements Runnable{
     private Socket clientSocket;
     private VehicleManagementController vehicleManagementController = new VehicleManagementController();
     private BillingController billingController = new BillingController();
+    private ReportController reportController = new ReportController();
 
     public ClientManager(Socket socket) throws SQLException {
         this.clientSocket = socket;
@@ -72,8 +73,8 @@ public class ClientManager implements Runnable{
 //                             companyList = companyManagementController.getCompanies();
                         }
                         break;
-                    case "/reporting":
-//                        logic related to reporting
+                    case "/reports":
+//                      response = reportController.getReports();
                         break;
                     case "/testing":
                       response = TestingController.test(client);

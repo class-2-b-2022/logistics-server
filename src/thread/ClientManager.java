@@ -22,9 +22,9 @@ import java.util.List;
  */
 public class ClientManager implements Runnable{
     private Socket clientSocket;
+    private final ReportController reportController = new ReportController();
     private final VehicleManagementController vehicleManagementController = new VehicleManagementController();
     private final BillingController billingController = new BillingController();
-    private final ReportController reportController =  new ReportController();
     UserController userController=new UserController();
 
     public ClientManager(Socket socket) throws SQLException {
@@ -97,7 +97,7 @@ public class ClientManager implements Runnable{
                     response = vehicleManagementController.mainMethod(client);
                     break;
                 case "/reports":
-                    response = reportController.mainMethod(client);
+                   response = reportController.mainMethod(client);
                     break;
                 case "/testing":
                     response = TestingController.test(client);

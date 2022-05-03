@@ -3,16 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b30d4b0f-e72c-4f86-94a1-97b01e3eea3f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logdel-server.iml" beforeDir="false" afterPath="$PROJECT_DIR$/logdel-server.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/logistics-server/models/ResponseBody.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/logistics-server/services/DeliveryModule/VehicleService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/logistics-server/thread/ClientManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/user_management/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/user_management/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/user_management/userActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/user_management/userActions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/ClientRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/ClientRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/Wallet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Wallet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/BillingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/BillingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/ParserObj.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/ParserObj.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,13 +29,13 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/jackson-annotations-2.12.1.jar" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RunManager">
     <configuration name="LogisticsServer" type="Application" factoryName="Application">
-      <option name="ALTERNATIVE_JRE_PATH" value="$PROJECT_DIR$/../../../../Program Files/Java/jdk-17" />
+      <option name="ALTERNATIVE_JRE_PATH" value="17" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="main.LogisticsServer" />
       <module name="logdel-server" />
@@ -79,6 +69,15 @@
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

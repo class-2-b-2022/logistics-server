@@ -25,7 +25,6 @@ public class ReportService {
         while(resultSet.next()){
             Integer TIN = resultSet.getInt("companyTIN");
             Integer productId = resultSet.getInt("productId");
-            Date date = resultSet.getDate("Date");
 
             String getProductName = "SELECT * FROM products WHERE productId = "+productId+";";
             String getCompanyName = "SELECT * FROM companies WHERE TIN = "+ TIN +";";
@@ -36,11 +35,11 @@ public class ReportService {
             ResultSet resultSet1 = statement1.executeQuery(getProductName);
             ResultSet resultSet2 = statement2.executeQuery(getCompanyName);
 
-            String companyName = null;
-            String productName = null;
 
+            Date date = resultSet.getDate("Date");
             ReportModel reportModel = new ReportModel();
             reportModel.setDate(resultSet.getDate("Date"));
+            System.out.println("This is the date retrieved from db "+reportModel.getDate());
 
             while(resultSet1.next()){
                 reportModel.setProduct(resultSet1.getString("productName"));
@@ -51,10 +50,11 @@ public class ReportService {
 
             while(resultSet2.next()){
                 reportModel.setCompanyName(resultSet2.getString("name"));
+                System.out.println(resultSet2.getString("name"));
             }
             reportsObject.add( reportModel);
         }
         return reportsObject;
-
     }
+
 }

@@ -47,5 +47,9 @@ public class UserController {
                 break;
         }
         return new ObjectMapper().writeValueAsString(res);
+<<<<<<< HEAD
     }
+=======
+   }
+>>>>>>> 62e47edbd1416f80b555002075c9f09bcefd4e81
 }

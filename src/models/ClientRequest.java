@@ -49,5 +49,8 @@ public class ClientRequest implements Serializable {
     public void setData(Object data) {
         this.data = data;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 62e47edbd1416f80b555002075c9f09bcefd4e81
 }

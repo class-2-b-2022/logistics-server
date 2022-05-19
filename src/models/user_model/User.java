@@ -6,19 +6,17 @@ public class User implements Serializable {
     private String email;
     private String password;
     private String roleAsString;
-    private String status;
     private int phone;
     private int role;
     private int userId;
     public User() {}
-    public User(String names,String email,String password,String roleAsString,int phone,int role,String status) {
+    public User(String names,String email,String password,String roleAsString,int phone,int role) {
         this.names=names;
         this.email=email;
         this.password=password;
         this.roleAsString=roleAsString;
         this.phone=phone;
         this.role=role;
-        this.status=status;
     }
 
     public int getPhone() {
@@ -76,10 +74,4 @@ public class User implements Serializable {
     public void setUserId(int userId) {
         this.userId = userId;
     }
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
 }

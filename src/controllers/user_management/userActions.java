@@ -28,20 +28,6 @@ public class userActions {
         return resObj;
     }
 
-	
-	public Object getUser(Integer id) throws Exception {
-		Object user =userService.getUser(id);
-		if(user==null) {
-			resbody.setStatus("404");
-	        resbody.setMessage("No users available");
-		}else {
-			resbody.setStatus("200");
-	        resbody.setMessage("List Of all users");
-		}
-		resbody.setData(user);
-		return resbody;
-	}
-	
     /**
      * @author: Isite Yves
      */

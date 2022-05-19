@@ -21,12 +21,10 @@ public class ReportService {
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
 
+
         while(resultSet.next()){
-            String status = resultSet.getString("Status");
-            Integer quantity= resultSet.getInt("quantity");
             Integer TIN = resultSet.getInt("companyTIN");
             Integer productId = resultSet.getInt("productId");
-            Date date = resultSet.getDate("Date");
 
             String getProductName = "SELECT * FROM products WHERE productId = "+productId+";";
             String getCompanyName = "SELECT * FROM companies WHERE TIN = "+ TIN +";";
@@ -37,25 +35,26 @@ public class ReportService {
             ResultSet resultSet1 = statement1.executeQuery(getProductName);
             ResultSet resultSet2 = statement2.executeQuery(getCompanyName);
 
-            String companyName = null;
-            String productName = null;
+
+            Date date = resultSet.getDate("Date");
+            ReportModel reportModel = new ReportModel();
+            reportModel.setDate(resultSet.getDate("Date"));
+            System.out.println("This is the date retrieved from db "+reportModel.getDate());
 
             while(resultSet1.next()){
-                productName = resultSet1.getString("productName");
-            }
-            while(resultSet2.next()){
-                companyName = resultSet2.getString("name");
+                reportModel.setProduct(resultSet1.getString("productName"));
             }
 
-            ReportModel reportModel = new ReportModel();
-            reportModel.setCompanyName(companyName);
-            reportModel.setProduct(productName);
-            reportModel.setDate(date);
-            reportModel.setStatus(status);
-            reportModel.setQuantity(quantity);
-            reportsObject.add((Object) reportModel);
+            reportModel.setStatus(resultSet.getString("Status"));
+            reportModel.setQuantity(resultSet.getInt("quantity"));
+
+            while(resultSet2.next()){
+                reportModel.setCompanyName(resultSet2.getString("name"));
+                System.out.println(resultSet2.getString("name"));
+            }
+            reportsObject.add( reportModel);
         }
         return reportsObject;
-
     }
+
 }

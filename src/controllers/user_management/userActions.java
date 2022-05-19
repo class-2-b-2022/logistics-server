@@ -30,7 +30,7 @@ public class userActions {
 
 	
 	public Object getUser(Integer id) throws Exception {
-		Object user =userService.getUser(id);
+		Object user = userService.getUser(id);
 		if(user==null) {
 			resbody.setStatus("404");
 	        resbody.setMessage("No users available");

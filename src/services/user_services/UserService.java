@@ -144,4 +144,7 @@ public class UserService {
     }
 
 
+    public Object getUser(Integer id) {
+        return id;
+    }
 }

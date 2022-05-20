@@ -2,6 +2,7 @@ package thread;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import controllers.BillingController;
+import controllers.DeliveryModule.TrackingManagerController;
 import controllers.DeliveryModule.VehicleManagementController;
 import controllers.InventoryController;
 import controllers.ProductController;
@@ -95,6 +96,9 @@ public class ClientManager implements Runnable{
                     break;
                 case "/delivery/vehicles":
                     response = vehicleManagementController.mainMethod(client);
+                    break;
+                case "/delivery/tracking":
+                    response = TrackingManagerController.mainMethod(client);
                     break;
                 case "/reports":
                    response = reportController.mainMethod(client);

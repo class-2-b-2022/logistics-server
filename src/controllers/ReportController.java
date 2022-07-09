@@ -12,8 +12,8 @@ public class ReportController {
     static ResponseBody responseBody = new ResponseBody();
     static ParserObj parse = new ParserObj();
 
-    public static String getReports() throws SQLException {
-        String result = parse.parseData(ReportService.getReportInformation(), ReportModel.class);
-//        return ReportService.getReportInformation();
+    public static List<Object> getReports() throws SQLException {
+        ReportModel result = parse.parseData(ReportService.getReportInformation(), ReportModel.class);
+        return ReportService.getReportInformation();
     }
 }

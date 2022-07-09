@@ -49,7 +49,4 @@ public class ReportModel {
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
-
-
-
 }

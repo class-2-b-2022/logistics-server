@@ -6,19 +6,19 @@ public class ProductModel implements Serializable {
     int productId;
     String productName;
     String productType;
-    int userId;
-    String pricePerBulk;
+    int companyId;
+    int pricePerBulk;
 
     public void setProductId(int productId) {
         this.productId = productId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
     }
 
-    public void setPricePerBulk(String pricePerBulk) {
-        this.pricePerBulk = pricePerBulk;
+    public void setPricePerBulk(int pricePerBulk) {
+        this.pricePerBulk=pricePerBulk;
     }
 
     public void setProductName(String productName) {
@@ -29,15 +29,15 @@ public class ProductModel implements Serializable {
         this.productType = productType;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getCompanyId() {
+        return companyId;
     }
 
     public int getProductId() {
         return productId;
     }
 
-    public String getPricePerBulk() {
+    public int getPricePerBulk() {
         return pricePerBulk;
     }
 

@@ -17,7 +17,7 @@ public class Server {
 
         try {
 
-            ServerSocket server = new ServerSocket(9080);
+            ServerSocket server = new ServerSocket(5459);
             Socket client = server.accept();
 
             DatabaseConnection db = new DatabaseConnection();

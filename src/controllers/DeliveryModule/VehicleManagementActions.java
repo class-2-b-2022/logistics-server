@@ -39,7 +39,7 @@ public class VehicleManagementActions<ResponseStatus> {
     }
 
     public List<Object> getVehicles() throws SQLException {
-       return vehicleService.getListOfVehicles();
+        return vehicleService.getListOfVehicles();
     }
 
 }

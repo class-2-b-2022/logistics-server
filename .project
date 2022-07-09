@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-<<<<<<< HEAD
 	<name>login-server</name>
 	<name>logistics-server</name>
 	<comment></comment>
@@ -12,13 +11,13 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
-	</buildSpec>
+	</buildSpec>s
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1646036829327</id>
+			<id>1647194749765</id>
 			<name></name>
 			<type>30</type>
 			<matcher>
